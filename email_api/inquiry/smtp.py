@@ -57,6 +57,8 @@ def mail_template(clasue, address, data):
 def send_mail(name, clasue, address, data):
     # 读取代理邮箱
     email = Session().read_email(name)
+    # 使用split函数将邮件作为列表
+    email = email.split(",")
     # 从配置文件中获取邮箱账号和密码
     with open(os.path.join(os.getcwd(), "conf", "email.conf"), "r") as f:
         email_conf = f.read()
@@ -67,7 +69,7 @@ def send_mail(name, clasue, address, data):
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "DAP shipment"
     msg["From"] = email_conf["name"]
-    msg["To"] = email
+    msg["To"] = ",".join(email)
     msg.attach(MIMEText(html_template, "html"))
     # 发送邮件
     smtp = smtplib.SMTP()

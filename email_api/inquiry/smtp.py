@@ -50,6 +50,7 @@ def mail_template(clasue, address, data):
     """.format(
         clasue=clasue, address=address, table_rows=table_rows, encoded_image=img_data
     )
+    return html_template
 
 
 # 邮件发送
@@ -74,3 +75,4 @@ def send_mail(name, clasue, address, data):
     smtp.login(email_conf["smtp_user"], email_conf["smtp_password"])
     smtp.sendmail(email_conf["smtp_user"], email, msg.as_string())
     smtp.quit()
+    return True

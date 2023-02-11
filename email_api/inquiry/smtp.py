@@ -3,6 +3,8 @@ import base64
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
+import json
+from email_api.agent_email_sql import Session, Agent
 
 # 邮件模板data样式
 ###data = [  ["Row 1, Column 1", "Row 1, Column 2"],
@@ -48,3 +50,27 @@ def mail_template(clasue, address, data):
     """.format(
         clasue=clasue, address=address, table_rows=table_rows, encoded_image=img_data
     )
+
+
+# 邮件发送
+def send_mail(name, clasue, address, data):
+    # 读取代理邮箱
+    email = Session().read_email(name)
+    # 从配置文件中获取邮箱账号和密码
+    with open(os.path.join(os.getcwd(), "conf", "email.conf"), "r") as f:
+        email_conf = f.read()
+    email_conf = json.loads(email_conf)
+    # 邮件模板
+    html_template = mail_template(clasue, address, data)
+    # 邮件发送
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = "DAP shipment"
+    msg["From"] = email_conf["name"]
+    msg["To"] = email
+    msg.attach(MIMEText(html_template, "html"))
+    # 发送邮件
+    smtp = smtplib.SMTP()
+    smtp.connect(email_conf["smtp_server"])
+    smtp.login(email_conf["smtp_user"], email_conf["smtp_password"])
+    smtp.sendmail(email_conf["smtp_user"], email, msg.as_string())
+    smtp.quit()

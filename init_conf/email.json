@@ -1,0 +1,7 @@
+{
+    "name": "",
+    "smtp_server": "smtp.qiye.163.com",
+    "smtp_port": 465,
+    "smtp_user": "",
+    "smtp_password": ""
+}

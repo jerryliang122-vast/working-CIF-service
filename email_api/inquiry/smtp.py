@@ -54,7 +54,7 @@ def mail_template(clasue, address, data):
 
 
 # 邮件发送
-def send_mail(name, clasue, address, data):
+def send_mail(name, clasue, address, data, subject):
     # 读取代理邮箱
     email = Session().read_email(name)
     # 使用split函数将邮件作为列表
@@ -67,7 +67,7 @@ def send_mail(name, clasue, address, data):
     html_template = mail_template(clasue, address, data)
     # 邮件发送
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = "DAP shipment"
+    msg["Subject"] = subject
     msg["From"] = email_conf["name"]
     msg["To"] = ",".join(email)
     msg.attach(MIMEText(html_template, "html"))

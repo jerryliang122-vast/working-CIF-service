@@ -53,7 +53,7 @@
      <property name="title">
       <string>询价信息</string>
      </property>
-     <widget class="QPlainTextEdit" name="plainTextEdit">
+     <widget class="QPlainTextEdit" name="address">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -90,7 +90,7 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="PKGS"/>
        </item>
        <item>
         <widget class="QLabel" name="label_2">
@@ -131,7 +131,7 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="KGS">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -176,7 +176,7 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit_3"/>
+        <widget class="QLineEdit" name="CBM"/>
        </item>
        <item>
         <spacer name="horizontalSpacer_3">
@@ -223,7 +223,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit_4">
+        <widget class="QLineEdit" name="size">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -262,7 +262,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QLineEdit" name="lineEdit_5"/>
+        <widget class="QLineEdit" name="HS"/>
        </item>
        <item>
         <spacer name="horizontalSpacer_5">
@@ -297,7 +297,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QLineEdit" name="lineEdit_6"/>
+        <widget class="QLineEdit" name="cargoname"/>
        </item>
        <item>
         <spacer name="horizontalSpacer_6">
@@ -403,7 +403,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_3"/>
+        <widget class="QComboBox" name="gangkou"/>
        </item>
       </layout>
      </widget>
@@ -438,7 +438,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_2">
+        <widget class="QComboBox" name="hangxian">
          <item>
           <property name="text">
            <string>东亚</string>
@@ -456,7 +456,7 @@
          </item>
          <item>
           <property name="text">
-           <string>澳洲</string>
+           <string>澳大利亚</string>
           </property>
          </item>
          <item>
@@ -507,7 +507,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_4"/>
+        <widget class="QComboBox" name="guojia"/>
        </item>
       </layout>
      </widget>

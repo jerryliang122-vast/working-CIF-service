@@ -291,7 +291,7 @@
        <rect>
         <x>30</x>
         <y>120</y>
-        <width>231</width>
+        <width>261</width>
         <height>31</height>
        </rect>
       </property>
@@ -324,9 +324,9 @@
      <widget class="QComboBox" name="comboBox">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>290</x>
         <y>120</y>
-        <width>81</width>
+        <width>51</width>
         <height>31</height>
        </rect>
       </property>
@@ -345,6 +345,133 @@
         <string>DDP</string>
        </property>
       </item>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>0</y>
+       <width>251</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>选择代理</string>
+     </property>
+     <widget class="QListView" name="listView">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>50</y>
+        <width>251</width>
+        <height>121</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_7">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>20</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>港口</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_3"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_8">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>航线</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_2">
+         <item>
+          <property name="text">
+           <string>东亚</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>东南亚</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>印巴</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>澳洲</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>北美</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>南美</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>

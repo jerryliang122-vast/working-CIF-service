@@ -55,26 +55,29 @@ def mail_template(clasue, address, data):
 
 # 邮件发送
 def send_mail(name, clasue, address, data, subject):
-    # 读取代理邮箱
-    email = Session().read_email(name)
-    # 使用split函数将邮件作为列表
-    email = email.split(",")
-    # 从配置文件中获取邮箱账号和密码
-    with open(os.path.join(os.getcwd(), "conf", "email.conf"), "r") as f:
-        email_conf = f.read()
-    email_conf = json.loads(email_conf)
-    # 邮件模板
-    html_template = mail_template(clasue, address, data)
-    # 邮件发送
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = subject
-    msg["From"] = email_conf["name"]
-    msg["To"] = ",".join(email)
-    msg.attach(MIMEText(html_template, "html"))
-    # 发送邮件
-    smtp = smtplib.SMTP()
-    smtp.connect(email_conf["smtp_server"])
-    smtp.login(email_conf["smtp_user"], email_conf["smtp_password"])
-    smtp.sendmail(email_conf["smtp_user"], email, msg.as_string())
-    smtp.quit()
-    return True
+    try:
+        # 读取代理邮箱
+        email = Session().read_email(name)
+        # 使用split函数将邮件作为列表
+        email = email.split(",")
+        # 从配置文件中获取邮箱账号和密码
+        with open(os.path.join(os.getcwd(), "conf", "email.conf"), "r") as f:
+            email_conf = f.read()
+        email_conf = json.loads(email_conf)
+        # 邮件模板
+        html_template = mail_template(clasue, address, data)
+        # 邮件发送
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = subject
+        msg["From"] = email_conf["name"]
+        msg["To"] = ",".join(email)
+        msg.attach(MIMEText(html_template, "html"))
+        # 发送邮件
+        smtp = smtplib.SMTP()
+        smtp.connect(email_conf["smtp_server"])
+        smtp.login(email_conf["smtp_user"], email_conf["smtp_password"])
+        smtp.sendmail(email_conf["smtp_user"], email, msg.as_string())
+        smtp.quit()
+        return True
+    except Exception as e:
+        return False, e

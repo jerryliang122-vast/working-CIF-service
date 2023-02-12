@@ -1,6 +1,9 @@
 import sys
 import json
 import os
+from PyQt6.QtGui import QStandardItemModel, QStandardItem
+from PyQt6.QtWidgets import QListView, QAbstractItemView
+
 
 # 获取港口信息
 with open(os.path.join(os.getcwd(), "conf", "port.json"), "r", encoding="utf-8") as f:
@@ -33,3 +36,14 @@ class work_inquiry:
             self.main_window.gangkou.clear()
             self.main_window.gangkou.addItems(port)
             return port
+
+    # 使用listview显示代理信息
+    def get_proxy(self):
+        model = QStandardItemModel(self.main_window.daili_list)
+        for info in proxy_infos:
+            item = QStandardItem(info)
+            item.setCheckable(True)
+            model.appendRow(item)
+
+        self.main_window.daili_list.setModel(model)
+        self.main_window.daili_list.setSelectionMode(QAbstractItemView.ExtendedSelection)

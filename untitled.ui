@@ -359,7 +359,7 @@
      <property name="title">
       <string>选择代理</string>
      </property>
-     <widget class="QListView" name="listView">
+     <widget class="QListView" name="daili_list">
       <property name="geometry">
        <rect>
         <x>0</x>

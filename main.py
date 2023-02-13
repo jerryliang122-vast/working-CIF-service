@@ -10,6 +10,15 @@ from PyQt6.QtWidgets import QApplication, QMainWindow
 from Ui_untitled import Ui_Form
 import sys
 from work.inquiry import work_inquiry
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    handlers=[logging.FileHandler("conf/app.log"), logging.StreamHandler()],
+)
+logger = logging.getLogger()
 
 
 class wm(QMainWindow, Ui_Form):

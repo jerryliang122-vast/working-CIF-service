@@ -3,9 +3,11 @@ import json
 import os
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 from PyQt6.QtWidgets import QListView, QAbstractItemView
+from PyQt6.QtWidgets import QMessageBox
 from email_api.agent_email_sql import Agent, Session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
+import logging
 
 
 # 获取港口信息
@@ -61,7 +63,7 @@ def write_port_name(port, name, email):
         session.commit()
         return True
     except Exception as e:
-        print(e)
+        logging.error(e)
         return False
 
 
@@ -126,6 +128,6 @@ class work_inquiry:
         # 判断是否写入成功
         if data:
             # 弹出界面提示
-            self.main_window.statusbar.showMessage("写入成功")
+            QMessageBox.about(self.main_window, "提示", "写入成功")
         else:
-            self.main_window.statusbar.showMessage("写入失败")
+            QMessageBox.about(self.main_window, "提示", "写入失败")

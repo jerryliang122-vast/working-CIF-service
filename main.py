@@ -17,6 +17,7 @@ logging.basicConfig(
     format="%(asctime)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     handlers=[logging.FileHandler("conf/app.log"), logging.StreamHandler()],
+    encoding="utf-8",
 )
 logger = logging.getLogger()
 

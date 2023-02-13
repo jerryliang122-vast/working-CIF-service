@@ -9,6 +9,7 @@ Base = declarative_base()
 class Agent(Base):
     __tablename__ = "agent_email_address"
     id = Column(Integer, primary_key=True, autoincrement=True)
+    port = Column(TEXT)
     name = Column(TEXT)
     email = Column(TEXT)
 
@@ -54,3 +55,10 @@ class Session(object):
         with self as session:
             data = session.query(Agent.email).filter(Agent.name == name).first()
             return data[0]
+
+    # 按照港口读取代理名称列表
+    def read_port_name(self, port):
+        with self as session:
+            data = session.query(Agent.name).filter(Agent.port.like("%{}%".format(port))).all()
+            data = [i[0] for i in data]
+            return data

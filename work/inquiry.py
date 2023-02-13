@@ -3,6 +3,7 @@ import json
 import os
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 from PyQt6.QtWidgets import QListView, QAbstractItemView
+from email_api import agent_email_sql
 
 
 # 获取港口信息
@@ -40,6 +41,11 @@ class work_inquiry:
     # 使用listview显示代理信息
     def get_proxy(self):
         model = QStandardItemModel(self.main_window.daili_list)
+        # 从数据库中获取代理信息
+        # 实例化数据库
+        with agent_email_sql.Session() as session:
+            # 读取此港口下的代理列表
+            proxy_infos = session.read_port_name(self.main_window.gangkou.currentText())
         for info in proxy_infos:
             item = QStandardItem(info)
             item.setCheckable(True)

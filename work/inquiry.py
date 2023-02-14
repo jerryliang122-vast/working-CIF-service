@@ -73,6 +73,7 @@ class work_inquiry:
         self.main_window.hangxian.currentIndexChanged.connect(self.get_country)
         self.main_window.guojia.currentIndexChanged.connect(self.get_port)
         self.main_window.add_agent_email.clicked.connect(self.write_proxy)
+        self.main_window.daili_list_update.clicked.connect(self.get_proxy)
 
     # 根据选择的航线，获取json中的国家
     def get_country(self):
@@ -107,7 +108,6 @@ class work_inquiry:
             model.appendRow(item)
 
         self.main_window.daili_list.setModel(model)
-        self.main_window.daili_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
 
     # 代理信息写入数据库
     def write_proxy(self):

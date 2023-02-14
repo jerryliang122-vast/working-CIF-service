@@ -2,8 +2,7 @@ import sys
 import json
 import os
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
-from PyQt6.QtWidgets import QListView, QAbstractItemView
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QListView, QAbstractItemView, QMainWindow, QMessageBox
 from email_api.agent_email_sql import Agent, Session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
@@ -100,14 +99,15 @@ class work_inquiry:
 
     # 使用listview显示代理信息
     def get_proxy(self):
-        # 从数据库中获取代理信息
-
         # 读取此港口下的代理列表
         proxy_infos = read_port_name(self.main_window.gangkou.currentText())
+
+        model = QStandardItemModel()
         for info in proxy_infos:
             item = QStandardItem(info)
             item.setCheckable(True)
-            self.main_window.daili_list.appendRow(item)
+            model.appendRow(item)
+        self.main_window.daili_list.setModel(model)
 
     # 代理信息写入数据库
     def write_proxy(self):
@@ -133,7 +133,7 @@ class work_inquiry:
             QMessageBox.about(self.main_window, "提示", "写入失败")
 
     # 预览
-    def preview(self):
+    def preview_data(self):
         # 获取地址
         address = self.main_window.address.toPlainText()
         # 获取件数
@@ -163,8 +163,13 @@ class work_inquiry:
             ["hs_code", f"{hs_code}"],
         ]
         # 渲染模板
-        global template  # 设置为全局变量
         template = smtps.mail_template(clause, address, data)
+        return template
+
+    # 预览显示到界面
+    def preview(self):
+        # 获取模板
+        template = self.preview_data()
         # 显示到textedit界面
         self.main_window.emailtext.setHtml(template)
 
@@ -178,6 +183,8 @@ class work_inquiry:
         subject = f"{clause} == {inquiry_number}"
         # 从listview中获取选中代理信息
         selected_indexes = self.main_window.daili_list.selectedIndexes()
+        # 获取模板
+        template = self.preview_data()
         # 收集发送成功率
         reports = []
         for index in selected_indexes:

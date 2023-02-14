@@ -127,7 +127,7 @@ class Ui_Form(object):
         self.groupBox_2.setObjectName("groupBox_2")
         self.daili_list = QtWidgets.QListView(self.groupBox_2)
         self.daili_list.setGeometry(QtCore.QRect(0, 80, 251, 91))
-        self.daili_list.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
+        self.daili_list.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection)
         self.daili_list.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
         self.daili_list.setObjectName("daili_list")
         self.horizontalLayoutWidget_7 = QtWidgets.QWidget(self.groupBox_2)

@@ -6,6 +6,7 @@ from email.mime.image import MIMEImage
 import os
 import json
 from email_api.agent_email_sql import Session, Agent
+import logging
 
 
 # 邮件模板data样式
@@ -53,37 +54,29 @@ def mail_template(clasue, address, data):
 
 
 # 邮件发送
-def send_mail(name, clasue, address, data, subject):
-    try:
-        # 读取代理邮箱
-        email = Session().read_email(name)
-        # 使用split函数将邮件作为列表
-        email = email.split(",")
-        # 从配置文件中获取邮箱账号和密码
-        with open(os.path.join(os.getcwd(), "conf", "email.conf"), "r") as f:
-            email_conf = f.read()
-        email_conf = json.loads(email_conf)
-        # 读取签名照片
-        with open(os.path.join(os.getcwd(), "conf", "signature.jpg"), "rb") as f:
-            img_data = f.read()
-        img_data = base64.b64encode(img_data)
-        img_data = img_data.decode("utf-8")
-        msg = MIMEImage(img_data)
-        msg.add_header("Content-ID", "<image1>")
-        # 邮件模板
-        html_template = mail_template(clasue, address, data)
-        # 邮件发送
-        msg = MIMEMultipart("alternative")
-        msg["Subject"] = subject
-        msg["From"] = email_conf["name"]
-        msg["To"] = ",".join(email)
-        msg.attach(MIMEText(html_template, "html"))
-        # 发送邮件
-        smtp = smtplib.SMTP()
-        smtp.connect(email_conf["smtp_server"])
-        smtp.login(email_conf["smtp_user"], email_conf["smtp_password"])
-        smtp.sendmail(email_conf["smtp_user"], email, msg.as_string())
-        smtp.quit()
-        return True
-    except Exception as e:
-        return False, e
+def send_mail(name, subject, data):
+    # 使用split函数将邮件作为列表
+    email = name.split(",")
+    # 从配置文件中获取邮箱账号和密码
+    with open(os.path.join(os.getcwd(), "conf", "email.json"), "r") as f:
+        email_conf = json.load(f)
+    # 读取签名照片
+    with open(os.path.join(os.getcwd(), "conf", "signature.jpg"), "rb") as f:
+        img_data = f.read()
+    img_data = base64.b64encode(img_data)
+    msg = MIMEMultipart()
+    msg.attach(MIMEText(data, "html"))
+    # 图片部分
+    img = MIMEImage(img_data, _subtype="jpg")
+    img.add_header("Content-ID", "<image1>")
+    msg.attach(img)
+    # 邮件发送
+    msg["Subject"] = subject
+    msg["From"] = email_conf["name"]
+    msg["To"] = ",".join(email)
+    smtp = smtplib.SMTP(email_conf["smtp_server"])
+    smtp.starttls()
+    smtp.login(email_conf["smtp_user"], email_conf["smtp_password"])
+    smtp.sendmail(email_conf["smtp_user"], email, msg.as_string())
+    smtp.quit()
+    return True

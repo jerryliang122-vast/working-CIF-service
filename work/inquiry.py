@@ -8,7 +8,7 @@ from email_api.agent_email_sql import Agent, Session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
-from email_api.inquiry.smtp import mail_template
+import email_api.inquiry.smtp as smtps
 
 
 # 获取港口信息
@@ -73,9 +73,10 @@ class work_inquiry:
         self.main_window = main_window
         self.main_window.hangxian.currentIndexChanged.connect(self.get_country)
         self.main_window.guojia.currentIndexChanged.connect(self.get_port)
+        self.main_window.gangkou.currentIndexChanged.connect(self.get_proxy)
         self.main_window.add_agent_email.clicked.connect(self.write_proxy)
-        self.main_window.daili_list_update.clicked.connect(self.get_proxy)
         self.main_window.Preview_email.clicked.connect(self.preview)
+        self.main_window.send_email.clicked.connect(self.send_email)
 
     # 根据选择的航线，获取json中的国家
     def get_country(self):
@@ -99,7 +100,6 @@ class work_inquiry:
 
     # 使用listview显示代理信息
     def get_proxy(self):
-        model = QStandardItemModel(self.main_window.daili_list)
         # 从数据库中获取代理信息
 
         # 读取此港口下的代理列表
@@ -107,9 +107,7 @@ class work_inquiry:
         for info in proxy_infos:
             item = QStandardItem(info)
             item.setCheckable(True)
-            model.appendRow(item)
-
-        self.main_window.daili_list.setModel(model)
+            self.main_window.daili_list.appendRow(item)
 
     # 代理信息写入数据库
     def write_proxy(self):
@@ -166,6 +164,29 @@ class work_inquiry:
         ]
         # 渲染模板
         global template  # 设置为全局变量
-        template = mail_template(clause, address, data)
+        template = smtps.mail_template(clause, address, data)
         # 显示到textedit界面
         self.main_window.emailtext.setHtml(template)
+
+    # 发送邮件
+    def send_email(self):
+        # 获取条款
+        clause = self.main_window.clause.currentText()
+        # 获取询价编号
+        inquiry_number = self.main_window.inquiry_number.text()
+        # 设计邮件主题
+        subject = f"{clause} == {inquiry_number}"
+        # 从listview中获取选中代理信息
+        selected_indexes = self.main_window.daili_list.selectedIndexes()
+        # 收集发送成功率
+        reports = []
+        for index in selected_indexes:
+            proxy_infos = read_email(index.data())
+            # 发送邮件
+            report = smtps.send_mail(proxy_infos, subject, template)
+            reports.append(report)
+        # 判断reports列表中是否含有false
+        if False in reports:
+            QMessageBox.about(self.main_window, "提示", "发送失败")
+        else:
+            QMessageBox.about(self.main_window, "提示", "发送成功")

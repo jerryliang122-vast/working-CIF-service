@@ -8,6 +8,7 @@ from email_api.agent_email_sql import Agent, Session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
+from email_api.inquiry.smtp import mail_template
 
 
 # 获取港口信息
@@ -74,6 +75,7 @@ class work_inquiry:
         self.main_window.guojia.currentIndexChanged.connect(self.get_port)
         self.main_window.add_agent_email.clicked.connect(self.write_proxy)
         self.main_window.daili_list_update.clicked.connect(self.get_proxy)
+        self.main_window.Preview_email.clicked.connect(self.preview)
 
     # 根据选择的航线，获取json中的国家
     def get_country(self):
@@ -131,3 +133,39 @@ class work_inquiry:
             QMessageBox.about(self.main_window, "提示", "写入成功")
         else:
             QMessageBox.about(self.main_window, "提示", "写入失败")
+
+    # 预览
+    def preview(self):
+        # 获取地址
+        address = self.main_window.address.toPlainText()
+        # 获取件数
+        number = self.main_window.PKGS.text()
+        # 获取重量
+        weight = self.main_window.KGS.text()
+        # 获取体积
+        volume = self.main_window.CBM.text()
+        # 获取货物单件体积
+        single_volume = self.main_window.size.text()
+        # 获取HS 编码
+        hs_code = self.main_window.HS.text()
+        # 获取货物描述
+        goods_description = self.main_window.cargoname.text()
+        # 获取条款
+        clause = self.main_window.clause.currentText()
+        # 处理货物数据
+        ###data = [  ["Row 1, ", "Row 1, Column 2"],
+        ###  ["Row 2, Column 1", "Row 2, Column 2"],
+        ###  ["Row 3, Column 1", "Row 3, Column 2"],
+        ###]
+        data = [
+            ["quantity", f"{number}"],
+            ["weight", f"{weight}"],
+            ["volume", f"{volume}"],
+            ["single_volume", f"{single_volume}"],
+            ["hs_code", f"{hs_code}"],
+        ]
+        # 渲染模板
+        global template  # 设置为全局变量
+        template = mail_template(clause, address, data)
+        # 显示到textedit界面
+        self.main_window.emailtext.setHtml(template)

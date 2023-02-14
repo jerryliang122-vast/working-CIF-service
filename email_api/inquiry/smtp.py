@@ -2,9 +2,11 @@ import smtplib
 import base64
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
 import os
 import json
 from email_api.agent_email_sql import Session, Agent
+
 
 # 邮件模板data样式
 ###data = [  ["Row 1, Column 1", "Row 1, Column 2"],
@@ -13,21 +15,17 @@ from email_api.agent_email_sql import Session, Agent
 ###]
 
 
-# 处理放置在conf文件中的签名照片
-def get_img():
-    with open(os.path.join(os.getcwd(), "conf", "signature"), "rb") as f:
-        img_data = f.read()
-    return img_data
-
-
 # 邮件模板修改
 def mail_template(clasue, address, data):
     # 读取列表数据并生成
     table_rows = ""
     for row in data:
-        table_rows += "<tr><td>{}</td><td>{}</td></tr>".format(row[0], row[1])
+        table_rows += (
+            "<tr><td style='border: 1px solid black;'>{}</td><td style='border: 1px solid black;'>{}</td></tr>".format(
+                row[0], row[1]
+            )
+        )
     # 读取签名照片并转换为base64编码
-    img_data = get_img()
     # 邮件模板
     html_template = """
     <html>
@@ -35,20 +33,21 @@ def mail_template(clasue, address, data):
     <title>DAP shipment</title>
     </head>
     <body>
-    <h1>Dear team,</h1>
+    <p>Dear team,<p>
     <p>This is a {clasue} shipment</p>
     <p>Address:</p>
     <p>{address}</p>
-    <table>
+    <p>Details:</p>
+    <table style='border-collapse: collapse;'>
         {table_rows}
     </table>
     <p>Thanks and best regards!</p>
     <p>NVOCC#SMTC-NV00275/FMCBond#026678/WCA#92530</p>
-    <img src="data:image/jpeg;base64,{encoded_image}" alt="Company logo">
+    <img src="cid:image1">
     </body>
     </html>
     """.format(
-        clasue=clasue, address=address, table_rows=table_rows, encoded_image=img_data
+        clasue=clasue, address=address, table_rows=table_rows
     )
     return html_template
 
@@ -64,6 +63,13 @@ def send_mail(name, clasue, address, data, subject):
         with open(os.path.join(os.getcwd(), "conf", "email.conf"), "r") as f:
             email_conf = f.read()
         email_conf = json.loads(email_conf)
+        # 读取签名照片
+        with open(os.path.join(os.getcwd(), "conf", "signature.jpg"), "rb") as f:
+            img_data = f.read()
+        img_data = base64.b64encode(img_data)
+        img_data = img_data.decode("utf-8")
+        msg = MIMEImage(img_data)
+        msg.add_header("Content-ID", "<image1>")
         # 邮件模板
         html_template = mail_template(clasue, address, data)
         # 邮件发送

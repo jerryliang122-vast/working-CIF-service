@@ -72,10 +72,9 @@ def send_mail(name, subject, data):
     msg.attach(img)
     # 邮件发送
     msg["Subject"] = subject
-    msg["From"] = email_conf["name"]
+    msg["From"] = f'{email_conf["name"]} <{email_conf["smtp_user"]}>'
     msg["To"] = ",".join(email)
-    smtp = smtplib.SMTP(email_conf["smtp_server"])
-    smtp.starttls()
+    smtp = smtplib.SMTP_SSL(email_conf["smtp_server"], port=email_conf["smtp_port"])
     smtp.login(email_conf["smtp_user"], email_conf["smtp_password"])
     smtp.sendmail(email_conf["smtp_user"], email, msg.as_string())
     smtp.quit()

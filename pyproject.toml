@@ -14,6 +14,8 @@ pymupdf = "^1.21.1"
 tencentcloud-sdk-python = "^3.0.822"
 imbox = {git = "https://github.com/martinrusev/imbox.git"}
 sqlalchemy = "^2.0.1"
+json5 = "^0.9.11"
+sqlacodegen = "^2.3.0"
 
 
 [tool.poetry.group.dev.dependencies]

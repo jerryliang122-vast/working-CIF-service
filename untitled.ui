@@ -53,7 +53,7 @@
      <property name="title">
       <string>询价信息</string>
      </property>
-     <widget class="QPlainTextEdit" name="plainTextEdit">
+     <widget class="QPlainTextEdit" name="address">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -90,9 +90,6 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
-       </item>
-       <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
           <string>件</string>
@@ -111,6 +108,9 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="PKGS"/>
        </item>
       </layout>
      </widget>
@@ -131,9 +131,9 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2">
-         <property name="enabled">
-          <bool>true</bool>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>重量KG</string>
          </property>
         </widget>
        </item>
@@ -151,9 +151,9 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>重量KG</string>
+        <widget class="QLineEdit" name="KGS">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -176,7 +176,11 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit_3"/>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>体积CBM</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="horizontalSpacer_3">
@@ -192,11 +196,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>体积CBM</string>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="CBM"/>
        </item>
       </layout>
      </widget>
@@ -223,9 +223,9 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEdit_4">
-         <property name="enabled">
-          <bool>true</bool>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>货物单件体积</string>
          </property>
         </widget>
        </item>
@@ -243,9 +243,9 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>货物单件体积</string>
+        <widget class="QLineEdit" name="size">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -262,7 +262,11 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QLineEdit" name="lineEdit_5"/>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>HS编码</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="horizontalSpacer_5">
@@ -278,11 +282,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>HS编码</string>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="HS"/>
        </item>
       </layout>
      </widget>
@@ -291,13 +291,17 @@
        <rect>
         <x>30</x>
         <y>120</y>
-        <width>231</width>
+        <width>261</width>
         <height>31</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QLineEdit" name="lineEdit_6"/>
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>货物描述</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="horizontalSpacer_6">
@@ -313,20 +317,16 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>货物描述</string>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="cargoname"/>
        </item>
       </layout>
      </widget>
-     <widget class="QComboBox" name="comboBox">
+     <widget class="QComboBox" name="clause">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>290</x>
         <y>120</y>
-        <width>81</width>
+        <width>51</width>
         <height>31</height>
        </rect>
       </property>
@@ -345,6 +345,430 @@
         <string>DDP</string>
        </property>
       </item>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>0</y>
+       <width>251</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>选择代理</string>
+     </property>
+     <widget class="QListView" name="daili_list">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>80</y>
+        <width>251</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_7">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>50</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>港口</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QComboBox" name="gangkou"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_8">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>航线</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QComboBox" name="hangxian">
+         <item>
+          <property name="text">
+           <string>东亚</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>东南亚</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>印巴</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>澳大利亚</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>北美</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>南美</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_9">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>20</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>国家</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QComboBox" name="guojia"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>0</y>
+       <width>281</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>添加代理信息</string>
+     </property>
+     <widget class="QWidget" name="horizontalLayoutWidget_10">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>140</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <item>
+        <widget class="QPushButton" name="add_agent_email">
+         <property name="text">
+          <string>添加</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_10">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>删除</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPlainTextEdit" name="agent_email_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>261</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_11">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>201</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item>
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>代理名称</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_11">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="agent_name"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>170</y>
+       <width>601</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>渲染界面</string>
+     </property>
+     <widget class="QTextEdit" name="emailtext">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>581</width>
+        <height>261</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>170</y>
+       <width>281</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>发送邮件</string>
+     </property>
+     <widget class="QPushButton" name="Preview_email">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>180</y>
+        <width>75</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>预览</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_12">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>20</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_12">
+       <item>
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>询价编号</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_12">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="inquiry_number"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="send_email">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>180</y>
+        <width>75</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>发送</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>180</y>
+        <width>75</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>删除</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="addresslist">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>251</width>
+        <height>121</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_6">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>380</y>
+       <width>281</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>编号加载</string>
+     </property>
+     <widget class="QPushButton" name="aoto">
+      <property name="geometry">
+       <rect>
+        <x>214</x>
+        <y>13</y>
+        <width>61</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>生成</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="plainTextEdit">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>191</width>
+        <height>51</height>
+       </rect>
+      </property>
      </widget>
     </widget>
    </widget>

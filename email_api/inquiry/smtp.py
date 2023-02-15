@@ -26,7 +26,6 @@ def mail_template(clasue, address, data):
                 row[0], row[1]
             )
         )
-    # 读取签名照片并转换为base64编码
     # 邮件模板
     html_template = """
     <html>
@@ -63,7 +62,6 @@ def send_mail(name, subject, data):
     # 读取签名照片
     with open(os.path.join(os.getcwd(), "conf", "signature.jpg"), "rb") as f:
         img_data = f.read()
-    img_data = base64.b64encode(img_data)
     msg = MIMEMultipart()
     msg.attach(MIMEText(data, "html"))
     # 图片部分

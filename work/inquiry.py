@@ -155,12 +155,19 @@ class work_inquiry:
         ###  ["Row 2, Column 1", "Row 2, Column 2"],
         ###  ["Row 3, Column 1", "Row 3, Column 2"],
         ###]
+        if single_volume == "":
+            single_volume = "N/A"
+        if hs_code == "":
+            hs_code = "N/A"
+        if goods_description == "":
+            goods_description = "N/A"
         data = [
             ["quantity", f"{number}"],
             ["weight", f"{weight}"],
             ["volume", f"{volume}"],
-            ["single_volume", f"{single_volume}"],
+            ["cargo_size", f"{single_volume}"],
             ["hs_code", f"{hs_code}"],
+            ["cargo_description", f"{goods_description}"],
         ]
         # 渲染模板
         template = smtps.mail_template(clause, address, data)
@@ -191,7 +198,9 @@ class work_inquiry:
             proxy_infos = read_email(index.data())
             # 发送邮件
             report = smtps.send_mail(proxy_infos, subject, template)
-            reports.append(report)
+            report_data = {index.data(): report}
+            if report[0] == False:
+                reports.append(report_data)
         # 判断reports列表中是否含有false
         if False in reports:
             QMessageBox.about(self.main_window, "提示", "发送失败")

@@ -6,7 +6,7 @@ from email.mime.image import MIMEImage
 import os
 import json
 from email_api.agent_email_sql import Session, Agent
-import logging
+import work.log as log
 
 
 # 邮件模板data样式
@@ -79,5 +79,5 @@ def send_mail(name, subject, data):
         smtp.quit()
         return True
     except Exception as e:
-        logging.error(e)
+        log.mylog().error_logger(e)
         return False

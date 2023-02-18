@@ -1,0 +1,30 @@
+name: Build and Upload Windows Executable
+
+on:
+  push:
+    branches:
+      - inquiry
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install pyinstaller
+        pip install poetry
+    - name: Build Windows Executable
+      run: |
+        pyinstaller -F -w main.py
+        cp -r init_conf dist/
+    - name: Upload Windows Executable
+      uses: actions/upload-artifact@v2
+      with:
+        name: your_script
+        path: dist/

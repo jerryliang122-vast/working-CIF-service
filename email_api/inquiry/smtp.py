@@ -6,8 +6,9 @@ from email.mime.image import MIMEImage
 import os
 import json
 from email_api.agent_email_sql import Session, Agent
-import work.log as log
+import logging
 
+logger = logging.getLogger("my_logger")
 
 # 邮件模板data样式
 ###data = [  ["Row 1, Column 1", "Row 1, Column 2"],
@@ -79,5 +80,5 @@ def send_mail(name, subject, data):
         smtp.quit()
         return True
     except Exception as e:
-        log.mylog().error_logger(e)
+        logger.error(e)
         return False

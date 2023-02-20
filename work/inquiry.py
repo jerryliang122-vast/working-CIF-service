@@ -9,6 +9,7 @@ from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
 import email_api.inquiry.smtp as smtps
 
+logger = logging.getLogger("my_logger")
 
 # 获取港口信息
 with open(os.path.join(os.getcwd(), "conf", "port.json"), "r", encoding="utf-8") as f:
@@ -182,27 +183,31 @@ class work_inquiry:
 
     # 发送邮件
     def send_email(self):
-        # 获取条款
-        clause = self.main_window.clause.currentText()
-        # 获取询价编号
-        inquiry_number = self.main_window.inquiry_number.text()
-        # 设计邮件主题
-        subject = f"{clause} == {inquiry_number}"
-        # 从listview中获取选中代理信息
-        selected_indexes = self.main_window.daili_list.selectedIndexes()
-        # 获取模板
-        template = self.preview_data()
-        # 收集发送成功率
-        reports = []
-        for index in selected_indexes:
-            proxy_infos = read_email(index.data())
-            # 发送邮件
-            report = smtps.send_mail(proxy_infos, subject, template)
-            report_data = {index.data(): report}
-            if report[0] == False:
-                reports.append(report_data)
-        # 判断reports列表中是否含有false
-        if False in reports:
-            QMessageBox.about(self.main_window, "提示", "发送失败")
-        else:
-            QMessageBox.about(self.main_window, "提示", "发送成功")
+        try:
+            # 获取条款
+            clause = self.main_window.clause.currentText()
+            # 获取询价编号
+            inquiry_number = self.main_window.inquiry_number.text()
+            # 设计邮件主题
+            subject = f"{clause} == {inquiry_number}"
+            # 从listview中获取选中代理信息
+            selected_indexes = self.main_window.daili_list.selectedIndexes()
+            # 获取模板
+            template = self.preview_data()
+            # 收集发送成功率
+            reports = []
+            for index in selected_indexes:
+                proxy_infos = read_email(index.data())
+                # 发送邮件
+                report = smtps.send_mail(proxy_infos, subject, template)
+                report_data = {index.data(): report}
+                if report[0] == False:
+                    reports.append(report_data)
+            # 判断reports列表中是否含有false
+            if False in reports:
+                QMessageBox.about(self.main_window, "提示", "发送失败")
+            else:
+                QMessageBox.about(self.main_window, "提示", "发送成功")
+        except Exception as e:
+            QMessageBox.about(self.main_window, "提示", "出现崩溃")
+            logger.error(e)

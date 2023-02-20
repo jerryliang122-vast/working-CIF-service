@@ -21,6 +21,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install poetry
+          choco install zip
           
 
       - name: Build Windows Executable

@@ -18,14 +18,12 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
+        pip uninstall pathlib
         pip install poetry
         
     - name: Build Windows Executable
       run: |
         poetry install
-        cd C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\working-cif-service-NxTJ2SoF-py3.9\Scripts\
-        python.exe -m pip uninstall pathlib -y
-        cd ${{ github.workspace }}
         poetry run pyinstaller -F -w main.py
         cp -r init_conf dist/
     - name: Upload Windows Executable

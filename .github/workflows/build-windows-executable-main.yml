@@ -1,0 +1,64 @@
+name: Build and Upload Windows Executable
+
+on:
+  pull_request:
+    types: [closed]
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+
+      - name: Build Windows Executable
+        run: |
+          C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\working-cif-service-NxTJ2SoF-py3.9\Scripts\python.exe -m pip uninstall pathlib -y
+          poetry run pyinstaller -F -w main.py
+          cp -r init_conf dist/
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.pull_request.head.ref }}
+          release_name: Release ${{ github.event.pull_request.head.ref }}
+          body: |
+            This is a release.
+          draft: false
+          prerelease: false
+
+      - name: Upload Windows Executable
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/main.exe
+          asset_name: main.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload init_conf
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/init_conf
+          asset_name: init_conf
+          asset_content_type: application/octet-stream

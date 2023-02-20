@@ -9,6 +9,7 @@ from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
 import email_api.inquiry.smtp as smtps
 
+logger = logging.getLogger("my_logger")
 
 # 获取港口信息
 with open(os.path.join(os.getcwd(), "conf", "port.json"), "r", encoding="utf-8") as f:
@@ -155,12 +156,19 @@ class work_inquiry:
         ###  ["Row 2, Column 1", "Row 2, Column 2"],
         ###  ["Row 3, Column 1", "Row 3, Column 2"],
         ###]
+        if single_volume == "":
+            single_volume = "N/A"
+        if hs_code == "":
+            hs_code = "N/A"
+        if goods_description == "":
+            goods_description = "N/A"
         data = [
             ["quantity", f"{number}"],
             ["weight", f"{weight}"],
             ["volume", f"{volume}"],
-            ["single_volume", f"{single_volume}"],
+            ["cargo_size", f"{single_volume}"],
             ["hs_code", f"{hs_code}"],
+            ["cargo_description", f"{goods_description}"],
         ]
         # 渲染模板
         template = smtps.mail_template(clause, address, data)
@@ -175,25 +183,26 @@ class work_inquiry:
 
     # 发送邮件
     def send_email(self):
-        # 获取条款
-        clause = self.main_window.clause.currentText()
-        # 获取询价编号
-        inquiry_number = self.main_window.inquiry_number.text()
-        # 设计邮件主题
-        subject = f"{clause} == {inquiry_number}"
-        # 从listview中获取选中代理信息
-        selected_indexes = self.main_window.daili_list.selectedIndexes()
-        # 获取模板
-        template = self.preview_data()
-        # 收集发送成功率
-        reports = []
-        for index in selected_indexes:
-            proxy_infos = read_email(index.data())
-            # 发送邮件
-            report = smtps.send_mail(proxy_infos, subject, template)
-            reports.append(report)
-        # 判断reports列表中是否含有false
-        if False in reports:
-            QMessageBox.about(self.main_window, "提示", "发送失败")
-        else:
-            QMessageBox.about(self.main_window, "提示", "发送成功")
+        try:
+            # 获取条款
+            clause = self.main_window.clause.currentText()
+            # 获取询价编号
+            inquiry_number = self.main_window.inquiry_number.text()
+            # 设计邮件主题
+            subject = f"{clause} == {inquiry_number}"
+            # 从listview中获取选中代理信息
+            selected_indexes = self.main_window.daili_list.selectedIndexes()
+            # 获取模板
+            template = self.preview_data()
+            for index in selected_indexes:
+                proxy_infos = read_email(index.data())
+                # 发送邮件
+                report = smtps.send_mail(proxy_infos, subject, template)
+            # 判断reports列表中是否含有false
+            if report == False:
+                QMessageBox.about(self.main_window, "提示", "发送失败")
+            else:
+                QMessageBox.about(self.main_window, "提示", "发送成功")
+        except Exception as e:
+            QMessageBox.about(self.main_window, "提示", "出现崩溃")
+            logger.error(e)

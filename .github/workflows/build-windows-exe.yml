@@ -1,0 +1,33 @@
+name: Build and Upload Windows Executable
+
+on:
+  push:
+    branches:
+      - inquiry
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+        
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install poetry
+        
+    - name: Build Windows Executable
+      run: |
+        poetry install
+        C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\working-cif-service-NxTJ2SoF-py3.9\Scripts\python.exe -m pip uninstall pathlib -y
+        poetry run pyinstaller -F -w main.py
+        cp -r init_conf dist/
+    - name: Upload Windows Executable
+      uses: actions/upload-artifact@v2
+      with:
+        name: your_script
+        path: dist/

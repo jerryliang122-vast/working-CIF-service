@@ -1,5 +1,6 @@
 # 初始化
 import os
+import sys
 
 # 检查工作目录下是否有conf文件夹
 if not os.path.exists("conf"):
@@ -12,14 +13,18 @@ import sys
 from work.inquiry import work_inquiry
 import logging
 
+logpath = os.path.join(os.getcwd(), "log.log")
 logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s %(message)s",
+    level=logging.DEBUG,  # 级别：CRITICAL > ERROR > WARNING > INFO > DEBUG，默认级别为 WARNING
+    format="%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s:  %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
-    handlers=[logging.FileHandler("conf/app.log"), logging.StreamHandler()],
-    encoding="utf-8",
+    filename=logpath,
+    filemode="a",
 )
-logger = logging.getLogger()
+logger = logging.getLogger("my_logger")
+
+# sys导出控制台的输出
+sys.stdout = open("log.log", "w", encoding="utf-8")
 
 
 class wm(QMainWindow, Ui_Form):

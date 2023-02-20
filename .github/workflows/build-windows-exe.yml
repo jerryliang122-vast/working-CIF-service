@@ -18,11 +18,11 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install pyinstaller
         pip install poetry
+        poetry install
     - name: Build Windows Executable
       run: |
-        pyinstaller -F -w main.py
+        poetry run pyinstaller -F -w main.py
         cp -r init_conf dist/
     - name: Upload Windows Executable
       uses: actions/upload-artifact@v2

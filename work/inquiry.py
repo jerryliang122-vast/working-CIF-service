@@ -77,6 +77,7 @@ class work_inquiry:
         self.main_window.add_agent_email.clicked.connect(self.write_proxy)
         self.main_window.Preview_email.clicked.connect(self.preview)
         self.main_window.send_email.clicked.connect(self.send_email)
+        self.main_window.aoto.clicked.connect(self.random_number)
 
     # 根据选择的航线，获取json中的国家
     def get_country(self):
@@ -206,3 +207,11 @@ class work_inquiry:
         except Exception as e:
             QMessageBox.about(self.main_window, "提示", "出现崩溃")
             logger.error(e)
+
+    # 随机生成询价编号
+    def random_number(self):
+        import work.random_number as random_number
+
+        inquiry_number = random_number.reandom()
+        self.main_window.random_number.clear()
+        self.main_window.random_number.appendPlainText(inquiry_number)

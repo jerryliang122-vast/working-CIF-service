@@ -194,17 +194,12 @@ class work_inquiry:
             selected_indexes = self.main_window.daili_list.selectedIndexes()
             # 获取模板
             template = self.preview_data()
-            # 收集发送成功率
-            reports = []
             for index in selected_indexes:
                 proxy_infos = read_email(index.data())
                 # 发送邮件
                 report = smtps.send_mail(proxy_infos, subject, template)
-                report_data = {index.data(): report}
-                if report[0] == False:
-                    reports.append(report_data)
             # 判断reports列表中是否含有false
-            if False in reports:
+            if report == False:
                 QMessageBox.about(self.main_window, "提示", "发送失败")
             else:
                 QMessageBox.about(self.main_window, "提示", "发送成功")

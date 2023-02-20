@@ -1,4 +1,4 @@
-name: Build and Upload Windows Executable main
+name: build main
 
 on:
   pull_request:
@@ -19,11 +19,13 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install poetry
-          poetry install
+          
 
       - name: Build Windows Executable
         run: |
+          poetry install
           C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\working-cif-service-NxTJ2SoF-py3.9\Scripts\python.exe -m pip uninstall pathlib -y
           poetry run pyinstaller -F -w main.py
           cp -r init_conf dist/

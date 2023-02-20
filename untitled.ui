@@ -760,7 +760,7 @@
        <string>生成</string>
       </property>
      </widget>
-     <widget class="QPlainTextEdit" name="plainTextEdit">
+     <widget class="QPlainTextEdit" name="random_number">
       <property name="geometry">
        <rect>
         <x>20</x>

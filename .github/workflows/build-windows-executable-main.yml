@@ -28,7 +28,8 @@ jobs:
           poetry install
           C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\working-cif-service-NxTJ2SoF-py3.9\Scripts\python.exe -m pip uninstall pathlib -y
           poetry run pyinstaller -F -w main.py
-          cp -r init_conf dist/
+          zip -r init_conf.zip ./init_conf
+          mv init_conf.zip dist/init_conf.zip
 
       - name: Create Release
         id: create_release
@@ -43,22 +44,18 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Windows Executable
+      - name: Upload Assets
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/main.exe
-          asset_name: main.exe
-          asset_content_type: application/octet-stream
-
-      - name: Upload init_conf
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/init_conf
-          asset_name: init_conf
-          asset_content_type: application/octet-stream
+          asset_path: |
+            ./dist/main.exe
+            ./dist/init_conf.zip
+          asset_name: |
+            main.exe
+            init_conf.zip
+          asset_content_type: |
+            application/octet-stream
+            application/zip

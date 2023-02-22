@@ -51,17 +51,19 @@ jobs:
           prerelease: false
 
       - name: Upload Windows Executable and init_conf
+        working-directory: ./dist # 指定工作目录为./dist
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: |
-            ./dist/main.exe
-            ./dist/init_conf.zip
+            main.exe
+            init_conf.zip
           asset_name: |
             main.exe
             init_conf.zip
           asset_content_type: |
             application/octet-stream
             application/zip
+

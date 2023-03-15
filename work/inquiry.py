@@ -55,7 +55,8 @@ def write_port_name(port, name, email):
         data = [i[0] for i in data]
         if name in data:
             # 更新
-            session.query(Agent).filter(Agent.name == name, Agent.port == port).update({Agent.email: email})        else:
+            session.query(Agent).filter(Agent.name == name, Agent.port == port).update({Agent.email: email})
+        else:
             # 写入
             agent = Agent(port=port, name=name, email=email)
             session.add(agent)

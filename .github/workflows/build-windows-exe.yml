@@ -1,6 +1,6 @@
 name: Build and Upload Windows Executable
 
-on:push
+on: push
 
 jobs:
   build:

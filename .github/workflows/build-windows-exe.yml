@@ -1,9 +1,6 @@
 name: Build and Upload Windows Executable
 
-on:
-  push:
-    branches:
-      - inquiry
+on:push
 
 jobs:
   build:

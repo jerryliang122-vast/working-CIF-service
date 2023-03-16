@@ -19,7 +19,7 @@ jobs:
     - name: Install and configure Poetry
       run: |
         (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
-    
+        set PATH=%PATH%;C:\Users\runneradmin\AppData\Roaming\Python\Scripts
     - name: Build Windows Executable
       run: |
         poetry install

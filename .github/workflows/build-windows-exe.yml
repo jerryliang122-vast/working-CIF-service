@@ -17,10 +17,8 @@ jobs:
         Set-MpPreference -DisableRealtimeMonitoring $true
 
     - name: Install and configure Poetry
-      uses: snok/install-poetry@v1.1.6 # or any other action that installs poetry
-      with:
-        virtualenvs-create: true # optional, default is true
-        virtualenvs-in-project: true # optional, default is false
+      run: |
+        (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
     
     - name: Build Windows Executable
       run: |

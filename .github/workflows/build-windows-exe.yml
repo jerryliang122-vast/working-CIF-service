@@ -17,9 +17,10 @@ jobs:
         Set-MpPreference -DisableRealtimeMonitoring $true
 
     - name: Install and configure Poetry
-      run: |
-        (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
-        set PATH=%PATH%;C:\Users\runneradmin\AppData\Roaming\Python\Scripts
+      uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 3.9
+
     - name: Build Windows Executable
       run: |
         poetry install

@@ -16,11 +16,12 @@ jobs:
       run: |
         Set-MpPreference -DisableRealtimeMonitoring $true
 
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install poetry
-        
+    - name: Install and configure Poetry
+      uses: snok/install-poetry@v1.1.6 # or any other action that installs poetry
+      with:
+        virtualenvs-create: true # optional, default is true
+        virtualenvs-in-project: true # optional, default is false
+    
     - name: Build Windows Executable
       run: |
         poetry install

@@ -18,8 +18,8 @@ jobs:
 
     - name: Install and configure Poetry
       uses: abatilo/actions-poetry@v2
-        with:
-          poetry-version: 3.9
+      with:
+        poetry-version: 3.9
 
     - name: Build Windows Executable
       run: |

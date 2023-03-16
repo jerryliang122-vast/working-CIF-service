@@ -25,3 +25,8 @@ black = {version = "^23.1.0", allow-prereleases = true}
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "default"
+default = true
+url = "https://pypi.org/simple/"

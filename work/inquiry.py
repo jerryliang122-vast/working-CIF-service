@@ -229,11 +229,12 @@ class work_inquiry:
         # 获取代理邮箱
         email = read_email(selected_name, port)
         # email做成列表
-        email = email.split(",")
+        email_list = email.split(",")
         # 创建表格模型并填充数据
         model = QStandardItemModel()
         header_labels = ["邮箱"]
         model.setHorizontalHeaderLabels(header_labels)
-        item_email = QStandardItem(email)
-        model.appendRow([item_email])
+        for item in email_list:
+            item_email = QStandardItem(item.strip())  # 使用strip()方法去掉元素中的空格
+            model.appendRow([item_email])
         self.main_window.addresslist.setModel(model)

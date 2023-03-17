@@ -2,7 +2,7 @@ import sys
 import json
 import os
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
-from PyQt6.QtWidgets import QListView, QAbstractItemView, QMainWindow, QMessageBox
+from PyQt6.QtWidgets import QListView, QAbstractItemView, QMainWindow, QMessageBox, QHeaderView
 from email_api.agent_email_sql import Agent, Session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
@@ -238,3 +238,5 @@ class work_inquiry:
             item_email = QStandardItem(item.strip())  # 使用strip()方法去掉元素中的空格
             model.appendRow([item_email])
         self.main_window.addresslist.setModel(model)
+        header = self.main_window.addresslist.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.Stretch)

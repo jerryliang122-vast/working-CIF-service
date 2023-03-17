@@ -1,17 +1,14 @@
 name: Build and Upload Windows Executable
 
-on:
-  push:
-    branches:
-      - inquiry
+on: push
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
         
@@ -19,11 +16,12 @@ jobs:
       run: |
         Set-MpPreference -DisableRealtimeMonitoring $true
 
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install poetry
-        
+    - name: Install and configure Poetry
+      uses: abatilo/actions-poetry@v2
+      with:
+        python-version: 3.9
+        poetry-version: 1.3.2
+
     - name: Build Windows Executable
       run: |
         poetry install

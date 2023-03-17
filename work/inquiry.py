@@ -239,4 +239,4 @@ class work_inquiry:
             model.appendRow([item_email])
         self.main_window.addresslist.setModel(model)
         header = self.main_window.addresslist.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.Stretch)
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)

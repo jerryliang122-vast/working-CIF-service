@@ -35,8 +35,8 @@ def read_name():
 
 
 # 读取代理邮箱
-def read_email(name):
-    data = session.query(Agent.email).filter(Agent.name == name).first()
+def read_email(name, port):
+    data = session.query(Agent.email).filter(Agent.name == name, Agent.port == port).first()
     return data[0]
 
 
@@ -110,6 +110,7 @@ class work_inquiry:
             item.setCheckable(True)
             model.appendRow(item)
         self.main_window.daili_list.setModel(model)
+        self.main_window.daili_list.selectionModel().currentRowChanged.connect(self.update_addresslist)
 
     # 代理信息写入数据库
     def write_proxy(self):
@@ -193,10 +194,12 @@ class work_inquiry:
             subject = f"Inquiry {clause} price == {inquiry_number}"
             # 从listview中获取选中代理信息
             selected_indexes = self.main_window.daili_list.selectedIndexes()
+            # 获取港口
+            port = self.main_window.gangkou.currentText()
             # 获取模板
             template = self.preview_data()
             for index in selected_indexes:
-                proxy_infos = read_email(index.data())
+                proxy_infos = read_email(index.data(), port)
                 # 发送邮件
                 report = smtps.send_mail(proxy_infos, subject, template)
             # 判断reports列表中是否含有false
@@ -215,3 +218,22 @@ class work_inquiry:
         inquiry_number = random_number.reandom()
         self.main_window.random_number.clear()
         self.main_window.random_number.appendPlainText(inquiry_number)
+
+    # 显示代理邮箱
+    def update_addresslist(self, current, previous):
+        # 获取当前选中项的名称
+        selected_item = self.main_window.daili_list.model().itemFromIndex(current)
+        selected_name = selected_item.text()
+        # 获取港口
+        port = self.main_window.gangkou.currentText()
+        # 获取代理邮箱
+        email = read_email(selected_name, port)
+        # email做成列表
+        email = email.split(",")
+        # 创建表格模型并填充数据
+        model = QStandardItemModel()
+        header_labels = ["邮箱"]
+        model.setHorizontalHeaderLabels(header_labels)
+        item_email = QStandardItem(email)
+        model.appendRow([item_email])
+        self.main_window.addresslist.setModel(model)

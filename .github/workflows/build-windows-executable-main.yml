@@ -24,7 +24,11 @@ jobs:
       - name: Install and configure Poetry
         uses: abatilo/actions-poetry@v2
         with:
-          python-version: 3.9
+          - name: Install and configure Poetry
+            uses: abatilo/actions-poetry@v2
+            with:
+              python-version: 3.9
+              poetry-version: 1.3.2
           poetry-version: 1.3.2
       - name: Install dependencies
         run: |
@@ -60,8 +64,8 @@ jobs:
         with: 
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: |
-            D:\a\working-CIF-service\working-CIF-service\dist\main.exe
-            D:\a\working-CIF-service\working-CIF-service\dist\init_conf.zip
+            ${{ github.workspace }}/dist/main.exe
+            ${{ github.workspace }}/dist/init_conf.zip
           asset_name: |
             main.exe
             init_conf.zip

@@ -31,7 +31,6 @@ jobs:
         run: |
           choco install zip
           
-
       - name: Build Windows Executable
         run: |
           poetry install
@@ -69,4 +68,3 @@ jobs:
           asset_content_type: |
             application/octet-stream
             application/zip
-

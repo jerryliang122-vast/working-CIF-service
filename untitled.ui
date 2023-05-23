@@ -256,7 +256,7 @@
        <rect>
         <x>210</x>
         <y>90</y>
-        <width>131</width>
+        <width>188</width>
         <height>31</height>
        </rect>
       </property>
@@ -291,7 +291,7 @@
        <rect>
         <x>30</x>
         <y>120</y>
-        <width>261</width>
+        <width>151</width>
         <height>31</height>
        </rect>
       </property>
@@ -345,6 +345,28 @@
         <string>DDP</string>
        </property>
       </item>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_13">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>120</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_13">
+       <item>
+        <widget class="QLabel" name="label_13">
+         <property name="text">
+          <string>港口</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="port"/>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_2">

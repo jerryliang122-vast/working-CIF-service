@@ -18,7 +18,7 @@ logger = logging.getLogger("my_logger")
 
 
 # 邮件模板修改
-def mail_template(clasue, address, data):
+def mail_template(clasue,port, address, data):
     # 读取列表数据并生成
     table_rows = ""
     for row in data:
@@ -36,6 +36,8 @@ def mail_template(clasue, address, data):
     <body>
     <p>Dear team,<p>
     <p>This is a {clasue} shipment, Pls share price to us </p>
+    <p>Destination Port:</p>
+    <p>{port}</p>
     <p>Address:</p>
     <p>{address}</p>
     <p>Details:</p>
@@ -48,7 +50,7 @@ def mail_template(clasue, address, data):
     </body>
     </html>
     """.format(
-        clasue=clasue, address=address, table_rows=table_rows
+        clasue=clasue,port=port, address=address, table_rows=table_rows
     )
     return html_template
 

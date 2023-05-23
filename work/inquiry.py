@@ -153,11 +153,15 @@ class work_inquiry:
         goods_description = self.main_window.cargoname.text()
         # 获取条款
         clause = self.main_window.clause.currentText()
+        # 获取港口
+        port = self.main_window.port.text()
         # 处理货物数据
         ###data = [  ["Row 1, ", "Row 1, Column 2"],
         ###  ["Row 2, Column 1", "Row 2, Column 2"],
         ###  ["Row 3, Column 1", "Row 3, Column 2"],
         ###]
+        if port == "":
+            port = "Please recommend a nearest port"
         if single_volume == "":
             single_volume = "N/A"
         if hs_code == "":
@@ -173,7 +177,7 @@ class work_inquiry:
             ["cargo_description", f"{goods_description}"],
         ]
         # 渲染模板
-        template = smtps.mail_template(clause, address, data)
+        template = smtps.mail_template(clause, port, address, data)
         return template
 
     # 预览显示到界面

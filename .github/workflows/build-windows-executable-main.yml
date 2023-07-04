@@ -38,6 +38,7 @@ jobs:
           poetry run pyinstaller -F -w main.py
           cp -r init_conf dist/
           zip -r dist/init_conf.zip dist/init_conf
+          dir .\dist
         
 
       - name: Create Release

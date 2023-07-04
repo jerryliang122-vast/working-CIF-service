@@ -38,6 +38,7 @@ jobs:
           poetry run pyinstaller -F -w main.py
           cp -r init_conf dist/
           zip -r dist/init_conf.zip dist/init_conf
+          dir .\dist
         
 
       - name: Create Release
@@ -54,6 +55,8 @@ jobs:
 
       - name: Upload Windows Executable and init_conf
         uses: actions/upload-release-asset@v1
+        run: |
+          dir .\dist
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with: 

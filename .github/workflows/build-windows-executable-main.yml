@@ -17,7 +17,7 @@ jobs:
           Set-MpPreference -DisableRealtimeMonitoring $true
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: 3.9
 
@@ -36,8 +36,9 @@ jobs:
           poetry install
           C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\working-cif-service-NxTJ2SoF-py3.9\Scripts\python.exe -m pip uninstall pathlib -y
           poetry run pyinstaller -F -w main.py
-          zip -r init_conf.zip ./init_conf
-          mv init_conf.zip dist/
+          cp -r init_conf dist/
+          zip -r dist/init_conf.zip dist/init_conf
+        
 
       - name: Create Release
         id: create_release
@@ -46,10 +47,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           tag_name: ${{ github.event.pull_request.title }}
-          release_name: Release ${{ github.event.pull_request.head.ref }}
-          release_title: "CIF Service Release -${{ github.event.pull_request.title }}"
-          body: |
-            ${{ github.event.pull_request.body }}
+          name: Release ${{ github.event.pull_request.head.ref }}
+          body: ${{ github.event.pull_request.body }}
           draft: false
           prerelease: false
 

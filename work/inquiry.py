@@ -78,6 +78,7 @@ class work_inquiry:
         self.main_window.Preview_email.clicked.connect(self.preview)
         self.main_window.send_email.clicked.connect(self.send_email)
         self.main_window.aoto.clicked.connect(self.random_number)
+        self.main_window.delete_data.clicked.connect(self.delete_data)
 
     # 根据选择的航线，获取json中的国家
     def get_country(self):
@@ -244,3 +245,21 @@ class work_inquiry:
         self.main_window.addresslist.setModel(model)
         header = self.main_window.addresslist.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+    # 删除填充的所有数据
+    def delete_data(self):
+        self.main_window.address.clear()
+        self.main_window.PKGS.clear()
+        self.main_window.KGS.clear()
+        self.main_window.CBM.clear()
+        self.main_window.size.clear()
+        self.main_window.HS.clear()
+        self.main_window.cargoname.clear()
+        self.main_window.port.clear()
+        self.main_window.emailtext.clear()
+        self.main_window.agent_name.clear()
+        self.main_window.agent_email_list.clear()
+        self.main_window.random_number.clear()
+        self.main_window.inquiry_number.clear()
+        #弹出提示
+        QMessageBox.about(self.main_window, "提示", "清空成功")

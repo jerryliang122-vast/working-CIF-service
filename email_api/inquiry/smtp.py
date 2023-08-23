@@ -19,16 +19,11 @@ logger = logging.getLogger("my_logger")
 
 # 邮件模板修改
 def mail_template(clasue,port, address, data):
-    # 读取列表数据并生成
-    table_rows = ""
-    for row in data:
-        table_rows += (
-            "<tr><td style='border: 1px solid black;'>{}</td><td style='border: 1px solid black;'>{}</td></tr>".format(
-                row[0], row[1]
-            )
-        )
-    # 邮件模板
-    html_template = """
+    table_rows = "".join(
+        f"<tr><td style='border: 1px solid black;'>{row[0]}</td><td style='border: 1px solid black;'>{row[1]}</td></tr>"
+        for row in data
+    )
+    return """
     <html>
     <head>
     <title>DAP shipment</title>
@@ -50,9 +45,8 @@ def mail_template(clasue,port, address, data):
     </body>
     </html>
     """.format(
-        clasue=clasue,port=port, address=address, table_rows=table_rows
+        clasue=clasue, port=port, address=address, table_rows=table_rows
     )
-    return html_template
 
 
 # 邮件发送

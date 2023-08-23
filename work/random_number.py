@@ -13,24 +13,12 @@ conf = json.loads(conf)
 
 def reandom():
     date = datetime.datetime.now()
-    if date.hour < 10:
-        hour = "0" + str(date.hour)
-    else:
-        hour = str(date.hour)
-
-    if date.minute < 10:
-        minute = "0" + str(date.minute)
-    else:
-        minute = str(date.minute)
-
-    if date.second < 10:
-        second = "0" + str(date.second)
-    else:
-        second = str(date.second)
-
+    hour = f"0{date.hour}" if date.hour < 10 else str(date.hour)
+    minute = f"0{date.minute}" if date.minute < 10 else str(date.minute)
+    second = f"0{date.second}" if date.second < 10 else str(date.second)
     year = str(date.year)[2:4]
 
-    number = year + hour + minute + second + str(date.microsecond)[0:3]
+    number = year + hour + minute + second + str(date.microsecond)[:3]
     number = conf["Prefix"] + str(number)
-    logger.info("生成的随机数为:{}".format(str(number)))
+    logger.info(f"生成的随机数为:{str(number)}")
     return number

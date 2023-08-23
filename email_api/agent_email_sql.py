@@ -16,7 +16,7 @@ class Agent(Base):
 
 # 创建数据库
 database = os.path.join(os.getcwd(), "conf", "agent_email.db")
-engine = create_engine("sqlite:///{}".format(database), echo=True)
+engine = create_engine(f"sqlite:///{database}", echo=True)
 Base.metadata.create_all(engine)
 # 创建数据库连接
 Session = sessionmaker(bind=engine)

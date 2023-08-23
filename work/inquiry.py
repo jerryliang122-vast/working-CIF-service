@@ -42,7 +42,7 @@ def read_email(name, port):
 
 # 按照港口读取代理名称列表
 def read_port_name(port):
-    data = session.query(Agent.name).filter(Agent.port.like("%{}%".format(port))).all()
+    data = session.query(Agent.name).filter(Agent.port.like(f"%{port}%")).all()
     data = [i[0] for i in data]
     return data
 
@@ -51,7 +51,7 @@ def read_port_name(port):
 def write_port_name(port, name, email):
     try:
         # 先查询是否有此港口的代理
-        data = session.query(Agent.name).filter(Agent.port.like("%{}%".format(port))).all()
+        data = session.query(Agent.name).filter(Agent.port.like(f"%{port}%")).all()
         data = [i[0] for i in data]
         if name in data:
             # 更新
@@ -92,8 +92,7 @@ class work_inquiry:
     # 根据选择的国家，获取json中的港口
     def get_port(self):
         ship_route = self.main_window.hangxian.currentText()
-        country = self.main_window.guojia.currentText()
-        if country:
+        if country := self.main_window.guojia.currentText():
             port = port_conf[ship_route][country]
             # 更新到ComboBox
             self.main_window.gangkou.clear()
@@ -127,10 +126,7 @@ class work_inquiry:
         proxy_email = self.main_window.agent_email_list.toPlainText()
         # 处理代理邮箱数据。将换行符替换成逗号
         proxy_email = proxy_email.replace("\n", ",")
-        # 向数据库写入数据
-        data = write_port_name(port, proxy_name, proxy_email)
-        # 判断是否写入成功
-        if data:
+        if data := write_port_name(port, proxy_name, proxy_email):
             # 弹出界面提示
             QMessageBox.about(self.main_window, "提示", "写入成功")
         else:
@@ -177,9 +173,7 @@ class work_inquiry:
             ["hs_code", f"{hs_code}"],
             ["cargo_description", f"{goods_description}"],
         ]
-        # 渲染模板
-        template = smtps.mail_template(clause, port, address, data)
-        return template
+        return smtps.mail_template(clause, port, address, data)
 
     # 预览显示到界面
     def preview(self):

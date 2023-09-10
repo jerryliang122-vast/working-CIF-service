@@ -34,7 +34,7 @@ jobs:
             zip -r output.zip dist
             
         - name: Upload Windows Executable
-        uses: actions/upload-artifact@v2
-        with:
+          uses: actions/upload-artifact@v2
+          with:
             name: your_script
             path: dist/

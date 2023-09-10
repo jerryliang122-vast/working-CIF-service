@@ -7,6 +7,7 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v3
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -26,11 +27,9 @@ jobs:
       with:
         nuitka-version: main
         script-name: main.py
-        onefile: true
         standalone: true
         enable-plugins: pyqt6
       
-
     - name: copy init_conf to dist
       run: |
         mkdir dist

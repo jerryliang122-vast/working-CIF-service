@@ -17,6 +17,11 @@ jobs:
       run: |
         Set-MpPreference -DisableRealtimeMonitoring $true
 
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        choco install zip
+        
     - name: Build Windows Executable
       uses: Nuitka/Nuitka-Action@main
       with:

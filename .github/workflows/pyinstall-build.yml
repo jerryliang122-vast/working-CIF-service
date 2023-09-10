@@ -8,13 +8,9 @@ jobs:
   
       steps:
         - uses: actions/checkout@v3
-        
-        - name: Disable Windows Defender
-          run: |
-            Set-MpPreference -DisableRealtimeMonitoring $true
   
         - name: Setup Python
-          uses: actions/setup-python@v2
+          uses: actions/setup-python@v4
           with:
             python-version: 3.10
   

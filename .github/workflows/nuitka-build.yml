@@ -32,12 +32,10 @@ jobs:
       
     - name: copy init_conf to dist
       run: |
-        mkdir dist
-        cp -r init_conf dist/
-        cp build/main.exe dist/
+        cp -r init_conf build/
 
     - name: Upload Windows Executable
       uses: actions/upload-artifact@v2
       with:
         name: your_script
-        path: dist/
+        path: build/

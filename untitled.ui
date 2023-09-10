@@ -647,7 +647,7 @@
       </rect>
      </property>
      <property name="title">
-      <string>渲染界面</string>
+      <string>自动识别以及渲染界面</string>
      </property>
      <widget class="QTextEdit" name="emailtext">
       <property name="geometry">
@@ -796,7 +796,7 @@
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
-     <string>提单</string>
+     <string>预付货总结</string>
     </attribute>
    </widget>
    <widget class="QWidget" name="tab_3">

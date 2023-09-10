@@ -1,0 +1,40 @@
+name: pyinstall build
+
+on: push
+
+jobs:
+    build:
+      runs-on: windows-latest
+  
+      steps:
+        - uses: actions/checkout@v3
+        
+        - name: Disable Windows Defender
+          run: |
+            Set-MpPreference -DisableRealtimeMonitoring $true
+  
+        - name: Setup Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: 3.10
+  
+        - name: Install dependencies
+          run: |
+            pip install -r requirements.txt
+            choco install zip
+        
+        - name: install pyinstaller
+          run: |
+            pip install pyinstaller
+
+        - name: Build Windows Executable
+          run: |
+            pyinstaller -F -w main.py
+            cp -r init_conf dist/
+            zip -r output.zip dist
+            
+        - name: Upload Windows Executable
+        uses: actions/upload-artifact@v2
+        with:
+            name: your_script
+            path: dist/

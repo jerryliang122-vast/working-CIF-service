@@ -20,12 +20,23 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install nuitka
 
     - name: Build Windows Executable
+      uses: Nuitka/Nuitka-Action@main
+      with:
+        nuitka-version: main
+        script-name: main.py
+        onefile: true
+        standalone: true
+        enable-plugins: pyqt6
+      
+
+    - name: copy init_conf to dist
       run: |
-        pip install pyinstaller
-        pyinstaller -F -w main.py
+        mkdir dist
         cp -r init_conf dist/
+        cp build/main.exe dist/
 
     - name: Upload Windows Executable
       uses: actions/upload-artifact@v2

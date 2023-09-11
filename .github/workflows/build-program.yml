@@ -1,4 +1,4 @@
-name: build exe
+name: build program
 
 on: push
 
@@ -40,7 +40,6 @@ jobs:
     - name: copy init_conf to dist
       run: |
         cp -r init_conf build/init_conf
-        cp main.exe build/
 
     - name: Upload Windows Executable
       uses: actions/upload-artifact@v2

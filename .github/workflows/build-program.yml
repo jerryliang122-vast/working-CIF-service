@@ -41,7 +41,7 @@ jobs:
       run: |
         mkdir dist
         cp -r init_conf dist/init_conf
-        cp main.exe dist/
+        cp build/main.exe dist/
 
     - name: Upload Windows Executable
       uses: actions/upload-artifact@v2

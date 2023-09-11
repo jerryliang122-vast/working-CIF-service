@@ -28,8 +28,16 @@ jobs:
         nuitka-version: main
         script-name: main.py
         standalone: true
+        output-dir: build
         enable-plugins: pyqt6
+    
+    - name: look file 
+      run: |
+        dir /b
       
+    - name: look all file 
+      run: |
+        dir /b /s
     - name: copy init_conf to dist
       run: |
         cp -r init_conf build/

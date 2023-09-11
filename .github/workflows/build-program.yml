@@ -30,7 +30,7 @@ jobs:
         nuitka-version: main
         script-name: main.py
         standalone: false
-        include-package-data: "requirements.txt"
+        include-package-data: ${{ github.workspace }}/requirements.txt
         onefile: true
         enable-plugins: pyqt6
 

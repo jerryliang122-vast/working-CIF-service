@@ -29,9 +29,8 @@ jobs:
       with:
         nuitka-version: main
         script-name: main.py
-        standalone: false
+        standalone: true
         include-package-data: ${{ github.workspace }}/requirements.txt
-        onefile: true
         enable-plugins: pyqt6
 
     - name: look file 

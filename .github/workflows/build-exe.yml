@@ -1,0 +1,98 @@
+name: build exe
+
+on: push
+
+jobs:
+  job1:
+    name: Nuitka-build
+    runs-on: windows-latest
+    steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+        root-reserve-mb: 40960
+        swap-size-mb: 1024
+        remove-dotnet: 'true'
+        remove-android: 'true'
+        remove-haskell: 'true'
+        remove-docker-images: 'true'
+        remove-codeql: 'true'
+
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+        
+    - name: Disable Windows Defender
+      run: |
+        Set-MpPreference -DisableRealtimeMonitoring $true
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        choco install zip
+        
+    - name: Build Windows Executable
+      run: |
+        pip install nuitka
+        nuitka --standalone --disable-console --assume-yes-for-downloads --output-dir=build --enable-plugin=pyqt6 main.py
+
+    - name: look file 
+      run: |
+        dir
+      
+    - name: copy init_conf to dist
+      run: |
+        cp -r init_conf build/init_conf
+
+    - name: Upload Windows Executable
+      uses: actions/upload-artifact@v2
+      with:
+        name: nuitka(exe)
+        path: build/
+  
+  job2:
+    name: pyinstall-build
+    runs-on: windows-latest
+
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 40960
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-docker-images: 'true'
+          remove-codeql: 'true'
+
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          choco install zip
+      
+      - name: install pyinstaller
+        run: |
+          pip install pyinstaller
+
+      - name: Build Windows Executable
+        run: |
+          pyinstaller -F -w main.py
+          cp -r init_conf dist/
+          zip -r output.zip dist
+          
+      - name: Upload Windows Executable
+        uses: actions/upload-artifact@v2
+        with:
+          name: pyinstall(exe)
+          path: dist/

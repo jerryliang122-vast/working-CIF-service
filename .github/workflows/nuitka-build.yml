@@ -25,7 +25,7 @@ jobs:
     - name: Build Windows Executable
       run: |
         pip install nuitka
-        nuitka --standalone --show-progress --assume-yes-for-downloads ----output-dir=build --enable-plugin=pyqt6 main.py
+        nuitka --standalone --show-progress --assume-yes-for-downloads --output-dir=build --enable-plugin=pyqt6 main.py
 
     - name: look file 
       run: |

@@ -30,7 +30,7 @@ jobs:
         nuitka-version: main
         script-name: main.py
         standalone: true
-        output-dir: build
+        onefile: true
         enable-plugins: pyqt6
 
     - name: look file 
@@ -39,13 +39,15 @@ jobs:
       
     - name: copy init_conf to dist
       run: |
-        cp -r init_conf build/init_conf
+        mkdir dist
+        cp -r init_conf dist/init_conf
+        cp main.exe dist/
 
     - name: Upload Windows Executable
       uses: actions/upload-artifact@v2
       with:
         name: nuitka(exe)
-        path: build/
+        path: dist/
   
   job2:
     name: pyinstall-build

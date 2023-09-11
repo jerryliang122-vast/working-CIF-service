@@ -23,14 +23,10 @@ jobs:
         choco install zip
         
     - name: Build Windows Executable
-      uses: Nuitka/Nuitka-Action@main
-      with:
-        nuitka-version: main
-        script-name: main.py
-        standalone: true
-        output-dir: build
-        enable-plugins: pyqt6
-    
+      run: |
+        pip install nuitka
+        nuitka --standalone --show-progress --assume-yes-for-downloads ----output-dir=build --enable-plugin=pyqt6 main.py
+
     - name: look file 
       run: |
         dir

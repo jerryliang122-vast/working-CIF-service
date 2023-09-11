@@ -29,8 +29,9 @@ jobs:
       with:
         nuitka-version: main
         script-name: main.py
-        standalone: true
+        standalone: false
         onefile: true
+        
         enable-plugins: pyqt6
 
     - name: look file 

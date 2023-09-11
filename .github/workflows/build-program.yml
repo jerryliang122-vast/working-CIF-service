@@ -30,8 +30,8 @@ jobs:
         nuitka-version: main
         script-name: main.py
         standalone: false
+        include-package-data: "requirements.txt"
         onefile: true
-        
         enable-plugins: pyqt6
 
     - name: look file 
@@ -49,7 +49,12 @@ jobs:
       with:
         name: nuitka(exe)
         path: dist/
-  
+     
+    - name: Upload Windows Executable - build
+      uses: actions/upload-artifact@v2
+      with:
+        name: nuitka-build
+        path: build/
   job2:
     name: pyinstall-build
     runs-on: windows-latest

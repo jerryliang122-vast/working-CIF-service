@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 import os
 import json
-from email_api.agent_email_sql import Session, Agent
+from .email_sql import Session, Agent
 import logging
 
 logger = logging.getLogger("my_logger")

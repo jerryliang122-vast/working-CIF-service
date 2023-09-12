@@ -1,25 +1,22 @@
 import sys
-import json
 import os
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 from PyQt6.QtWidgets import QListView, QAbstractItemView, QMainWindow, QMessageBox, QHeaderView
-from email_api.agent_email_sql import Agent, Session
+from utils import email_sql
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
-import email_api.inquiry.smtp as smtps
-
+from utils import inquiry_smtp
+from utils import port
 logger = logging.getLogger("my_logger")
 
 # 获取港口信息
-with open(os.path.join(os.getcwd(), "conf", "port.json"), "r", encoding="utf-8") as f:
-    port_conf = f.read()
-port_conf = json.loads(port_conf)
+port_conf = port()
 
 
 # 数据库操作方法
-session = Session()
-
+session = email_sql.Session()
+Agent = email_sql.Agent
 
 def insert(name, email):
     agent = Agent(name=name, email=email)
@@ -71,6 +68,9 @@ def write_port_name(port, name, email):
 class work_inquiry:
     def __init__(self, main_window):
         self.main_window = main_window
+        self.get_line()
+        self.get_country()
+        self.get_port()
         self.main_window.hangxian.currentIndexChanged.connect(self.get_country)
         self.main_window.guojia.currentIndexChanged.connect(self.get_port)
         self.main_window.gangkou.currentIndexChanged.connect(self.get_proxy)
@@ -80,10 +80,17 @@ class work_inquiry:
         self.main_window.aoto.clicked.connect(self.random_number)
         self.main_window.delete_data.clicked.connect(self.delete_data)
 
+    #自动生成航线菜单栏中的内容
+    def get_line(self):
+        self.main_window.hangxian.clear()
+        #读取航线
+        line = list(port_conf.get_line())
+        self.main_window.hangxian.addItems(line)
+
     # 根据选择的航线，获取json中的国家
     def get_country(self):
         ship_route = self.main_window.hangxian.currentText()
-        country = list(port_conf[ship_route].keys())
+        country = list(port_conf.get_country(ship_route))
         # 更新到ComboBox
         self.main_window.guojia.clear()
         self.main_window.guojia.addItems(country)
@@ -93,7 +100,7 @@ class work_inquiry:
     def get_port(self):
         ship_route = self.main_window.hangxian.currentText()
         if country := self.main_window.guojia.currentText():
-            port = port_conf[ship_route][country]
+            port = list(port_conf.get_port(ship_route,country))
             # 更新到ComboBox
             self.main_window.gangkou.clear()
             self.main_window.gangkou.addItems(port)
@@ -173,7 +180,7 @@ class work_inquiry:
             ["hs_code", f"{hs_code}"],
             ["cargo_description", f"{goods_description}"],
         ]
-        return smtps.mail_template(clause, port, address, data)
+        return inquiry_smtp.mail_template(clause, port, address, data)
 
     # 预览显示到界面
     def preview(self):
@@ -200,7 +207,7 @@ class work_inquiry:
             for index in selected_indexes:
                 proxy_infos = read_email(index.data(), port)
                 # 发送邮件
-                report = smtps.send_mail(proxy_infos, subject, template)
+                report = inquiry_smtp.send_mail(proxy_infos, subject, template)
             # 判断reports列表中是否含有false
             if report == False:
                 QMessageBox.about(self.main_window, "提示", "发送失败")
@@ -212,7 +219,7 @@ class work_inquiry:
 
     # 随机生成询价编号
     def random_number(self):
-        import work.random_number as random_number
+        import utils as random_number
 
         inquiry_number = random_number.reandom()
         self.main_window.random_number.clear()

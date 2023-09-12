@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'd:\Git\working-CIF-service\untitled.ui'
+# Form implementation generated from reading ui file '.\untitled.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -169,12 +169,6 @@ class Ui_Form(object):
         self.horizontalLayout_8.addItem(spacerItem7)
         self.hangxian = QtWidgets.QComboBox(parent=self.horizontalLayoutWidget_8)
         self.hangxian.setObjectName("hangxian")
-        self.hangxian.addItem("")
-        self.hangxian.addItem("")
-        self.hangxian.addItem("")
-        self.hangxian.addItem("")
-        self.hangxian.addItem("")
-        self.hangxian.addItem("")
         self.horizontalLayout_8.addWidget(self.hangxian)
         self.horizontalLayoutWidget_9 = QtWidgets.QWidget(parent=self.groupBox_2)
         self.horizontalLayoutWidget_9.setGeometry(QtCore.QRect(120, 20, 131, 31))
@@ -298,18 +292,12 @@ class Ui_Form(object):
         self.groupBox_2.setTitle(_translate("Form", "选择代理"))
         self.label_9.setText(_translate("Form", "港口"))
         self.label_8.setText(_translate("Form", "航线"))
-        self.hangxian.setItemText(0, _translate("Form", "东亚"))
-        self.hangxian.setItemText(1, _translate("Form", "东南亚"))
-        self.hangxian.setItemText(2, _translate("Form", "印巴"))
-        self.hangxian.setItemText(3, _translate("Form", "澳大利亚"))
-        self.hangxian.setItemText(4, _translate("Form", "北美"))
-        self.hangxian.setItemText(5, _translate("Form", "南美"))
         self.label_10.setText(_translate("Form", "国家"))
         self.groupBox_3.setTitle(_translate("Form", "添加代理信息"))
         self.add_agent_email.setText(_translate("Form", "添加"))
         self.pushButton_2.setText(_translate("Form", "删除"))
         self.label_11.setText(_translate("Form", "代理名称"))
-        self.groupBox_4.setTitle(_translate("Form", "渲染界面"))
+        self.groupBox_4.setTitle(_translate("Form", "自动识别以及渲染界面"))
         self.groupBox_5.setTitle(_translate("Form", "发送邮件"))
         self.Preview_email.setText(_translate("Form", "预览"))
         self.label_12.setText(_translate("Form", "询价编号"))
@@ -318,5 +306,5 @@ class Ui_Form(object):
         self.groupBox_6.setTitle(_translate("Form", "编号加载"))
         self.aoto.setText(_translate("Form", "生成"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Form", "询价"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Form", "提单"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Form", "预付货总结"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Form", "设置"))

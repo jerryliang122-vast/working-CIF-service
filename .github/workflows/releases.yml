@@ -17,25 +17,19 @@ jobs:
           Set-MpPreference -DisableRealtimeMonitoring $true
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.9
-
-      - name: Install and configure Poetry
-        uses: abatilo/actions-poetry@v2
-        with:
-          python-version: 3.9
-          poetry-version: 1.3.2
+          python-version: 3.10
 
       - name: Install dependencies
         run: |
+          pip install -r requirements.txt
           choco install zip
           
       - name: Build Windows Executable
         run: |
-          poetry install
-          C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\working-cif-service-NxTJ2SoF-py3.9\Scripts\python.exe -m pip uninstall pathlib -y
-          poetry run pyinstaller -F -w main.py
+          pip install pyinstaller
+          pyinstaller -F -w main.py
           cp -r init_conf dist/
           zip -r output.zip dist
           

@@ -1,0 +1,4 @@
+imbox @ git+https://github.com/martinrusev/imbox.git@616e278519a6b906d42e98a44acd4012fe742aba
+PyQt6==6.5.2
+PyQt6_sip==13.5.2
+SQLAlchemy==1.4.49

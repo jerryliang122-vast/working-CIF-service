@@ -2,12 +2,12 @@ import sys
 import os
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 from PyQt6.QtWidgets import QListView, QAbstractItemView, QMainWindow, QMessageBox, QHeaderView
-from email_api.agent_email_sql import Agent, Session
+from utils import email_sql
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
-import email_api.inquiry.smtp as smtps
-from tools.comfig import port
+from utils import inquiry_smtp
+from utils import port
 logger = logging.getLogger("my_logger")
 
 # 获取港口信息
@@ -15,8 +15,8 @@ port_conf = port()
 
 
 # 数据库操作方法
-session = Session()
-
+session = email_sql.Session()
+Agent = email_sql.Agent
 
 def insert(name, email):
     agent = Agent(name=name, email=email)
@@ -69,6 +69,8 @@ class work_inquiry:
     def __init__(self, main_window):
         self.main_window = main_window
         self.get_line()
+        self.get_country()
+        self.get_port()
         self.main_window.hangxian.currentIndexChanged.connect(self.get_country)
         self.main_window.guojia.currentIndexChanged.connect(self.get_port)
         self.main_window.gangkou.currentIndexChanged.connect(self.get_proxy)
@@ -178,7 +180,7 @@ class work_inquiry:
             ["hs_code", f"{hs_code}"],
             ["cargo_description", f"{goods_description}"],
         ]
-        return smtps.mail_template(clause, port, address, data)
+        return inquiry_smtp.mail_template(clause, port, address, data)
 
     # 预览显示到界面
     def preview(self):
@@ -205,7 +207,7 @@ class work_inquiry:
             for index in selected_indexes:
                 proxy_infos = read_email(index.data(), port)
                 # 发送邮件
-                report = smtps.send_mail(proxy_infos, subject, template)
+                report = inquiry_smtp.send_mail(proxy_infos, subject, template)
             # 判断reports列表中是否含有false
             if report == False:
                 QMessageBox.about(self.main_window, "提示", "发送失败")
@@ -217,7 +219,7 @@ class work_inquiry:
 
     # 随机生成询价编号
     def random_number(self):
-        import work.random_number as random_number
+        import utils as random_number
 
         inquiry_number = random_number.reandom()
         self.main_window.random_number.clear()

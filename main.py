@@ -8,9 +8,9 @@ if not os.path.exists("conf"):
     os.rename("init_conf", "conf")
 
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from Ui_untitled import Ui_Form
+from Ui.Ui_untitled import Ui_Form
 import sys
-from work.inquiry import work_inquiry
+from controllers import work_inquiry
 import logging
 
 logpath = os.path.join(os.getcwd(), "log.log")

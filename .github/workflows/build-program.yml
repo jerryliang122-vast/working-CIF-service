@@ -2,8 +2,8 @@ name: build program
 
 on:
   push:
-    branches:
-      - ! main
+    branches-ignore:
+      - main
 
 jobs:
   job1:

@@ -54,6 +54,7 @@ jobs:
       with:
         name: nuitka-build
         path: build/
+
   job2:
     name: pyinstall-build
     runs-on: windows-latest
@@ -77,7 +78,7 @@ jobs:
 
       - name: Build Windows Executable
         run: |
-          pyinstaller -F -w main.py
+          pyinstaller -F -w --exclude-module main.py
           cp -r init_conf dist/
           zip -r output.zip dist
           

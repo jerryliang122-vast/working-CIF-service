@@ -1,3 +1,7 @@
+import json
+
+# JSON 数据
+json_data = '''
 {
     "印巴": {
         "印度": [
@@ -52,3 +56,11 @@
         ]
     }
 }
+'''
+
+# 解析 JSON 数据
+data = json.loads(json_data)
+
+# 遍历 JSON 数据的键
+for key in data.keys():
+    print(data[key].keys())

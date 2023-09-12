@@ -1,5 +1,4 @@
 import sys
-import json
 import os
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 from PyQt6.QtWidgets import QListView, QAbstractItemView, QMainWindow, QMessageBox, QHeaderView
@@ -8,13 +7,11 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
 import email_api.inquiry.smtp as smtps
-
+from tools.comfig import port
 logger = logging.getLogger("my_logger")
 
 # 获取港口信息
-with open(os.path.join(os.getcwd(), "conf", "port.json"), "r", encoding="utf-8") as f:
-    port_conf = f.read()
-port_conf = json.loads(port_conf)
+port_conf = port()
 
 
 # 数据库操作方法
@@ -71,6 +68,7 @@ def write_port_name(port, name, email):
 class work_inquiry:
     def __init__(self, main_window):
         self.main_window = main_window
+        self.get_line()
         self.main_window.hangxian.currentIndexChanged.connect(self.get_country)
         self.main_window.guojia.currentIndexChanged.connect(self.get_port)
         self.main_window.gangkou.currentIndexChanged.connect(self.get_proxy)
@@ -80,10 +78,17 @@ class work_inquiry:
         self.main_window.aoto.clicked.connect(self.random_number)
         self.main_window.delete_data.clicked.connect(self.delete_data)
 
+    #自动生成航线菜单栏中的内容
+    def get_line(self):
+        self.main_window.hangxian.clear()
+        #读取航线
+        line = list(port_conf.get_line())
+        self.main_window.hangxian.addItems(line)
+
     # 根据选择的航线，获取json中的国家
     def get_country(self):
         ship_route = self.main_window.hangxian.currentText()
-        country = list(port_conf[ship_route].keys())
+        country = list(port_conf.get_country(ship_route))
         # 更新到ComboBox
         self.main_window.guojia.clear()
         self.main_window.guojia.addItems(country)
@@ -93,7 +98,7 @@ class work_inquiry:
     def get_port(self):
         ship_route = self.main_window.hangxian.currentText()
         if country := self.main_window.guojia.currentText():
-            port = port_conf[ship_route][country]
+            port = list(port_conf.get_port(ship_route,country))
             # 更新到ComboBox
             self.main_window.gangkou.clear()
             self.main_window.gangkou.addItems(port)

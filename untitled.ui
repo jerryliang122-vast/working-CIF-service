@@ -466,38 +466,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QComboBox" name="hangxian">
-         <item>
-          <property name="text">
-           <string>东亚</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>东南亚</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>印巴</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>澳大利亚</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>北美</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>南美</string>
-          </property>
-         </item>
-        </widget>
+        <widget class="QComboBox" name="hangxian"/>
        </item>
       </layout>
      </widget>

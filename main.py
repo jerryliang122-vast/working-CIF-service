@@ -1,10 +1,7 @@
 # 初始化
 import os
 import sys
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(BASE_DIR, 'client'))
-                
+      
 # 检查工作目录下是否有conf文件夹
 if not os.path.exists("conf"):
     # 没有的话直接重命名init_conf文件夹为conf

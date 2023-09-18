@@ -219,9 +219,9 @@ class work_inquiry:
 
     # 随机生成询价编号
     def random_number(self):
-        import utils as random_number
+        from utils import reandom
 
-        inquiry_number = random_number.reandom()
+        inquiry_number = reandom()
         self.main_window.random_number.clear()
         self.main_window.random_number.appendPlainText(inquiry_number)
 

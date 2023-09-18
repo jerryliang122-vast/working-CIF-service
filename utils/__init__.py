@@ -3,6 +3,6 @@ from .comfig import port
 #发送询价邮件
 from .email_api import inquiry_smtp
 #生成随机编号
-from . import random_number
+from .random_number import reandom
 #获取数据库
 from .email_api import email_sql

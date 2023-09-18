@@ -28,6 +28,7 @@ jobs:
       - name: install pyinstaller
         run: |
           pip install pyinstaller
+          pip uninstall pathlib
 
       - name: Build Windows Executable
         run: |

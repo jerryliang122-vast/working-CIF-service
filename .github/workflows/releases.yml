@@ -29,11 +29,10 @@ jobs:
       - name: Build Windows Executable
         run: |
           pip install pyinstaller
+          pip uninstall pathlib
           pyinstaller -F -w main.py
           cp -r init_conf dist/
           zip -r output.zip dist
-          
-        
 
       - name: Create Release
         id: create_release

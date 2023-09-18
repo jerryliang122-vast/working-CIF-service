@@ -31,7 +31,7 @@ jobs:
 
       - name: Build Windows Executable
         run: |
-          pyinstaller -F build.spec
+          pyinstaller -F -w main.py
           cp -r init_conf dist/
           zip -r output.zip dist
           

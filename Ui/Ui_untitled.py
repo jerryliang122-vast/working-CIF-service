@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '.\untitled.ui'
+# Form implementation generated from reading ui file 'd:\Git\working-CIF-service\Ui\untitled.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -198,9 +198,9 @@ class Ui_Form(object):
         self.horizontalLayout_10.addWidget(self.add_agent_email)
         spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_10.addItem(spacerItem9)
-        self.pushButton_2 = QtWidgets.QPushButton(parent=self.horizontalLayoutWidget_10)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout_10.addWidget(self.pushButton_2)
+        self.delete_agent = QtWidgets.QPushButton(parent=self.horizontalLayoutWidget_10)
+        self.delete_agent.setObjectName("delete_agent")
+        self.horizontalLayout_10.addWidget(self.delete_agent)
         self.agent_email_list = QtWidgets.QPlainTextEdit(parent=self.groupBox_3)
         self.agent_email_list.setGeometry(QtCore.QRect(10, 50, 261, 91))
         self.agent_email_list.setObjectName("agent_email_list")
@@ -295,7 +295,7 @@ class Ui_Form(object):
         self.label_10.setText(_translate("Form", "国家"))
         self.groupBox_3.setTitle(_translate("Form", "添加代理信息"))
         self.add_agent_email.setText(_translate("Form", "添加"))
-        self.pushButton_2.setText(_translate("Form", "删除"))
+        self.delete_agent.setText(_translate("Form", "删除"))
         self.label_11.setText(_translate("Form", "代理名称"))
         self.groupBox_4.setTitle(_translate("Form", "自动识别以及渲染界面"))
         self.groupBox_5.setTitle(_translate("Form", "发送邮件"))

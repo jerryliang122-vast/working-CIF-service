@@ -35,7 +35,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -623,10 +623,56 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>581</width>
-        <height>261</height>
+        <width>341</width>
+        <height>271</height>
        </rect>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_7">
+      <property name="geometry">
+       <rect>
+        <x>359</x>
+        <y>10</y>
+        <width>231</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>自动识别输入框</string>
+      </property>
+      <widget class="QPlainTextEdit" name="aiimport">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>211</width>
+         <height>51</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_8">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>139</y>
+        <width>231</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>自动识别输出框</string>
+      </property>
+      <widget class="QTextEdit" name="aioutput">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>211</width>
+         <height>121</height>
+        </rect>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_5">

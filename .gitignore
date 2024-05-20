@@ -128,3 +128,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.conda
+.vscode/launch.json
+.vscode/settings.json

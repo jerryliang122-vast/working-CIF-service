@@ -1,7 +1,12 @@
 name: build program
 
-on: push
-
+on:
+  push:
+    branches-ignore:
+      - main
+    tags-ignore:
+      - '!*'
+      
 jobs:
   job1:
     name: pyinstall-build
@@ -13,7 +18,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -23,15 +28,14 @@ jobs:
       - name: install pyinstaller
         run: |
           pip install pyinstaller
+          pip uninstall pathlib
 
       - name: Build Windows Executable
         run: |
           pyinstaller -F -w main.py
-          cp -r init_conf dist/
-          zip -r output.zip dist
           
       - name: Upload Windows Executable
         uses: actions/upload-artifact@v2
         with:
           name: pyinstall(exe)
-          path: dist/
+          path: dist/main.exe

@@ -104,6 +104,13 @@ class work_inquiry:
         line = list(port_conf.get_line())
         self.main_window.hangxian.addItems(line)
 
+    #自动生成航线菜单栏中的内容
+    def get_line(self):
+        self.main_window.hangxian.clear()
+        #读取航线
+        line = list(port_conf.get_line())
+        self.main_window.hangxian.addItems(line)
+
     # 根据选择的航线，获取json中的国家
     def get_country(self):
         ship_route = self.main_window.hangxian.currentText()

@@ -64,6 +64,22 @@ def write_port_name(port, name, email):
         logging.error(e)
         return False
 
+def delete_agent_by_port_and_name(port, name):
+    try:
+        # 查询指定港口和名称的代理
+        agent = session.query(Agent).filter(Agent.port.like(f"%{port}%"), Agent.name == name).first()
+        if agent:
+            # 如果代理存在，则删除
+            session.delete(agent)
+            session.commit()
+            return True
+        else:
+            # 如果代理不存在，返回 False
+            return False
+    except Exception as e:
+        # 打印错误信息到日志
+        logging.error(e)
+        return False
 
 class work_inquiry:
     def __init__(self, main_window):
@@ -79,6 +95,7 @@ class work_inquiry:
         self.main_window.send_email.clicked.connect(self.send_email)
         self.main_window.aoto.clicked.connect(self.random_number)
         self.main_window.delete_data.clicked.connect(self.delete_data)
+        self.main_window.delete_agent.clicked.connect(self.delete_agent)
 
     #自动生成航线菜单栏中的内容
     def get_line(self):
@@ -264,3 +281,24 @@ class work_inquiry:
         self.main_window.inquiry_number.clear()
         #弹出提示
         QMessageBox.about(self.main_window, "提示", "清空成功")
+    
+    #删除数据库中存储的代理信息
+    def delete_agent(self):
+        try:
+            # 从daili_list中获取选中代理信息
+            selected_indexes = self.main_window.daili_list.selectedIndexes()
+            # 获取港口
+            port = self.main_window.gangkou.currentText()
+            #将选中的代理信息返回到delete_agent_by_port_and_name
+            for index in selected_indexes:
+                delete_info = delete_agent_by_port_and_name(port,index.data())
+                if delete_info:
+                    #弹出提示信息
+                    QMessageBox.about(self.main_window, "提示", "删除成功")
+                else:
+                    #弹出提示信息
+                    QMessageBox.about(self.main_window, "提示", "删除失败")
+        except Exception as e:
+            #弹出提示信息
+            QMessageBox.about(self.main_window, "提示", "出现崩溃")
+            logger.error(e)

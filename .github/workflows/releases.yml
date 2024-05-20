@@ -31,7 +31,6 @@ jobs:
           pip install pyinstaller
           pip uninstall pathlib
           pyinstaller -F -w main.py
-          cp -r init_conf dist/
           zip -r output.zip dist
 
       - name: Create Release
@@ -41,7 +40,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           tag_name: ${{ github.event.pull_request.title }}
-          name: 瀚万客服小程序 ${{ github.event.pull_request.title }}
+          release_name: 瀚万客服小程序 ${{ github.event.pull_request.title }}
           body: ${{ github.event.pull_request.body }}
           draft: false
           prerelease: false
@@ -53,8 +52,8 @@ jobs:
         with: 
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: |
-            ${{ github.workspace }}\output.zip
+            ${{ github.workspace }}\dist\main.exe
           asset_name: |
-            output.zip
+            main.exe
           asset_content_type: |
-            application/zip
+            application/octet-stream

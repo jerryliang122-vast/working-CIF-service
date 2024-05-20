@@ -32,11 +32,27 @@ jobs:
           pyinstaller -F -w main.py
           zip -r output.zip dist
 
-      # 使用 softprops/action-gh-release 替换原有的创建和上传发布资产的步骤
-      - name: Create and Upload Release
-        uses: softprops/action-gh-release@v1
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
-          files: |
-            dist/main.exe
+          tag_name: ${{ github.event.pull_request.title }}
+          release_name: 瀚万客服小程序 ${{ github.event.pull_request.title }}
+          body: ${{ github.event.pull_request.body }}
+          draft: false
+          prerelease: false
+  
+      - name: Upload Windows Executable and init_conf
+        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: |
+            ${{ github.workspace }}\dist\main.exe
+          asset_name: |
+            main.exe
+          asset_content_type: |
+            application/octet-stream

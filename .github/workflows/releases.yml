@@ -34,7 +34,6 @@ jobs:
 
       # 使用 softprops/action-gh-release 替换原有的创建和上传发布资产的步骤
       - name: Create and Upload Release
-        if: github.event.pull_request.merged == true
         uses: softprops/action-gh-release@v1
         with:
           files: |

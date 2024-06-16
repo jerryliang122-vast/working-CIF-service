@@ -35,7 +35,7 @@ jobs:
           pyinstaller -F -w main.py
           
       - name: Upload Windows Executable
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: pyinstall(exe)
           path: dist/main.exe

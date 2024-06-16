@@ -29,6 +29,23 @@ def create_tencent_json():
         json.dump({"SecretId": "", "SecretKey": ""}, f, ensure_ascii=False, indent=4)
 
 
+# 创建AI配置yaml文件
+def create_ai_yaml():
+    with open("conf/ai.yaml", "w", encoding="utf-8") as f:
+        data = {
+            "api_key": "",
+            "model": "gpt-3.5-turbo",
+            "base_url": "https://api.openai.com/v1",
+            "system_prompt": "请你根据用户的文本，仅提取并显示以下信息：询价编号（如果有）， 地址，件数，重量，体积，HS编码，货物描述",
+        }
+        yaml.dump(
+            data,
+            f,
+            allow_unicode=True,
+            default_flow_style=False,
+        )
+
+
 # 创建邮件配置 JSON 文件
 def create_email_json():
     data = {
@@ -56,3 +73,6 @@ def main():
     # 检查conf文件夹中的email.json是否存在如果不存在生成一个
     if not os.path.exists("conf/email.json"):
         create_email_json()
+    # 检查conf文件夹中的ai.yaml是否存在如果不存在生成一个
+    if not os.path.exists("conf/ai.yaml"):
+        create_ai_yaml()

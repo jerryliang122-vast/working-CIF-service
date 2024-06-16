@@ -13,7 +13,7 @@ class ChatGPT:
         self.system_prompt = config.get("system_prompt")
         self.client = openai.OpenAI(api_key=api_key, base_url=base_url)
 
-    def aiimport(self, input):
+    def ai_import(self, input):
         # 输入进openai
         messages = [
             {"role": "system", "content": self.system_prompt},

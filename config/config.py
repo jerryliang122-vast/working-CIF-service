@@ -36,7 +36,7 @@ def create_ai_yaml():
             "api_key": "",
             "model": "gpt-3.5-turbo",
             "base_url": "https://api.openai.com/v1",
-            "system_prompt": "请你根据用户的文本，仅提取并显示以下信息：\n- 询价编号（如果有）\n- 地址\n- 件数\n- 重量\n- 体积\n- HS编码\n- 货物描述",
+            "system_prompt": "请你根据用户的文本，仅提取并显示以下信息：询价编号（如果有）， 地址，件数，重量，体积，HS编码，货物描述",
         }
         yaml.dump(
             data,

@@ -74,5 +74,5 @@ def main():
     if not os.path.exists("conf/email.json"):
         create_email_json()
     # 检查conf文件夹中的ai.yaml是否存在如果不存在生成一个
-    if not os.path.exists("conf/openai.yaml"):
+    if not os.path.exists("conf/ai.yaml"):
         create_ai_yaml()

@@ -15,6 +15,7 @@ from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
 from utils import inquiry_smtp
 from utils import port
+from Ui.Ui_untitled import Ui_Form
 
 logger = logging.getLogger("my_logger")
 
@@ -100,6 +101,27 @@ def delete_agent_by_port_and_name(port, name):
         # 打印错误信息到日志
         logging.error(e)
         return False
+
+
+class AIRecognitionThread(QThread):
+    auto_identification_ai_finished_signal = pyqtSignal(str)  # 用于传递识别结果的信号
+    auto_identification_ai_error_signal = pyqtSignal(str)
+
+    def __init__(self, data):
+        super().__init__()
+        self.data = data
+
+    def run(self):
+        try:
+            from utils.ai.chatgpt import ChatGPT
+
+            clint = ChatGPT()
+            respond = clint.ai_import(self.data)
+            self.auto_identification_ai_finished_signal.emit(
+                respond
+            )  # 发出信号携带识别结果
+        except Exception as e:
+            self.auto_identification_ai_error_signal.emit(str(e))
 
 
 class work_inquiry:
@@ -337,6 +359,24 @@ class work_inquiry:
             logger.error(e)
 
     # ai识别询价信息。整理询价信息
-    def ai_inquiry(self):
-        # 获取ai识别的询价信息在对象QPT：aiimport
+    def auto_identification_ai(self):
+        self.main_window.aioutput.clear()
         data = self.main_window.aiimport.toPlainText()
+        self.worker = AIRecognitionThread(data)  # 创建一个工作线程
+        self.worker.auto_identification_ai_finished_signal.connect(
+            self.auto_identification_ai_on_finished
+        )  # 连接信号到槽函数
+        self.worker.auto_identification_ai_error_signal.connect(
+            self.auto_identification_ai_on_error
+        )  # 连接错误信号到槽函数
+        self.worker.start()  # 开始线程
+
+    def auto_identification_ai_on_finished(self, respond):
+        # 将信息发送到aioutput
+        self.main_window.aioutput.setPlainText(respond)
+
+    def auto_identification_ai_on_error(self, error):
+        # 将错误信息发送到aioutput
+        self.main_window.aioutput.setPlainText("**Error:** " + error)
+        # 并记录到日志
+        logger.error(error)

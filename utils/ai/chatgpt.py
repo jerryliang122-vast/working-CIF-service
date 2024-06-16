@@ -5,7 +5,7 @@ import yaml
 
 class ChatGPT:
     def __init__(self):
-        with open("conf/openai.yaml", "r", encoding="utf-8") as f:
+        with open("conf/ai.yaml", "r", encoding="utf-8") as f:
             config = yaml.safe_load(f)
         api_key = config.get("api_key") or None
         self.model = config.get("model") or "gpt-3.5-turbo"
@@ -23,4 +23,4 @@ class ChatGPT:
             model=self.model, messages=messages, stream=False
         )
         # 输出openai的回答
-        return response.choices[0].message.content
+        return response.choices[0].message.content.strip()

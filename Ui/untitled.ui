@@ -10,6 +10,12 @@
     <height>504</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
    <size>
     <width>900</width>
@@ -21,6 +27,12 @@
     <width>900</width>
     <height>504</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -872,12 +884,12 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>351</width>
+        <width>341</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>登记的仓库费用标准将会存储在conf文件夹中。后续可以直接调用</string>
+       <string>登记的仓库费用标准将会存储在conf文件夹中,后续可以直接调用</string>
       </property>
      </widget>
      <widget class="QGroupBox" name="groupBox_10">
@@ -912,7 +924,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_4"/>
+           <widget class="QLineEdit" name="cfs_yg_pkgs_charge"/>
           </item>
          </layout>
         </item>
@@ -926,7 +938,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_5"/>
+           <widget class="QLineEdit" name="cfs_yg_weight_charge"/>
           </item>
          </layout>
         </item>
@@ -940,7 +952,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_6"/>
+           <widget class="QLineEdit" name="cfs_yg_cmb_charge"/>
           </item>
          </layout>
         </item>
@@ -954,7 +966,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_7"/>
+           <widget class="QLineEdit" name="cfs_yg_mini_charge"/>
           </item>
          </layout>
         </item>
@@ -993,7 +1005,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="cfs_ys_pkgs_charge"/>
           </item>
          </layout>
         </item>
@@ -1007,7 +1019,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_9"/>
+           <widget class="QLineEdit" name="cfs_ys_weight_charge"/>
           </item>
          </layout>
         </item>
@@ -1021,7 +1033,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_10"/>
+           <widget class="QLineEdit" name="cfs_ys_cbm_charge"/>
           </item>
          </layout>
         </item>
@@ -1035,7 +1047,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_11"/>
+           <widget class="QLineEdit" name="cfs_ys_mini_charge"/>
           </item>
          </layout>
         </item>
@@ -1062,7 +1074,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="cfs_name"/>
          </item>
         </layout>
        </item>
@@ -1076,7 +1088,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_12"/>
+          <widget class="QLineEdit" name="cfs_bl_charge"/>
          </item>
         </layout>
        </item>
@@ -1093,14 +1105,14 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="wright_yaml">
          <property name="text">
           <string>写入</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="clean_cfs_charge">
          <property name="text">
           <string>清除</string>
          </property>
@@ -1128,7 +1140,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_13"/>
+          <widget class="QLineEdit" name="cfs_van_charge"/>
          </item>
         </layout>
        </item>
@@ -1142,7 +1154,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_14"/>
+          <widget class="QLineEdit" name="cfs_ows_charge"/>
          </item>
         </layout>
        </item>
@@ -1156,7 +1168,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_16"/>
+          <widget class="QLineEdit" name="cfs_Insurance_charge"/>
          </item>
         </layout>
        </item>
@@ -1175,7 +1187,7 @@
      <property name="title">
       <string>标准列表</string>
      </property>
-     <widget class="QListView" name="listView">
+     <widget class="QListView" name="stander_list">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -1224,7 +1236,7 @@
      <property name="title">
       <string>计算结果</string>
      </property>
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QTextEdit" name="cfs_price_output">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1252,7 +1264,7 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>131</width>
+        <width>136</width>
         <height>121</height>
        </rect>
       </property>
@@ -1267,7 +1279,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox">
+          <widget class="QComboBox" name="chose_cfs_name">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>3</horstretch>
@@ -1289,28 +1301,28 @@
         </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_4">
+        <widget class="QCheckBox" name="cfs_pallets">
          <property name="text">
           <string>托盘货</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox">
+        <widget class="QCheckBox" name="cfs_ows">
          <property name="text">
           <string>超大货</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_2">
+        <widget class="QCheckBox" name="cfs_night_in">
          <property name="text">
           <string>夜间进仓</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_3">
+        <widget class="QCheckBox" name="cfs_van">
          <property name="text">
           <string>厢式车</string>
          </property>
@@ -1318,25 +1330,192 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="horizontalLayoutWidget_24">
+     <widget class="QWidget" name="verticalLayoutWidget_7">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>20</y>
-        <width>171</width>
-        <height>31</height>
+        <x>10</x>
+        <y>140</y>
+        <width>131</width>
+        <height>81</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_33">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
-        <widget class="QLabel" name="label_32">
-         <property name="text">
-          <string>进仓编号</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_38">
+         <item>
+          <widget class="QLabel" name="label_36">
+           <property name="text">
+            <string>件数</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_pkgs"/>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_15"/>
+        <layout class="QHBoxLayout" name="horizontalLayout_39">
+         <item>
+          <widget class="QLabel" name="label_37">
+           <property name="text">
+            <string>重量-吨</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_tone"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_40">
+         <item>
+          <widget class="QLabel" name="label_38">
+           <property name="text">
+            <string>体积</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_cbm"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_6">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>20</y>
+        <width>169</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_33">
+         <item>
+          <widget class="QLabel" name="label_32">
+           <property name="text">
+            <string>进仓编号</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_number"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_35">
+         <item>
+          <widget class="QLabel" name="label_34">
+           <property name="text">
+            <string>打折费率</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_discount_price">
+           <property name="text">
+            <string>0.8</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_36">
+         <item>
+          <widget class="QLabel" name="label_35">
+           <property name="text">
+            <string>在哪个地方打折</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="where_cfs_discount">
+           <item>
+            <property name="text">
+             <string>上下车费</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>总费用</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_37">
+         <item>
+          <widget class="QCheckBox" name="cfs_discount">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <weight>50</weight>
+             <bold>false</bold>
+             <kerning>true</kerning>
+            </font>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>是否打折</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoRepeat">
+            <bool>false</bool>
+           </property>
+           <property name="tristate">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <item>
+          <widget class="QPushButton" name="use_cfs_numebr_calculate">
+           <property name="text">
+            <string>使用进仓编号计算</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="use_cargo_info_calculate">
+           <property name="text">
+            <string>使用货物信息计算</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -1430,7 +1609,7 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>161</width>
+       <width>167</width>
        <height>41</height>
       </rect>
      </property>

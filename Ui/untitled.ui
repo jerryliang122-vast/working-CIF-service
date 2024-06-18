@@ -30,8 +30,11 @@
   </property>
   <property name="font">
    <font>
-    <weight>50</weight>
-    <bold>false</bold>
+    <family>Adobe Arabic</family>
+    <weight>75</weight>
+    <bold>true</bold>
+    <stylestrategy>NoAntialias</stylestrategy>
+    <kerning>true</kerning>
    </font>
   </property>
   <property name="windowTitle">
@@ -46,11 +49,23 @@
      <height>501</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Adobe Arabic</family>
+     <weight>50</weight>
+     <bold>false</bold>
+     <stylestrategy>NoAntialias</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
    <property name="cursor">
     <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="currentIndex">
     <number>0</number>
+   </property>
+   <property name="usesScrollButtons">
+    <bool>true</bool>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -96,7 +111,7 @@
        <rect>
         <x>30</x>
         <y>60</y>
-        <width>78</width>
+        <width>83</width>
         <height>31</height>
        </rect>
       </property>
@@ -670,7 +685,7 @@
         <rect>
          <x>10</x>
          <y>80</y>
-         <width>239</width>
+         <width>211</width>
          <height>41</height>
         </rect>
        </property>
@@ -1389,7 +1404,7 @@
        <rect>
         <x>150</x>
         <y>20</y>
-        <width>169</width>
+        <width>175</width>
         <height>181</height>
        </rect>
       </property>
@@ -1466,8 +1481,10 @@
            </property>
            <property name="font">
             <font>
+             <family>Adobe Arabic</family>
              <weight>50</weight>
              <bold>false</bold>
+             <stylestrategy>NoAntialias</stylestrategy>
              <kerning>true</kerning>
             </font>
            </property>

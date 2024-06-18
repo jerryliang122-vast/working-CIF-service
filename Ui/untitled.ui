@@ -685,7 +685,7 @@
         <rect>
          <x>10</x>
          <y>80</y>
-         <width>211</width>
+         <width>239</width>
          <height>41</height>
         </rect>
        </property>
@@ -1279,8 +1279,8 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>136</width>
-        <height>121</height>
+        <width>141</width>
+        <height>234</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1316,6 +1316,31 @@
         </layout>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_42">
+         <item>
+          <widget class="QLabel" name="label_40">
+           <property name="text">
+            <string>上下车费选择</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cfs_inout_chose">
+           <item>
+            <property name="text">
+             <string>外港</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>洋山</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <widget class="QCheckBox" name="cfs_pallets">
          <property name="text">
           <string>托盘货</string>
@@ -1343,57 +1368,49 @@
          </property>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="verticalLayoutWidget_7">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>140</y>
-        <width>131</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_38">
+        <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
-          <widget class="QLabel" name="label_36">
-           <property name="text">
-            <string>件数</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_38">
+           <item>
+            <widget class="QLabel" name="label_36">
+             <property name="text">
+              <string>件数</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="cfs_pkgs"/>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QLineEdit" name="cfs_pkgs"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_39">
-         <item>
-          <widget class="QLabel" name="label_37">
-           <property name="text">
-            <string>重量-吨</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="cfs_tone"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_40">
-         <item>
-          <widget class="QLabel" name="label_38">
-           <property name="text">
-            <string>体积</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_39">
+           <item>
+            <widget class="QLabel" name="label_37">
+             <property name="text">
+              <string>重量-吨</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="cfs_tone"/>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QLineEdit" name="cfs_cbm"/>
+          <layout class="QHBoxLayout" name="horizontalLayout_40">
+           <item>
+            <widget class="QLabel" name="label_38">
+             <property name="text">
+              <string>体积</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="cfs_cbm"/>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
@@ -1405,7 +1422,7 @@
         <x>150</x>
         <y>20</y>
         <width>175</width>
-        <height>181</height>
+        <height>202</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_6">

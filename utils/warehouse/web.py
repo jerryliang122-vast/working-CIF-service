@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 import datetime
 import re
 from decimal import Decimal, ROUND_UP
+import logging
+
+logger = logging.getLogger("my_logger")
 
 
 def big_calculator(dims):
@@ -123,27 +126,8 @@ def get_measurement(html, suffix):
                     ckg.get_text(strip=True),
                 ]
             )
-    # 对measurements中的每一个列表中的第一个值进行提取并成一个新列表表叫types
-    types = [measurement[0] for measurement in measurements]
-    # 如果types 的所有字符都相同
-    if all(char == types[0] for char in types) and not all(
-        big_calculator(measurement[4]) for measurement in measurements
-    ):
-        # 使用Decimal对measurements列表第二值进行相加
-        total_pieces = sum(Decimal(measurement[1]) for measurement in measurements)
-        total_weight = sum(Decimal(measurement[2]) for measurement in measurements)
-        total_volume = sum(Decimal(measurement[3]) for measurement in measurements)
-        return [
-            [
-                types[0],
-                str(total_pieces),
-                str(total_weight),
-                str(total_volume),
-                "83.0×39.0×26.0",
-            ]
-        ]
-    else:
-        return measurements
+    
+    return measurements
 
 
 # 获取收货入库的主程序
@@ -218,3 +202,6 @@ class web_grasp:
             data.append([cargo_data, data_list])
         return data
 
+if __name__ == "__main__":
+    data = web_grasp(False, "HWMAA2400934N-MF")
+    print(data.get_data())

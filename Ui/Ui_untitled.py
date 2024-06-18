@@ -252,7 +252,7 @@ class Ui_Form(object):
         self.aiimport.setGeometry(QtCore.QRect(10, 20, 211, 51))
         self.aiimport.setObjectName("aiimport")
         self.horizontalLayoutWidget_15 = QtWidgets.QWidget(parent=self.groupBox_7)
-        self.horizontalLayoutWidget_15.setGeometry(QtCore.QRect(10, 80, 239, 41))
+        self.horizontalLayoutWidget_15.setGeometry(QtCore.QRect(10, 80, 211, 41))
         self.horizontalLayoutWidget_15.setObjectName("horizontalLayoutWidget_15")
         self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_15)
         self.horizontalLayout_18.setContentsMargins(0, 0, 0, 0)

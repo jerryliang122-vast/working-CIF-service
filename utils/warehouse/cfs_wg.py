@@ -1,6 +1,7 @@
 import logging
 from decimal import Decimal, ROUND_UP
 import re
+from utils.warehouse.round import price_to_ten
 logger = logging.getLogger("my_logger")
 
 
@@ -32,11 +33,50 @@ class calculate_cfs_wg():
                 return True
         
         return False
+    #上下车费
+    def warehouse_in(self,data,big,night,pallet):
+        if big == True:
+            #获取货物数据，按照超大修改OWS单价
+            pkgs_unit_price  = Decimal(self.cfs_stander['cfs_yg_pkgs_charge']) +Decimal(10)
+            weight_unit_price = Decimal(self.cfs_stander['cfs_yg_weight_charge']) +Decimal(10)
+            volume_unit_price = Decimal(self.cfs_stander['cfs_yg_cmb_charge']) +Decimal(10)
+        else:
+            pkgs_unit_price =Decimal(self.cfs_stander['cfs_yg_pkgs_charge'])
+            weight_unit_price = Decimal(self.cfs_stander['cfs_yg_weight_charge'])
+            volume_unit_price = Decimal(self.cfs_stander['cfs_yg_cmb_charge'])
+        if night == True: #判断是否夜间
+            pkgs_unit_price = Decimal(pkgs_unit_price) * Decimal(1.30) #增加30%
+            weight_unit_price = Decimal(weight_unit_price) * Decimal(1.30) #增加30% 
+            volume_unit_price = Decimal(volume_unit_price) * Decimal(1.30) #增加30%  
+        #计算上下车费，按照货物数据，计算出PKGS WEIGHT 和VOLUME 然后相加，返回结果。
+        if pallet:
+            pkgs_charge = Decimal(pkgs_unit_price)*Decimal(data['pkgs'])
+        else:
+            pkgs_charge = Decimal(0)
+        weight_charge = Decimal(weight_unit_price)*Decimal(data['weight'])
+        volume_charge = Decimal(volume_unit_price) * Decimal(data['volume'])
+        #比大小
+        max_price = Decimal.max(pkgs_charge,weight_charge)
+        max_price = Decimal.max(max_price,volume_charge)   
+        #进十位
+        return price_to_ten(max_price)
+
+
     #上下车费,超大，夜间算法
     def warehouse_in_ows_night(self,data):
-        #获取货物数据，按照超大修改OWS单价
-        ows = Decimal(self.cfs_stander['']
-
+        #清洗数据，单独计算超大货的上下车费。
+        pattern = re.compile(r'(\d+(\.\d+)?)([xX*\.](\d+(\.\d+)?))+')
+        ows_data = []
+        normal_data = []
+        for i in data:
+            match = pattern.match(i[4])
+            dimensions = [float(num) for num in re.findall(r'\d+(\.\d+)?', match)]
+            if any(dim > 300 for dim in dimensions) or i[3] >=3.00:
+                #将超大货的数据信息移动到OWS_DATA中
+                ows_data.append(i)
+            else:
+                normal_data.append(i)
+        
 
 
     def main(self):

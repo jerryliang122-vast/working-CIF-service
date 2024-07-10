@@ -30,8 +30,8 @@ class calculate_cfs_wg():
             return True
         return False
     #上下车费
-    def warehouse_in(self,data,big,night,pallet):
-        if big == True:
+    def warehouse_in(self,data):
+        if data['big'] == True:
             #获取货物数据，按照超大修改OWS单价
             pkgs_unit_price  = Decimal(self.cfs_stander['cfs_yg_pkgs_charge']) +Decimal(10)
             weight_unit_price = Decimal(self.cfs_stander['cfs_yg_weight_charge']) +Decimal(10)
@@ -40,12 +40,12 @@ class calculate_cfs_wg():
             pkgs_unit_price =Decimal(self.cfs_stander['cfs_yg_pkgs_charge'])
             weight_unit_price = Decimal(self.cfs_stander['cfs_yg_weight_charge'])
             volume_unit_price = Decimal(self.cfs_stander['cfs_yg_cmb_charge'])
-        if night == True: #判断是否夜间
+        if data['night'] == True: #判断是否夜间
             pkgs_unit_price = Decimal(pkgs_unit_price) * Decimal(1.30) #增加30%
             weight_unit_price = Decimal(weight_unit_price) * Decimal(1.30) #增加30% 
             volume_unit_price = Decimal(volume_unit_price) * Decimal(1.30) #增加30%  
         #计算上下车费，按照货物数据，计算出PKGS WEIGHT 和VOLUME 然后相加，返回结果。
-        if pallet:
+        if data['pallet'] == True:
             pkgs_charge = Decimal(pkgs_unit_price)*Decimal(data['pkgs'])
         else:
             pkgs_charge = Decimal(0)
@@ -59,27 +59,55 @@ class calculate_cfs_wg():
 
 
     #上下车费,超大，夜间算法
-    def warehouse_in_ows_night(self,data,night):
+    def warehouse_in_charge(self,data,night):
         #清洗数据，单独计算超大货的上下车费。
         ows_data = []
         normal_data = []
+        pallet_data = []
         for i in data: #分离超大货物和普通货物，分别计算上下车费。
             if self.warehous_ows(i):
                 ows_data.append(i) #超大货物
+            elif i[0]:
+                 pallet_data.append(i) #托盘货物。
             else:
                 normal_data.append(i) #普通货物。
-        #处理normal_data货物
-        #需要合并normal_data中的pkgs 和 weight 和 volume的数据并使用字典
-        normal_data_pkgs = 0 #计算normal_data的pkgs数据。
-        normal_data_weight = 0 #计算normal_data的weight数据。
-        normal_data_volume = 0 #计算normal_data的volume数据。
-        for i in normal_data:
-            normal_data_pkgs += i[1] #计算normal_data的pkgs数据。
-            normal_data_weight += i[2] #计算normal_data的weight数据。
-            normal_data_volume += i[3] #计算normal_data的volume数据。
-        #将数据做成字典
-        normal_data_dict = {'pkgs':normal_data_pkgs,'weight':normal_data_weight,'volume':normal_data_volume,'big':False,'night':night}
-
+        #如果normal_data中有数据则计算，否则不计算。
+        if normal_data:
+            #需要合并normal_data中的pkgs 和 weight 和 volume的数据并使用字典
+            normal_data_pkgs = 0 #计算normal_data的pkgs数据。
+            normal_data_weight = 0 #计算normal_data的weight数据。
+            normal_data_volume = 0 #计算normal_data的volume数据。
+            for i in normal_data:
+                normal_data_pkgs += i[1] #计算normal_data的pkgs数据。
+                normal_data_weight += i[2] #计算normal_data的weight数据。
+                normal_data_volume += i[3] #计算normal_data的volume数据。
+            #将数据做成字典
+            normal_data_dict = {'pkgs':normal_data_pkgs,'weight':normal_data_weight,'volume':normal_data_volume,'big':False,'pallet':False,'night':night}
+            normal_price = self.warehouse_in(normal_data_dict) #计算normal_data的上下车费。
+        #如果pallet_data中有数据则计算，否则不计算。
+        if pallet_data:
+            #需要合并pallet_data中的pkgs 和 weight 和 volume的数据并使用字典
+            pallet_data_pkgs = 0 #计算pallet_data的pkgs数据。
+            pallet_data_weight = 0 #计算pallet_data的weight数据。
+            pallet_data_volume = 0 #计算pallet_data的volume数据。
+            for i in pallet_data:
+                pallet_data_pkgs += i[1] #计算pallet_data的pkgs数据。
+                pallet_data_weight += i[2] #计算pallet_data的weight数据。
+                pallet_data_volume += i[3] #计算pallet_data的volume数据。
+            #将数据做成字典
+            pallet_data_dict = {'pkgs':pallet_data_pkgs,'weight':pallet_data_weight,'volume':pallet_data_volume,'big':False,'pallet':True,'night':night}
+        #如果ows_data中有数据则计算，否则不计算。
+        if ows_data:
+            #需要合并ows_data中的pkgs 和 weight 和 volume的数据并使用字典
+            ows_data_pkgs = 0 #计算ows_data的pkgs数据。
+            ows_data_weight = 0 #计算ows_data的weight数据。
+            ows_data_volume = 0 #计算ows_data的volume数据。
+            for i in ows_data:
+                ows_data_pkgs += i[1] #计算ows_data的pkgs数据。
+                ows_data_weight += i[2] #计算ows_data的weight数据。
+                ows_data_volume += i[3] #计算ows_data的volume数据。
+                #将数据做成字典
+            ows_data_dict = {'pkgs':ows_data_pkgs,'weight':ows_data_weight,'volume':ows_data_volume,'big':True,'pallet':False,'night':night}
 
 
     def main(self):

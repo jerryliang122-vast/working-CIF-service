@@ -30,7 +30,7 @@ class calculate_cfs_wg():
             return True
         return False
     #上下车费
-    def warehouse_in(self,data):
+    def warehouse_in(self,data,discount):
         if data['big'] == True:
             #获取货物数据，按照超大修改OWS单价
             pkgs_unit_price  = Decimal(self.cfs_stander['cfs_yg_pkgs_charge']) +Decimal(10)
@@ -51,9 +51,14 @@ class calculate_cfs_wg():
             pkgs_charge = Decimal(0)
         weight_charge = Decimal(weight_unit_price)*Decimal(data['weight'])
         volume_charge = Decimal(volume_unit_price) * Decimal(data['volume'])
-        #比大小
+        #打折费率
+        pkgs_charge = Decimal(pkgs_charge) * Decimal(discount)
+        weight_charge = Decimal(weight_charge) * Decimal(discount)
+        volume_charge = Decimal(volume_charge) * Decimal(discount)
+        #比大小,mini
         max_price = Decimal.max(pkgs_charge,weight_charge)
         max_price = Decimal.max(max_price,volume_charge)   
+        max_price = Decimal.max(max_price,Decimal(self.cfs_stander['cfs_yg_mini_charge']))
         #进十位
         return price_to_ten(max_price)
 
@@ -82,6 +87,8 @@ class calculate_cfs_wg():
             normal_data_dict['pallet'] = False
             normal_data_dict['night'] = night
             normal_price = self.warehouse_in(normal_data_dict) #计算normal_data的上下车费。
+        else:
+            normal_price = Decimal(0)
         #如果pallet_data中有数据则计算，否则不计算。
         if pallet_data:
             pallet_data_dict = self.merge_data(pallet_data)
@@ -90,6 +97,8 @@ class calculate_cfs_wg():
             pallet_data_dict['pallet'] = True
             pallet_data_dict['night'] = night
             pallet_price = self.warehouse_in(pallet_data_dict) #计算pallet_data的上下车费。
+        else:
+            pallet_price = Decimal(0)
         #如果ows_data中有数据则计算，否则不计算。
         if ows_data:
             ows_data_dict = self.merge_data(ows_data)
@@ -98,7 +107,10 @@ class calculate_cfs_wg():
             ows_data_dict['pallet'] = False
             ows_data_dict['night'] = night
             ows_price = self.warehouse_in(ows_data_dict) #计算ows_data的上下车费。
-
+        else:
+            ows_price = Decimal(0)
+        #将所有结果相加
+        price_total = normal_price + pallet_price + ows_price
 
     def main(self):
         #按车分离数据

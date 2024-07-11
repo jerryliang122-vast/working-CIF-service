@@ -82,23 +82,52 @@ class calculate_cfs_wg():
         #进十位
         return price_to_ten(max_price)
 
+    # 合并货物数据
+    # 该方法用于计算给定数据集中所有货物的总件数、总重量和总体积。
+    # 参数:
+    #   data - 一个包含货物信息的列表，每个元素都是一个列表，包含四个项目：
+    #          0: 货物ID，1: 货物件数，2: 货物重量，3: 货物体积。
+    # 返回:
+    #   一个字典，包含货物的总件数（pkgs）、总重量（weight）和总体积（volume）。
     #合并货物数据
     def merge_data(self,data):
+        # 初始化货物件数、重量和体积的累加器
         pkgs = Decimal(0)
         weight = Decimal(0)
         volume = Decimal(0)
+        # 遍历数据集，累加每个货物的件数、重量和体积
         for i in data:
             pkgs += Decimal(i[1])
             weight += Decimal(i[2])
             volume += Decimal(i[3])
+        # 返回包含总件数、总重量和总体积的字典
         return {'pkgs':pkgs,'weight':weight,'volume':volume}
     
     #上下车费,超大，夜间算法
     def warehouse_in_charge(self,data,night):
-        #清洗数据，单独计算超大货的上下车费。
+        """
+        计算仓库装卸费用。
+        
+        根据货物类型（普通、托盘、超大）和是否夜间操作，计算相应的装卸费用。
+        参数:
+        - data: 货物数据列表，每个元素包含货物的信息。
+        - night: 布尔值，指示是否为夜间操作。
+        
+        返回:
+        - price_total: 字典，包含各类货物的装卸费用总和。
+        """
+        
+        # 筛选出超大货物的数据
+        # 清洗数据，单独计算超大货的上下车费。
         ows_data = [i for i in data if self.warehous_ows(i)] #超大货物
+        
+        # 筛选出普通货物的数据
         normal_data = [i for i in data if not self.warehous_ows(i) and not i[0]] #普通货物
+        
+        # 筛选出托盘货物的数据
         pallet_data = [i for i in data if not self.warehous_ows(i) and i[0]] #托盘货物。
+
+        # 如果有普通货物，计算其装卸费用
         #如果normal_data中有数据则计算，否则不计算。
         if normal_data:
             normal_data_dict = self.merge_data(normal_data)
@@ -109,6 +138,8 @@ class calculate_cfs_wg():
             normal_price = self.warehouse_in(normal_data_dict) #计算normal_data的上下车费。
         else:
             normal_price = Decimal(0)
+        
+        # 如果有托盘货物，计算其装卸费用
         #如果pallet_data中有数据则计算，否则不计算。
         if pallet_data:
             pallet_data_dict = self.merge_data(pallet_data)
@@ -119,6 +150,8 @@ class calculate_cfs_wg():
             pallet_price = self.warehouse_in(pallet_data_dict) #计算pallet_data的上下车费。
         else:
             pallet_price = Decimal(0)
+        
+        # 如果有超大货物，计算其装卸费用
         #如果ows_data中有数据则计算，否则不计算。
         if ows_data:
             ows_data_dict = self.merge_data(ows_data)
@@ -129,6 +162,8 @@ class calculate_cfs_wg():
             ows_price = self.warehouse_in(ows_data_dict) #计算ows_data的上下车费。
         else:
             ows_price = Decimal(0)
+        
+        # 计算所有货物的装卸费用总和
         #将所有结果相加
         price_total = normal_price + pallet_price + ows_price
 

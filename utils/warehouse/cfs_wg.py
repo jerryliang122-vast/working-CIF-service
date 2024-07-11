@@ -57,57 +57,47 @@ class calculate_cfs_wg():
         #进十位
         return price_to_ten(max_price)
 
-
+    #合并货物数据
+    def merge_data(self,data):
+        pkgs = Decimal(0)
+        weight = Decimal(0)
+        volume = Decimal(0)
+        for i in data:
+            pkgs += Decimal(i[1])
+            weight += Decimal(i[2])
+            volume += Decimal(i[3])
+        return {'pkgs':pkgs,'weight':weight,'volume':volume}
+    
     #上下车费,超大，夜间算法
     def warehouse_in_charge(self,data,night):
         #清洗数据，单独计算超大货的上下车费。
-        ows_data = []
-        normal_data = []
-        pallet_data = []
-        for i in data: #分离超大货物和普通货物，分别计算上下车费。
-            if self.warehous_ows(i):
-                ows_data.append(i) #超大货物
-            elif i[0]:
-                 pallet_data.append(i) #托盘货物。
-            else:
-                normal_data.append(i) #普通货物。
+        ows_data = [i for i in data if self.warehous_ows(i)] #超大货物
+        normal_data = [i for i in data if not self.warehous_ows(i) and not i[0]] #普通货物
+        pallet_data = [i for i in data if not self.warehous_ows(i) and i[0]] #托盘货物。
         #如果normal_data中有数据则计算，否则不计算。
         if normal_data:
-            #需要合并normal_data中的pkgs 和 weight 和 volume的数据并使用字典
-            normal_data_pkgs = 0 #计算normal_data的pkgs数据。
-            normal_data_weight = 0 #计算normal_data的weight数据。
-            normal_data_volume = 0 #计算normal_data的volume数据。
-            for i in normal_data:
-                normal_data_pkgs += i[1] #计算normal_data的pkgs数据。
-                normal_data_weight += i[2] #计算normal_data的weight数据。
-                normal_data_volume += i[3] #计算normal_data的volume数据。
+            normal_data_dict = self.merge_data(normal_data)
             #将数据做成字典
-            normal_data_dict = {'pkgs':normal_data_pkgs,'weight':normal_data_weight,'volume':normal_data_volume,'big':False,'pallet':False,'night':night}
+            normal_data_dict['big'] = False
+            normal_data_dict['pallet'] = False
+            normal_data_dict['night'] = night
             normal_price = self.warehouse_in(normal_data_dict) #计算normal_data的上下车费。
         #如果pallet_data中有数据则计算，否则不计算。
         if pallet_data:
-            #需要合并pallet_data中的pkgs 和 weight 和 volume的数据并使用字典
-            pallet_data_pkgs = 0 #计算pallet_data的pkgs数据。
-            pallet_data_weight = 0 #计算pallet_data的weight数据。
-            pallet_data_volume = 0 #计算pallet_data的volume数据。
-            for i in pallet_data:
-                pallet_data_pkgs += i[1] #计算pallet_data的pkgs数据。
-                pallet_data_weight += i[2] #计算pallet_data的weight数据。
-                pallet_data_volume += i[3] #计算pallet_data的volume数据。
+            pallet_data_dict = self.merge_data(pallet_data)
             #将数据做成字典
-            pallet_data_dict = {'pkgs':pallet_data_pkgs,'weight':pallet_data_weight,'volume':pallet_data_volume,'big':False,'pallet':True,'night':night}
+            pallet_data_dict['big'] = False
+            pallet_data_dict['pallet'] = True
+            pallet_data_dict['night'] = night
+            pallet_price = self.warehouse_in(pallet_data_dict) #计算pallet_data的上下车费。
         #如果ows_data中有数据则计算，否则不计算。
         if ows_data:
-            #需要合并ows_data中的pkgs 和 weight 和 volume的数据并使用字典
-            ows_data_pkgs = 0 #计算ows_data的pkgs数据。
-            ows_data_weight = 0 #计算ows_data的weight数据。
-            ows_data_volume = 0 #计算ows_data的volume数据。
-            for i in ows_data:
-                ows_data_pkgs += i[1] #计算ows_data的pkgs数据。
-                ows_data_weight += i[2] #计算ows_data的weight数据。
-                ows_data_volume += i[3] #计算ows_data的volume数据。
-                #将数据做成字典
-            ows_data_dict = {'pkgs':ows_data_pkgs,'weight':ows_data_weight,'volume':ows_data_volume,'big':True,'pallet':False,'night':night}
+            ows_data_dict = self.merge_data(ows_data)
+            #将数据做成字典
+            ows_data_dict['big'] = True
+            ows_data_dict['pallet'] = False
+            ows_data_dict['night'] = night
+            ows_price = self.warehouse_in(ows_data_dict) #计算ows_data的上下车费。
 
 
     def main(self):

@@ -31,6 +31,14 @@ class calculate_cfs_wg():
         return False
     #上下车费
     def warehouse_in(self,data,discount):
+        """
+        计算仓库入仓费用。
+        
+        :param data: 包含货物相关信息的字典，包括是否为大件、是否为夜间、托盘数量、重量和体积。
+        :param discount: 折扣率，用于计算最终费用。
+        :return: 返回计算出的最大费用，保留到10的最小整数。
+        """
+        # 根据货物是否为大件，确定包装、重量和体积的单价
         if data['big'] == True:
             #获取货物数据，按照超大修改OWS单价
             pkgs_unit_price  = Decimal(self.cfs_stander['cfs_yg_pkgs_charge']) +Decimal(10)
@@ -40,25 +48,37 @@ class calculate_cfs_wg():
             pkgs_unit_price =Decimal(self.cfs_stander['cfs_yg_pkgs_charge'])
             weight_unit_price = Decimal(self.cfs_stander['cfs_yg_weight_charge'])
             volume_unit_price = Decimal(self.cfs_stander['cfs_yg_cmb_charge'])
+        
+        # 如果是夜间入仓，费用增加30%
         if data['night'] == True: #判断是否夜间
             pkgs_unit_price = Decimal(pkgs_unit_price) * Decimal(1.30) #增加30%
             weight_unit_price = Decimal(weight_unit_price) * Decimal(1.30) #增加30% 
             volume_unit_price = Decimal(volume_unit_price) * Decimal(1.30) #增加30%  
+        
+        # 计算包装费，如果无托盘，则包装费为0
         #计算上下车费，按照货物数据，计算出PKGS WEIGHT 和VOLUME 然后相加，返回结果。
         if data['pallet'] == True:
             pkgs_charge = Decimal(pkgs_unit_price)*Decimal(data['pkgs'])
         else:
             pkgs_charge = Decimal(0)
+        
+        # 计算重量费和体积费
         weight_charge = Decimal(weight_unit_price)*Decimal(data['weight'])
         volume_charge = Decimal(volume_unit_price) * Decimal(data['volume'])
+        
+        # 应用折扣
         #打折费率
         pkgs_charge = Decimal(pkgs_charge) * Decimal(discount)
         weight_charge = Decimal(weight_charge) * Decimal(discount)
         volume_charge = Decimal(volume_charge) * Decimal(discount)
-        #比大小,mini
+        
+        # 计算最大费用，考虑到最小费用门槛
+        # 比大小,mini
         max_price = Decimal.max(pkgs_charge,weight_charge)
         max_price = Decimal.max(max_price,volume_charge)   
         max_price = Decimal.max(max_price,Decimal(self.cfs_stander['cfs_yg_mini_charge']))
+        
+        # 返回最大费用，保留到10的最小整数
         #进十位
         return price_to_ten(max_price)
 

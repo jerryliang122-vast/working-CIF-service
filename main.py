@@ -32,6 +32,20 @@ class wm(QMainWindow, Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        # 在这里设置样式
+        self.setStyleSheet("""
+            QMainWindow {
+                background-color: #f0f0f0;
+            }
+            QPushButton {
+                background-color: #e0e0e0;
+                color: #000;
+                border: 1px solid #c0c0c0;
+            }
+            QLabel {
+                color: #333;
+            }
+        """)
         self.combo_box_handler = work_inquiry(self)
 
 

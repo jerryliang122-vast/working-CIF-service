@@ -68,9 +68,10 @@ class calculate_cfs_wg():
         
         # 应用折扣
         #打折费率
-        pkgs_charge = Decimal(pkgs_charge) * Decimal(discount)
-        weight_charge = Decimal(weight_charge) * Decimal(discount)
-        volume_charge = Decimal(volume_charge) * Decimal(discount)
+        if data['where_cfs_discount'] == '上下车费':
+            pkgs_charge = Decimal(pkgs_charge) * Decimal(discount)
+            weight_charge = Decimal(weight_charge) * Decimal(discount)
+            volume_charge = Decimal(volume_charge) * Decimal(discount)
         
         # 计算最大费用，考虑到最小费用门槛
         # 比大小,mini
@@ -172,3 +173,4 @@ class calculate_cfs_wg():
         for i in self.cfs_wg_data: 
             #判断入库时间，修改cfs-price 的标准
             night = self.warehouse_time(i[0])
+            price = self.warehouse_in_charge(i[1],night)

@@ -110,22 +110,14 @@ def get_measurement(html, suffix):
     for row in data_rows:
         cells = row.find_all("td")
         if len(cells) > column_index_ckg:
-            # 获取'长×宽×高'所在的单元格
-            bz = cells[column_index_bz]
-            ckg = cells[column_index_ckg]
-            js = cells[column_index_js]
-            zl = cells[column_index_zl]
-            tj = cells[column_index_tj]
-            # 获取单元格的文本内容并添加到列表中
-            measurements.append(
-                [
-                    bz.get_text(strip=True),
-                    js.get_text(strip=True),
-                    zl.get_text(strip=True),
-                    tj.get_text(strip=True),
-                    ckg.get_text(strip=True),
-                ]
-            )
+            # 获取各列内容并直接构造字典添加到列表
+            measurements.append({
+                "pkgs_type": cells[column_index_bz].get_text(strip=True),
+                "pkgs": cells[column_index_js].get_text(strip=True),
+                "weight": cells[column_index_zl].get_text(strip=True),
+                "volume": cells[column_index_tj].get_text(strip=True),
+                "dims": cells[column_index_ckg].get_text(strip=True)
+            })
     
     return measurements
 
@@ -144,11 +136,8 @@ def get_data(html, suffix):
     element_registration_time = soup.find("td", id=registration_time)
     element_cx = soup.find("td", id=cx)
     element_jcbh = soup.find("td", id=jcbh)
-    return [
-        element_registration_time.get_text(strip=True),
-        element_cx.get_text(strip=True),
-        element_jcbh.get_text(strip=True),
-    ]
+    return {'time':element_registration_time.get_text(strip=True),"car_model": element_cx.get_text(strip=True),'cargo_id':element_jcbh.get_text(strip=True)}
+
 
 
 class web_grasp:

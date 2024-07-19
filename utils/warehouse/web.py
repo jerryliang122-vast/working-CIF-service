@@ -169,26 +169,25 @@ class web_grasp:
         suffix = parse_html(self.data_html)
         data = []
         for i in range(1, suffix):
-            data_list = []
             cargo_data = get_data(self.data_html, i)
             cargo_data_list = get_measurement(self.data_html, i)
-            date_time = self.change_time(cargo_data[0])
+            date_time = self.change_time(cargo_data['time'])
             # 更换cargo_data[0]的值为date_time
-            cargo_data[0] = date_time
-            if cargo_data[1] == "厢式车":
-                cargo_data[1] = True
+            cargo_data['time'] = date_time
+            if cargo_data['car_model'] == "厢式车":
+                cargo_data['car_model'] = True
             else:
-                cargo_data[1] = False
+                cargo_data['car_model'] = False
             # 修改data列表 中的托盘判断
             cargo_data_list_new = []
             for i in cargo_data_list:
-                if i[0] == "托":
-                    i[0] = True
+                if i['pkgs_type'] == "托":
+                    i['pkgs_type'] = True
                 else:
-                    i[0] = False
+                    i['pkgs_type'] = False
                 cargo_data_list_new.append(i)
-            data_list.append(cargo_data_list_new)
-            data.append([cargo_data, data_list])
+            cargo_data['goods'] = cargo_data_list_new
+            data.append(cargo_data)
         return data
 
 if __name__ == "__main__":

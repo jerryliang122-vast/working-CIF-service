@@ -167,6 +167,7 @@ class calculate_cfs_wg():
         # 计算所有货物的装卸费用总和
         #将所有结果相加
         price_total = normal_price + pallet_price + ows_price
+        return price_total
 
     def main(self):
         #按车分离数据
@@ -174,3 +175,4 @@ class calculate_cfs_wg():
             #判断入库时间，修改cfs-price 的标准
             night = self.warehouse_time(i[0])
             price = self.warehouse_in_charge(i[1],night)
+            print(price)

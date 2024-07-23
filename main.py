@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow
 from Ui.Ui_untitled import Ui_Form
 import sys
 from controllers import work_inquiry
+from controllers import warehouse_price
 import logging
 
 logpath = os.path.join(os.getcwd(), "log.log")
@@ -46,16 +47,12 @@ class wm(QMainWindow, Ui_Form):
             QLineEdit{
                 border: 1px solid black;
             }               
-            QPushButton {
-                background-color: #e0e0e0;
-                color: #000;
-                border: 1px solid #c0c0c0;
-            }
             QLabel {
                 color: #333;
             }
         """)
         self.combo_box_handler = work_inquiry(self)
+        self.combo_box_handler1 = warehouse_price(self)
 
 
 if __name__ == "__main__":

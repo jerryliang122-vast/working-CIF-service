@@ -37,6 +37,15 @@ class wm(QMainWindow, Ui_Form):
             QMainWindow {
                 background-color: #f0f0f0;
             }
+            QPlainTextEdit {
+                border: 1px solid black; /* 设置QPlainTextEdit边框为黑色 */
+            }
+            QTextEdit {
+                border: 1px solid black;
+            }
+            QLineEdit{
+                border: 1px solid black;
+            }               
             QPushButton {
                 background-color: #e0e0e0;
                 color: #000;

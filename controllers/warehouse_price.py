@@ -21,6 +21,7 @@ class warehouse_price():
         self.check_config_folder()
         self.main_window.wright_yaml.clicked.connect(self.write_warehouse_stander)
         self.main_window.clean_cfs_charge.clicked.connect(self.clear_field)
+        self.main_window.pushButton_4.clicked.connect(self.read_warehouse_stander)
 
     
 

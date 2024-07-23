@@ -111,5 +111,24 @@ class warehouse_price():
                 item = QStandardItem(file.replace(".yaml", ""))
                 model.appendRow([item])
         self.main_window.stander_list.setModel(model)
+        self.main_window.stander_list.selectionModel().currentRowChanged.connect(self.read_and_show_warehouse_stander)
 
-        
+    #读取conf/warehouse 并写入标准的登记配置
+    def read_and_show_warehouse_stander(self, current):
+        stander_name  = self.main_window.stander_list.model().itemFromIndex(current)
+        stander_name = stander_name.text()
+        with open(f"conf/warehouse/{stander_name}.yaml", "r", encoding="utf-8") as f:
+            cfs_stander = yaml.load(f, Loader=yaml.FullLoader)
+        self.main_window.cfs_name.setText(stander_name)
+        self.main_window.cfs_bl_charge.setText(cfs_stander['BL_charge'])
+        self.main_window.cfs_yg_pkgs_charge.setText(cfs_stander['cfs_yg_pkgs_charge'])
+        self.main_window.cfs_yg_weight_charge.setText(cfs_stander['cfs_yg_weight_charge'])
+        self.main_window.cfs_yg_cmb_charge.setText(cfs_stander['cfs_yg_cmb_charge'])
+        self.main_window.cfs_yg_mini_charge.setText(cfs_stander['cfs_yg_mini_charge'])
+        self.main_window.cfs_ys_pkgs_charge.setText(cfs_stander['cfs_ys_pkgs_charge'])
+        self.main_window.cfs_ys_weight_charge.setText(cfs_stander['cfs_ys_weight_charge'])
+        self.main_window.cfs_ys_cbm_charge.setText(cfs_stander['cfs_ys_cbm_charge'])
+        self.main_window.cfs_ys_mini_charge.setText(cfs_stander['cfs_ys_mini_charge'])
+        self.main_window.cfs_van_charge.setText(cfs_stander['cfs_van_charge'])
+        self.main_window.cfs_ows_charge.setText(cfs_stander['cfs_ows_charge'])
+        self.main_window.cfs_Insurance_charge.setText(cfs_stander['cfs_Insurance_charge'])

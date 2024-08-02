@@ -10,6 +10,12 @@
     <height>504</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
    <size>
     <width>900</width>
@@ -21,6 +27,15 @@
     <width>900</width>
     <height>504</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+    <weight>75</weight>
+    <bold>true</bold>
+    <stylestrategy>NoAntialias</stylestrategy>
+    <kerning>true</kerning>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -34,8 +49,23 @@
      <height>501</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <bold>false</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
    <property name="currentIndex">
     <number>0</number>
+   </property>
+   <property name="usesScrollButtons">
+    <bool>true</bool>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -50,6 +80,15 @@
        <height>171</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+       <kerning>true</kerning>
+      </font>
+     </property>
      <property name="title">
       <string>询价信息</string>
      </property>
@@ -62,6 +101,15 @@
         <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
      </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">
@@ -72,6 +120,15 @@
         <height>16</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <property name="text">
        <string>地址</string>
       </property>
@@ -81,9 +138,18 @@
        <rect>
         <x>30</x>
         <y>60</y>
-        <width>78</width>
+        <width>83</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <property name="leftMargin">
@@ -91,6 +157,15 @@
        </property>
        <item>
         <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>件</string>
          </property>
@@ -98,6 +173,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -110,7 +194,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="PKGS"/>
+        <widget class="QLineEdit" name="PKGS">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -123,6 +217,15 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <property name="leftMargin">
         <number>5</number>
@@ -132,6 +235,15 @@
        </property>
        <item>
         <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>重量KG</string>
          </property>
@@ -139,6 +251,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_2">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -155,6 +276,15 @@
          <property name="enabled">
           <bool>true</bool>
          </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
         </widget>
        </item>
       </layout>
@@ -168,6 +298,15 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <property name="leftMargin">
         <number>5</number>
@@ -177,6 +316,15 @@
        </property>
        <item>
         <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>体积CBM</string>
          </property>
@@ -184,6 +332,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_3">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -196,7 +353,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="CBM"/>
+        <widget class="QLineEdit" name="CBM">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -208,6 +375,15 @@
         <width>181</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <property name="spacing">
@@ -224,6 +400,15 @@
        </property>
        <item>
         <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>货物单件体积</string>
          </property>
@@ -231,6 +416,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_4">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -247,6 +441,15 @@
          <property name="enabled">
           <bool>true</bool>
          </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
         </widget>
        </item>
       </layout>
@@ -260,9 +463,27 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>HS编码</string>
          </property>
@@ -270,6 +491,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_5">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -282,7 +512,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="HS"/>
+        <widget class="QLineEdit" name="HS">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -295,9 +535,27 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
         <widget class="QLabel" name="label_7">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>货物描述</string>
          </property>
@@ -305,6 +563,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_6">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -317,7 +584,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="cargoname"/>
+        <widget class="QLineEdit" name="cargoname">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -329,6 +606,15 @@
         <width>51</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
       </property>
       <item>
        <property name="text">
@@ -355,16 +641,44 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_13">
        <item>
         <widget class="QLabel" name="label_13">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>港口</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="port"/>
+        <widget class="QLineEdit" name="port">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -378,6 +692,15 @@
        <height>171</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+       <kerning>true</kerning>
+      </font>
+     </property>
      <property name="title">
       <string>选择代理</string>
      </property>
@@ -389,6 +712,15 @@
         <width>251</width>
         <height>91</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
       </property>
       <property name="selectionMode">
        <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -406,12 +738,30 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <property name="leftMargin">
         <number>6</number>
        </property>
        <item>
         <widget class="QLabel" name="label_9">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>港口</string>
          </property>
@@ -419,6 +769,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_7">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -431,7 +790,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QComboBox" name="gangkou"/>
+        <widget class="QComboBox" name="gangkou">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -444,9 +813,27 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <widget class="QLabel" name="label_8">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>航线</string>
          </property>
@@ -454,6 +841,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_8">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -466,7 +862,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QComboBox" name="hangxian"/>
+        <widget class="QComboBox" name="hangxian">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -479,12 +885,30 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_9">
        <property name="leftMargin">
         <number>6</number>
        </property>
        <item>
         <widget class="QLabel" name="label_10">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>国家</string>
          </property>
@@ -492,6 +916,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_9">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -504,7 +937,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QComboBox" name="guojia"/>
+        <widget class="QComboBox" name="guojia">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -518,6 +961,15 @@
        <height>171</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+       <kerning>true</kerning>
+      </font>
+     </property>
      <property name="title">
       <string>添加代理信息</string>
      </property>
@@ -530,9 +982,27 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_10">
        <item>
         <widget class="QPushButton" name="add_agent_email">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>添加</string>
          </property>
@@ -540,6 +1010,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_10">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -553,6 +1032,15 @@
        </item>
        <item>
         <widget class="QPushButton" name="delete_agent">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>删除</string>
          </property>
@@ -569,6 +1057,15 @@
         <height>91</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
      </widget>
      <widget class="QWidget" name="horizontalLayoutWidget_11">
       <property name="geometry">
@@ -579,9 +1076,27 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_11">
        <item>
         <widget class="QLabel" name="label_11">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>代理名称</string>
          </property>
@@ -589,6 +1104,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_11">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -601,7 +1125,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="agent_name"/>
+        <widget class="QLineEdit" name="agent_name">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -615,6 +1149,15 @@
        <height>301</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+       <kerning>true</kerning>
+      </font>
+     </property>
      <property name="title">
       <string>自动识别以及渲染界面</string>
      </property>
@@ -627,6 +1170,15 @@
         <height>271</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
      </widget>
      <widget class="QGroupBox" name="groupBox_7">
       <property name="geometry">
@@ -636,6 +1188,15 @@
         <width>231</width>
         <height>131</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
       </property>
       <property name="title">
        <string>自动识别输入框</string>
@@ -649,6 +1210,15 @@
          <height>51</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>微软雅黑</family>
+         <weight>50</weight>
+         <bold>false</bold>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>true</kerning>
+        </font>
+       </property>
       </widget>
       <widget class="QWidget" name="horizontalLayoutWidget_15">
        <property name="geometry">
@@ -659,9 +1229,27 @@
          <height>41</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>微软雅黑</family>
+         <weight>50</weight>
+         <bold>false</bold>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>true</kerning>
+        </font>
+       </property>
        <layout class="QHBoxLayout" name="horizontalLayout_18">
         <item>
          <widget class="QPushButton" name="auto_identification">
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+            <weight>50</weight>
+            <bold>false</bold>
+            <stylestrategy>PreferAntialias</stylestrategy>
+            <kerning>true</kerning>
+           </font>
+          </property>
           <property name="text">
            <string>识别</string>
           </property>
@@ -675,6 +1263,15 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+            <weight>50</weight>
+            <bold>false</bold>
+            <stylestrategy>PreferAntialias</stylestrategy>
+            <kerning>true</kerning>
+           </font>
+          </property>
           <property name="text">
            <string>粘贴</string>
           </property>
@@ -682,6 +1279,15 @@
         </item>
         <item>
          <widget class="QPushButton" name="auto_clean">
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+            <weight>50</weight>
+            <bold>false</bold>
+            <stylestrategy>PreferAntialias</stylestrategy>
+            <kerning>true</kerning>
+           </font>
+          </property>
           <property name="text">
            <string>清除</string>
           </property>
@@ -699,6 +1305,15 @@
         <height>151</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <property name="title">
        <string>自动识别输出框</string>
       </property>
@@ -710,6 +1325,15 @@
          <width>211</width>
          <height>121</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>微软雅黑</family>
+         <weight>50</weight>
+         <bold>false</bold>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>true</kerning>
+        </font>
        </property>
       </widget>
      </widget>
@@ -723,6 +1347,15 @@
        <height>211</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+       <kerning>true</kerning>
+      </font>
+     </property>
      <property name="title">
       <string>发送邮件</string>
      </property>
@@ -734,6 +1367,15 @@
         <width>75</width>
         <height>24</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
       </property>
       <property name="text">
        <string>预览</string>
@@ -748,9 +1390,27 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_12">
        <item>
         <widget class="QLabel" name="label_12">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="text">
           <string>询价编号</string>
          </property>
@@ -758,6 +1418,15 @@
        </item>
        <item>
         <spacer name="horizontalSpacer_12">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -770,7 +1439,17 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="inquiry_number"/>
+        <widget class="QLineEdit" name="inquiry_number">
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>true</kerning>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -782,6 +1461,15 @@
         <width>75</width>
         <height>24</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
       </property>
       <property name="text">
        <string>发送</string>
@@ -796,6 +1484,15 @@
         <height>24</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <property name="text">
        <string>删除</string>
       </property>
@@ -809,6 +1506,15 @@
         <height>121</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
      </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_6">
@@ -819,6 +1525,15 @@
        <width>281</width>
        <height>91</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+       <kerning>true</kerning>
+      </font>
      </property>
      <property name="title">
       <string>编号加载</string>
@@ -832,6 +1547,15 @@
         <height>61</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
       <property name="text">
        <string>生成</string>
       </property>
@@ -843,6 +1567,872 @@
         <y>20</y>
         <width>191</width>
         <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+        <kerning>true</kerning>
+       </font>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>指定货</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_9">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>461</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>仓库费用标准登记</string>
+     </property>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>登记的仓库费用标准将会存储在conf文件夹中,后续可以直接调用</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_10">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>161</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>上下车费-单价-外港</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>160</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_20">
+          <item>
+           <widget class="QLabel" name="label_20">
+            <property name="text">
+             <string>托盘</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cfs_yg_pkgs_charge"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_21">
+          <item>
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>重量</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cfs_yg_weight_charge"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_22">
+          <item>
+           <widget class="QLabel" name="label_22">
+            <property name="text">
+             <string>体积-立方</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cfs_yg_cmb_charge"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_23">
+          <item>
+           <widget class="QLabel" name="label_23">
+            <property name="text">
+             <string>最低收费标准</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cfs_yg_mini_charge"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_11">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>80</y>
+        <width>161</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>上下车费-单价-洋山</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>160</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_24">
+          <item>
+           <widget class="QLabel" name="label_24">
+            <property name="text">
+             <string>托盘</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cfs_ys_pkgs_charge"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_25">
+          <item>
+           <widget class="QLabel" name="label_25">
+            <property name="text">
+             <string>重量</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cfs_ys_weight_charge"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_26">
+          <item>
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>体积-立方</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cfs_ys_cbm_charge"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_27">
+          <item>
+           <widget class="QLabel" name="label_27">
+            <property name="text">
+             <string>最低收费标准</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="cfs_ys_mini_charge"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_22">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>321</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_31">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_19">
+         <item>
+          <widget class="QLabel" name="label_19">
+           <property name="text">
+            <string>登记名称</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_name"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_28">
+         <item>
+          <widget class="QLabel" name="label_28">
+           <property name="text">
+            <string>BL费用总价</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_bl_charge"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>140</y>
+        <width>121</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QPushButton" name="wright_yaml">
+         <property name="text">
+          <string>写入</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="clean_cfs_charge">
+         <property name="text">
+          <string>清除</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>40</y>
+        <width>121</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_29">
+         <item>
+          <widget class="QLabel" name="label_29">
+           <property name="text">
+            <string>厢式车</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_van_charge"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_30">
+         <item>
+          <widget class="QLabel" name="label_30">
+           <property name="text">
+            <string>超大费</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_ows_charge"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_34">
+         <item>
+          <widget class="QLabel" name="label_33">
+           <property name="text">
+            <string>保险费</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_Insurance_charge"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_12">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>0</y>
+       <width>421</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>标准列表</string>
+     </property>
+     <widget class="QListView" name="stander_list">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>311</width>
+        <height>181</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>70</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>读取</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>140</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>删除</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_13">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>210</y>
+       <width>461</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>计算结果</string>
+     </property>
+     <widget class="QTextEdit" name="cfs_price_output">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>441</width>
+        <height>231</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_14">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>210</y>
+       <width>421</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>控制台</string>
+     </property>
+     <widget class="QWidget" name="verticalLayoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>141</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_32">
+         <item>
+          <widget class="QLabel" name="label_31">
+           <property name="text">
+            <string>仓库名称</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="chose_cfs_name">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>3</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <item>
+            <property name="text">
+             <string>外港仓库</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>洋山仓库</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_42">
+         <item>
+          <widget class="QLabel" name="label_40">
+           <property name="text">
+            <string>上下车费选择</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cfs_inout_chose">
+           <item>
+            <property name="text">
+             <string>外港</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>洋山</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="cfs_pallets">
+         <property name="text">
+          <string>托盘货</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="cfs_night_in">
+         <property name="text">
+          <string>夜间进仓</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="cfs_van">
+         <property name="text">
+          <string>厢式车</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_6">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>10</y>
+        <width>175</width>
+        <height>202</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_33">
+         <item>
+          <widget class="QLabel" name="label_32">
+           <property name="text">
+            <string>进仓编号</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_number"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_35">
+         <item>
+          <widget class="QLabel" name="label_34">
+           <property name="text">
+            <string>打折费率</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_discount_price">
+           <property name="text">
+            <string>0.8</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_36">
+         <item>
+          <widget class="QLabel" name="label_35">
+           <property name="text">
+            <string>在哪个地方打折</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="where_cfs_discount">
+           <item>
+            <property name="text">
+             <string>上下车费</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>总费用</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_37">
+         <item>
+          <widget class="QCheckBox" name="cfs_discount">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>Adobe Arabic</family>
+             <weight>50</weight>
+             <bold>false</bold>
+             <stylestrategy>NoAntialias</stylestrategy>
+             <kerning>true</kerning>
+            </font>
+           </property>
+           <property name="acceptDrops">
+            <bool>false</bool>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>是否打折</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoRepeat">
+            <bool>false</bool>
+           </property>
+           <property name="tristate">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <item>
+          <widget class="QPushButton" name="use_cfs_numebr_calculate">
+           <property name="text">
+            <string>使用进仓编号计算</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="use_cargo_info_calculate">
+           <property name="text">
+            <string>使用货物信息计算</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>150</y>
+        <width>141</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_38">
+         <item>
+          <widget class="QLabel" name="label_36">
+           <property name="text">
+            <string>件数</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_pkgs"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_39">
+         <item>
+          <widget class="QLabel" name="label_37">
+           <property name="text">
+            <string>重量KG</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_tone"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_40">
+         <item>
+          <widget class="QLabel" name="label_38">
+           <property name="text">
+            <string>体积</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cfs_cbm"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_41">
+         <item>
+          <widget class="QLabel" name="label_39">
+           <property name="text">
+            <string>尺寸可空</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="cargo_dims"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_5">
+    <attribute name="title">
+     <string>账单统计</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_15">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>421</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>输入编号</string>
+     </property>
+     <widget class="QPlainTextEdit" name="bill_number">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>401</width>
+        <height>181</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_16">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>0</y>
+       <width>441</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>控制面板</string>
+     </property>
+     <widget class="QWidget" name="horizontalLayoutWidget_16">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>159</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_43">
+       <item>
+        <widget class="QLabel" name="label_41">
+         <property name="text">
+          <string>输入编号分隔符</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="bill_split">
+         <property name="text">
+          <string>,</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="label_42">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>158</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>需要剔除的编号用英文,分隔</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="bill_splitout">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>161</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="plainText">
+       <string>-(\d+)|\*(HB|MB|H\d+)</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bill_output">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>100</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>输出</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bill_clean">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>170</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>清除</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_17">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>421</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>输出编号结果</string>
+     </property>
+     <widget class="QPlainTextEdit" name="bill_out">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>401</width>
+        <height>221</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_18">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>210</y>
+       <width>441</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>编号统计结果</string>
+     </property>
+     <widget class="QPlainTextEdit" name="bill_out2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>421</width>
+        <height>221</height>
        </rect>
       </property>
      </widget>
@@ -936,7 +2526,7 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>161</width>
+       <width>167</width>
        <height>41</height>
       </rect>
      </property>

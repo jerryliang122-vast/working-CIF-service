@@ -13,6 +13,7 @@ from Ui.Ui_untitled import Ui_Form
 import sys
 from controllers import work_inquiry
 from controllers import warehouse_price
+from controllers import BillCalculate
 import logging
 
 logpath = os.path.join(os.getcwd(), "log.log")
@@ -53,6 +54,7 @@ class wm(QMainWindow, Ui_Form):
         """)
         self.combo_box_handler = work_inquiry(self)
         self.combo_box_handler1 = warehouse_price(self)
+        self.combo_box_handler2 = BillCalculate(self)
 
 
 if __name__ == "__main__":

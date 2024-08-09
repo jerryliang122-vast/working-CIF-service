@@ -132,3 +132,21 @@ class warehouse_price():
         self.main_window.cfs_van_charge.setText(cfs_stander['cfs_van_charge'])
         self.main_window.cfs_ows_charge.setText(cfs_stander['cfs_ows_charge'])
         self.main_window.cfs_Insurance_charge.setText(cfs_stander['cfs_Insurance_charge'])
+
+    #计算仓库费用
+    def calculate_warehouse_price(self):
+        cargo_data = {
+            "warehouse_name":self.main_window.chose_cfs_name.currentText(),
+            "warehouse_in_out":self.main_window.cfs_inout_chose.currentText(),
+            "cfs_pallets": self.main_window.cfs_pallets.isChecked(),
+            "cfs_night_in": self.main_window.cfs_night_in.isChecked(),
+            "cfs_van": self.main_window.cfs_van.isChecked(),
+            "cfs_pkgs": self.main_window.cfs_pkgs.text(),
+            "cfs_tone": self.main_window.cfs_tone.text(),
+            "cfs_cbm": self.main_window.cfs_cbm.text(),
+            "cargo_dims": self.main_window.cargo_dims.text(),
+            "cfs_number": self.main_window.cfs_number.text(),
+            "cfs_discount_price": self.main_window.cfs_discount_price.text(),
+            "where_cfs_discount": self.main_window.where_cfs_discount.currentText(),
+            "cfs_discount": self.main_window.cfs_discount.isChecked(),
+        }

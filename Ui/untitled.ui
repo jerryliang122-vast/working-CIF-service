@@ -2209,7 +2209,7 @@
         <x>20</x>
         <y>150</y>
         <width>141</width>
-        <height>111</height>
+        <height>120</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_7">

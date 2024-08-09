@@ -150,3 +150,18 @@ class warehouse_price():
             "where_cfs_discount": self.main_window.where_cfs_discount.currentText(),
             "cfs_discount": self.main_window.cfs_discount.isChecked(),
         }
+        cargo_stander = {
+            "cfs_name": self.main_window.cfs_name.text(),
+            "cfs_bl_charge" : self.main_window.cfs_bl_charge.text(),
+            "cfs_yg_pkgs_charge" : self.main_window.cfs_yg_pkgs_charge.text(),
+            "cfs_yg_weight_charge" : self.main_window.cfs_yg_weight_charge.text(),
+            "cfs_yg_cmb_charge" : self.main_window.cfs_yg_cmb_charge.text(),
+            "cfs_yg_mini_charge" : self.main_window.cfs_yg_mini_charge.text(),
+            "cfs_ys_pkgs_charge" : self.main_window.cfs_ys_pkgs_charge.text(),
+            "cfs_ys_weight_charge" : self.main_window.cfs_ys_weight_charge.text(),
+            "cfs_ys_cbm_charge" : self.main_window.cfs_ys_cbm_charge.text(),
+            "cfs_ys_mini_charge": self.main_window.cfs_ys_mini_charge.text(),
+            "cfs_van_charge" : self.main_window.cfs_van_charge.text(),
+            "cfs_ows_charge" : self.main_window.cfs_ows_charge.text(),
+            "cfs_Insurance_charge" : self.main_window.cfs_Insurance_charge.text(),
+        }

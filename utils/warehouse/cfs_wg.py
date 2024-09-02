@@ -14,9 +14,8 @@ class calculate_cfs_wg():
         self.cfs_stander = cfs_stander 
 
     def warehouse_time(self,data):
-        self.cfs_price = self.cfs_stander
         #判断时间在18年之后早上8点之前
-        if data[0] >=18 or data[0] <= 8: 
+        if data >=18 or data <= 8: 
             return True
         else:
             return False
@@ -24,7 +23,7 @@ class calculate_cfs_wg():
     def warehous_ows(self,data):
         #获取货物数据，检查是否有超大的
         pattern = re.compile(r'(\d+(\.\d+)?)([xX*\.](\d+(\.\d+)?))+')
-        match = pattern.match(data[4])
+        match = pattern.match(data["volume"])
         dimensions = [float(num) for num in re.findall(r'\d+(\.\d+)?', match)]
         if any(dim > 300 for dim in dimensions) or data[3] >=3.00:
             return True
@@ -123,10 +122,10 @@ class calculate_cfs_wg():
         ows_data = [i for i in data if self.warehous_ows(i)] #超大货物
         
         # 筛选出普通货物的数据
-        normal_data = [i for i in data if not self.warehous_ows(i) and not i[0]] #普通货物
+        normal_data = [i for i in data if not self.warehous_ows(i) and not i['pkgs_type']] #普通货物
         
         # 筛选出托盘货物的数据
-        pallet_data = [i for i in data if not self.warehous_ows(i) and i[0]] #托盘货物。
+        pallet_data = [i for i in data if not self.warehous_ows(i) and i['pkgs_type']] #托盘货物。
 
         # 如果有普通货物，计算其装卸费用
         #如果normal_data中有数据则计算，否则不计算。
@@ -173,6 +172,7 @@ class calculate_cfs_wg():
         #按车分离数据
         for i in self.cfs_wg_data: 
             #判断入库时间，修改cfs-price 的标准
-            night = self.warehouse_time(i[0])
-            price = self.warehouse_in_charge(i[1],night)
+            night = self.warehouse_time(i["time"])
+            price = self.warehouse_in_charge(i["goods"],night)
             print(price)
+            return price

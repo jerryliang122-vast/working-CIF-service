@@ -22,6 +22,7 @@ class warehouse_price():
         self.main_window.wright_yaml.clicked.connect(self.write_warehouse_stander)
         self.main_window.clean_cfs_charge.clicked.connect(self.clear_field)
         self.main_window.pushButton_4.clicked.connect(self.read_warehouse_stander)
+        self.main_window.use_cfs_numebr_calculate.clicked.connect(self.calculate_warehouse_price_no)
 
     
 
@@ -133,8 +134,8 @@ class warehouse_price():
         self.main_window.cfs_ows_charge.setText(cfs_stander['cfs_ows_charge'])
         self.main_window.cfs_Insurance_charge.setText(cfs_stander['cfs_Insurance_charge'])
 
-    #计算仓库费用
-    def calculate_warehouse_price(self):
+    #计算仓库费用, 使用进仓费编号计算
+    def calculate_warehouse_price_no(self):
         cargo_data = {
             "warehouse_name":self.main_window.chose_cfs_name.currentText(),
             "warehouse_in_out":self.main_window.cfs_inout_chose.currentText(),
@@ -165,3 +166,22 @@ class warehouse_price():
             "cfs_ows_charge" : self.main_window.cfs_ows_charge.text(),
             "cfs_Insurance_charge" : self.main_window.cfs_Insurance_charge.text(),
         }
+        #加载网页查询
+        import utils.warehouse.web as web 
+        import utils.warehouse.cfs_wg as cfs_wg
+        if cargo_data['warehouse_name'] == '外港仓库':
+            cargo_data_web = web.web_grasp(False,cargo_data["cfs_number"])
+            web_data =cargo_data_web.get_data()
+        else:
+            cargo_data_web = web.web_grasp(True,cargo_data["cfs_number"])
+            web_data =cargo_data_web.get_data()
+        #网页参数返回如下[{'time': 10, 'car_model': True, 'cargo_id': 'HWMAA2400934N-MF', 'goods': [{'pkgs_type': False, 'pkgs': '20', 'weight': '200.000', 'volume': '0.661', 'dims': '36.0×34.0×27.0'}]}, {'time': 16, 'car_model': True, 'cargo_id': 'HWMAA2400934N-MF', 'goods': [{'pkgs_type': False, 'pkgs': '24', 'weight': '175.000', 'volume': '0.800', 'dims': '35.0×34.0×28.0'}]}]
+        if cargo_data_web == None:
+            QMessageBox.information(self.main_window, "提示", "没有找到此单号，请检查单号是否正确")
+            return
+        if cargo_data["warehouse_name"] == "外港仓库":
+            cargo_calculate = cfs_wg.calculate_cfs_wg(web_data,cargo_stander)
+            cargo_data_calculate = cargo_calculate.main()
+        #将数据显示在cfs_price_output 的QTextEdit中
+        self.main_window.cfs_price_output.setText(str(cargo_data_calculate))
+        return

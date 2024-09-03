@@ -179,8 +179,18 @@ class warehouse_price():
         if cargo_data_web == None:
             QMessageBox.information(self.main_window, "提示", "没有找到此单号，请检查单号是否正确")
             return
+        if all(v is not None and v != '' for v in cargo_stander.values()) == False:
+            QMessageBox.information(self.main_window, "提示", "请先设置仓库标准")
+            return
+        #在web_data中添加一些数据
+        discount = {
+            'where_cfs_discount': cargo_data["where_cfs_discount"],
+            'cfs_discount': cargo_data["cfs_discount"],
+            'cfs_discount_price': cargo_data["cfs_discount_price"]
+        }
+
         if cargo_data["warehouse_name"] == "外港仓库":
-            cargo_calculate = cfs_wg.calculate_cfs_wg(web_data,cargo_stander)
+            cargo_calculate = cfs_wg.calculate_cfs_wg(web_data,cargo_stander,discount)
             cargo_data_calculate = cargo_calculate.main()
         #将数据显示在cfs_price_output 的QTextEdit中
         self.main_window.cfs_price_output.setText(str(cargo_data_calculate))

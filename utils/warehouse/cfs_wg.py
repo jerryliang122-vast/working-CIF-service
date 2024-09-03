@@ -6,12 +6,13 @@ logger = logging.getLogger("my_logger")
 
 
 class calculate_cfs_wg():
-    def __init__(self, cfs_wg_data,cfs_stander):
+    def __init__(self, cfs_wg_data,cfs_stander,discount):
         """
         需要写入列表[[[10, True, 'HWMAA2400934N-MF'], [[[False, '20', '200.000', '0.661', '36.0×34.0×27.0']]]], [[16, True, 'HWMAA2400934N-MF'], [[[False, '24', '175.000', '0.800', '35.0×34.0×28.0']]]]]
         """
         self.cfs_wg_data = cfs_wg_data
         self.cfs_stander = cfs_stander 
+        self.discount = discount
 
     def warehouse_time(self,data):
         #判断时间在18年之后早上8点之前
@@ -23,9 +24,9 @@ class calculate_cfs_wg():
     def warehous_ows(self,data):
         #获取货物数据，检查是否有超大的
         pattern = re.compile(r'(\d+(\.\d+)?)([xX*\.](\d+(\.\d+)?))+')
-        match = pattern.match(data["volume"])
-        dimensions = [float(num) for num in re.findall(r'\d+(\.\d+)?', match)]
-        if any(dim > 300 for dim in dimensions) or data[3] >=3.00:
+        match = pattern.match(data["dims"])
+        dimensions = [float(num) for num in re.findall(r'\d+(\.\d+)?', match.group())]
+        if any(dim > 300 for dim in dimensions) or float(data['volume']) >=3.00:
             return True
         return False
     #上下车费
@@ -67,10 +68,10 @@ class calculate_cfs_wg():
         
         # 应用折扣
         #打折费率
-        if data['where_cfs_discount'] == '上下车费':
-            pkgs_charge = Decimal(pkgs_charge) * Decimal(discount)
-            weight_charge = Decimal(weight_charge) * Decimal(discount)
-            volume_charge = Decimal(volume_charge) * Decimal(discount)
+        if discount['where_cfs_discount'] == '上下车费' and discount['cfs_discount'] == True:
+            pkgs_charge = Decimal(pkgs_charge) * Decimal(discount['cfs_discount_price'])
+            weight_charge = Decimal(weight_charge) * Decimal(discount['cfs_discount_price'])
+            volume_charge = Decimal(volume_charge) * Decimal(discount['cfs_discount_price'])
         
         # 计算最大费用，考虑到最小费用门槛
         # 比大小,mini
@@ -97,14 +98,14 @@ class calculate_cfs_wg():
         volume = Decimal(0)
         # 遍历数据集，累加每个货物的件数、重量和体积
         for i in data:
-            pkgs += Decimal(i[1])
-            weight += Decimal(i[2])
-            volume += Decimal(i[3])
+            pkgs += Decimal(i["pkgs"])
+            weight += Decimal(i["weight"])
+            volume += Decimal(i["volume"])
         # 返回包含总件数、总重量和总体积的字典
         return {'pkgs':pkgs,'weight':weight,'volume':volume}
     
     #上下车费,超大，夜间算法
-    def warehouse_in_charge(self,data,night):
+    def warehouse_in_charge(self,data,night,discount):
         """
         计算仓库装卸费用。
         
@@ -135,7 +136,7 @@ class calculate_cfs_wg():
             normal_data_dict['big'] = False
             normal_data_dict['pallet'] = False
             normal_data_dict['night'] = night
-            normal_price = self.warehouse_in(normal_data_dict) #计算normal_data的上下车费。
+            normal_price = self.warehouse_in(normal_data_dict,discount) #计算normal_data的上下车费。
         else:
             normal_price = Decimal(0)
         
@@ -147,7 +148,7 @@ class calculate_cfs_wg():
             pallet_data_dict['big'] = False
             pallet_data_dict['pallet'] = True
             pallet_data_dict['night'] = night
-            pallet_price = self.warehouse_in(pallet_data_dict) #计算pallet_data的上下车费。
+            pallet_price = self.warehouse_in(pallet_data_dict,discount) #计算pallet_data的上下车费。
         else:
             pallet_price = Decimal(0)
         
@@ -159,7 +160,7 @@ class calculate_cfs_wg():
             ows_data_dict['big'] = True
             ows_data_dict['pallet'] = False
             ows_data_dict['night'] = night
-            ows_price = self.warehouse_in(ows_data_dict) #计算ows_data的上下车费。
+            ows_price = self.warehouse_in(ows_data_dict,discount) #计算ows_data的上下车费。
         else:
             ows_price = Decimal(0)
         
@@ -169,10 +170,11 @@ class calculate_cfs_wg():
         return price_total
 
     def main(self):
+        discount = self.discount
         #按车分离数据
         for i in self.cfs_wg_data: 
             #判断入库时间，修改cfs-price 的标准
             night = self.warehouse_time(i["time"])
-            price = self.warehouse_in_charge(i["goods"],night)
+            price = self.warehouse_in_charge(i["goods"],night,discount)
             print(price)
             return price

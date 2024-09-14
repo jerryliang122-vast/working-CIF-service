@@ -112,28 +112,46 @@ class cargo_handle():
         pallet_cargo_data = data[2]
         return {'ows_cargo':ows_cargo_data,'normal_cargo':normal_cargo_data,'pallet_data':pallet_cargo_data}
         
-
-   
 class calculate_warehouse_charge():
-    def __init__(self,data):
+    def __init__(self,data,stander):
         self.data = data
-
+        self.stander = stander
+    def stander_change(self,night,ows):
+        pkgs_charge = Decimal(self.stander['cfs_yg_pkgs_charge']) 
+        weight_charge = Decimal(self.stander['cfs_yg_weight_charge']) 
+        volume_charge = Decimal(self.stander['cfs_yg_cmb_charge']) 
+        if night == True :
+            pkgs_charge = pkgs_charge* Decimal(1.3)
+            weight_charge = pkgs_charge * Decimal(1.3)
+            volume_charge = pkgs_charge* Decimal(1.3)
+        if ows == True:
+            pkgs_charge = Decimal(pkgs_charge) + Decimal(self.stander['cfs_ows_charge'])
+            weight_charge = Decimal(weight_charge) + Decimal(self.stander['cfs_ows_charge'])
+            volume_charge = Decimal(volume_charge) + Decimal(self.stander['cfs_ows_charge'])
+        return {'pkgs_charge':pkgs_charge,'weight_charge':weight_charge,'volume_charge':volume_charge}
+        
     def warehouse_time(self,data):
         #判断时间在18年之后早上8点之前
         if data >=18 or data <= 8: 
             return True
         else:
-            return False
-            
+            return False    
     def main(self):
         #查看货物时间
         warehouse_time = self.warehouse_time(self.data['time'])
         #清洗数据，将超大货物分开,并合并货物
         cargo_calculate_data = cargo_handle(self.data['goods'])
         data = cargo_calculate_data.main()
-        #计算货物上下车费
-        #实例化warehouse_in_out
-        calculate_inout = warehouse_in_out(data)
+        #按照货物数据修改仓储标准，并计算仓库费用
+        if data['ows_cargo']:
+            stander = self.stander_change(warehouse_time,True)
+            calculate_inout = warehouse_in_out(data,stander)
+        if data['normal_cargo']:
+            stander = self.stander_change(warehouse_time,False)
+            calculate_inout = warehouse_in_out(data,stander)
+        if data['pallet_data']:
+            stander = self.stander_change(warehouse_time,False)
+            calculate_inout = warehouse_in_out(data,stander)
 
 def main(stander,data,discount):
     for record in data:

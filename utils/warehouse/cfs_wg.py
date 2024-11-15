@@ -1,9 +1,23 @@
 import logging
 from decimal import Decimal, ROUND_UP
 import re
-from utils.warehouse.round import price_to_ten
 logger = logging.getLogger("my_logger")
 
+def price_to_ten(price: str):
+    """
+    这是一个进十位的函数
+    """
+    # 将price转换成decimal
+    price = Decimal(price)
+    # 先去除小数点
+    new_price = price.quantize(Decimal("1"), rounding=ROUND_UP)
+    # 除以10
+    new_price /= Decimal("10")
+    # 去除小数点
+    new_price = new_price.quantize(Decimal("1"), rounding=ROUND_UP)
+    # 重新乘以10
+    new_price *= Decimal("10")
+    return new_price
 
 class warehouse_in_out():
     def __init__(self, data,stander):
@@ -13,11 +27,11 @@ class warehouse_in_out():
         data = self.data
         stander = self.stander
         pkgs_unit_price =Decimal(stander['pkgs_charge'])
-        weight_unit_price = Decimal(stander['Weight_charge'])
-        volume_unit_price = Decimal(stander['cmb_charge'])
+        weight_unit_price = Decimal(stander['weight_charge'])
+        volume_unit_price = Decimal(stander['volume_charge'])
         # 计算包装费，如果无托盘，则包装费为0
         #计算上下车费，按照货物数据，计算出PKGS WEIGHT 和VOLUME 然后相加，返回结果。
-        if data['pallet'] == True:
+        if data['pkgs_type'] == True:
             pkgs_charge = Decimal(pkgs_unit_price)*Decimal(data['pkgs'])
         else:
             pkgs_charge = Decimal(0)
@@ -110,6 +124,15 @@ class cargo_handle():
         ows_cargo_data = data[0]
         normal_cargo_data = data[1]
         pallet_cargo_data = data[2]
+        if data[0]:
+            ows_cargo_data = self.merge_data(ows_cargo_data)
+            ows_cargo_data['pkgs_type'] = ows_cargo_data['pkgs_type']
+        if data[1]:
+            normal_cargo_data = self.merge_data(normal_cargo_data)
+            normal_cargo_data['pkgs_type'] = normal_cargo_data['pkgs_type']
+        if data[2]:
+            pallet_cargo_data = self.merge_data(pallet_cargo_data)
+            pallet_cargo_data['pkgs_type'] = pallet_cargo_data['pkgs_type']
         return {'ows_cargo':ows_cargo_data,'normal_cargo':normal_cargo_data,'pallet_data':pallet_cargo_data}
         
 class calculate_warehouse_charge():
@@ -145,15 +168,71 @@ class calculate_warehouse_charge():
         #按照货物数据修改仓储标准，并计算仓库费用
         if data['ows_cargo']:
             stander = self.stander_change(warehouse_time,True)
-            calculate_inout = warehouse_in_out(data,stander)
+            calculate_inout = warehouse_in_out(data['ows_cargo'],stander)
+            print(calculate_inout.in_out())
         if data['normal_cargo']:
             stander = self.stander_change(warehouse_time,False)
-            calculate_inout = warehouse_in_out(data,stander)
+            calculate_inout = warehouse_in_out(data['normal_cargo'],stander)
+            print(calculate_inout.in_out())
         if data['pallet_data']:
             stander = self.stander_change(warehouse_time,False)
-            calculate_inout = warehouse_in_out(data,stander)
+            calculate_inout = warehouse_in_out(data['pallet_data'],stander)
+            print(calculate_inout.in_out())
+
+class cargo_handle_yg():
+    def __init__(self,data):
+        self.data = data
 
 def main(stander,data,discount):
-    for record in data:
-        #实例化cargo_handle 类
-        cargo_handle_data = calculate_warehouse_charge(record)
+    back_data= []
+    #获取每次进仓的数据
+    for i in data:
+        
+
+
+if __name__ == '__main__':
+    data = [
+    {
+        'time': 10,
+        'car_model': True,
+        'cargo_id': 'HWMAA2400934N-MF',
+        'goods': [
+            {
+                'pkgs_type': False,
+                'pkgs': '20',
+                'weight': '200.000',
+                'volume': '0.661',
+                'dims': '36.0×34.0×27.0'
+            }
+        ]
+    },
+    {
+        'time': 16,
+        'car_model': True,
+        'cargo_id': 'HWMAA2400934N-MF',
+        'goods': [
+            {
+                'pkgs_type': False,
+                'pkgs': '24',
+                'weight': '175.000',
+                'volume': '0.800',
+                'dims': '35.0×34.0×28.0'
+            }
+        ]
+    }
+    ]
+    stander = {
+    "BL_charge": 1,
+    "cfs_Insurance_charge": 1,
+    "cfs_ows_charge": 1,
+    "cfs_van_charge": 1,
+    "cfs_yg_cmb_charge": 1,
+    "cfs_yg_mini_charge": 1,
+    "cfs_yg_pkgs_charge": 1,
+    "cfs_yg_weight_charge": 1,
+    "cfs_ys_cbm_charge": 1,
+    "cfs_ys_mini_charge": 1,
+    "cfs_ys_pkgs_charge": 1,
+    "cfs_ys_weight_charge": 1
+    }
+    main(stander,data,None)

@@ -12,6 +12,53 @@ from PyQt6.QtWidgets import (
 from utils import email_sql
 import logging
 import yaml
+import utils.warehouse.web as web 
+import utils.warehouse.cfs_wg as cfs_wg
+
+
+class WebDataThread(QThread):
+    '''
+    
+    '''
+    finished = pyqtSignal(dict)  # 信号，用于在线程完成后发送结果
+
+    def __init__(self, cargo_data, cargo_stander):
+        super().__init__()
+        self.cargo_data = cargo_data
+        self.cargo_stander = cargo_stander
+
+    def run(self):
+        # 根据仓库名称选择不同的网页抓取方式
+        if self.cargo_data['warehouse_name'] == '外港仓库':
+            cargo_data_web = web.web_grasp(False, self.cargo_data["cfs_number"])
+            web_data = cargo_data_web.get_data()
+        else:
+            cargo_data_web = web.web_grasp(True, self.cargo_data["cfs_number"])
+            web_data = cargo_data_web.get_data()
+        
+        # 如果没有找到单号，则弹出提示框
+        if cargo_data_web is None:
+            QMessageBox.information(self.main_window, "提示", "没有找到此单号，请检查单号是否正确")
+            return
+        
+        # 如果仓库标准没有设置，则弹出提示框
+        if all(v is not None and v != '' for v in self.cargo_stander.values()) == False:
+            QMessageBox.information(self.main_window, "提示", "请先设置仓库标准")
+            return
+        
+        # 获取折扣信息
+        discount = {
+            'where_cfs_discount': self.cargo_data["where_cfs_discount"],
+            'cfs_discount': self.cargo_data["cfs_discount"],
+            'cfs_discount_price': self.cargo_data["cfs_discount_price"]
+        }
+
+        # 根据仓库名称选择不同的计算方式
+        if self.cargo_data["warehouse_name"] == "外港仓库":
+            cargo_calculate = cfs_wg.calculate_cfs_wg(web_data, self.cargo_stander, discount)
+            cargo_data_calculate = cargo_calculate.main()
+        
+        self.finished.emit(cargo_data_calculate)  # 发送结果信号
 
 
 
@@ -136,62 +183,47 @@ class warehouse_price():
 
     #计算仓库费用, 使用进仓费编号计算
     def calculate_warehouse_price_no(self):
+        # 定义一个字典cargo_data，用于存储货物信息
         cargo_data = {
-            "warehouse_name":self.main_window.chose_cfs_name.currentText(),
-            "warehouse_in_out":self.main_window.cfs_inout_chose.currentText(),
-            "cfs_pallets": self.main_window.cfs_pallets.isChecked(),
-            "cfs_night_in": self.main_window.cfs_night_in.isChecked(),
-            "cfs_van": self.main_window.cfs_van.isChecked(),
-            "cfs_pkgs": self.main_window.cfs_pkgs.text(),
-            "cfs_tone": self.main_window.cfs_tone.text(),
-            "cfs_cbm": self.main_window.cfs_cbm.text(),
-            "cargo_dims": self.main_window.cargo_dims.text(),
-            "cfs_number": self.main_window.cfs_number.text(),
-            "cfs_discount_price": self.main_window.cfs_discount_price.text(),
-            "where_cfs_discount": self.main_window.where_cfs_discount.currentText(),
-            "cfs_discount": self.main_window.cfs_discount.isChecked(),
+            "warehouse_name":self.main_window.chose_cfs_name.currentText(),  # 仓库名称
+            "warehouse_in_out":self.main_window.cfs_inout_chose.currentText(),  # 仓库进出
+            "cfs_pallets": self.main_window.cfs_pallets.isChecked(),  # 是否有托盘
+            "cfs_night_in": self.main_window.cfs_night_in.isChecked(),  # 是否夜间进仓
+            "cfs_van": self.main_window.cfs_van.isChecked(),  # 是否有货车
+            "cfs_pkgs": self.main_window.cfs_pkgs.text(),  # 货物件数
+            "cfs_tone": self.main_window.cfs_tone.text(),  # 货物吨数
+            "cfs_cbm": self.main_window.cfs_cbm.text(),  # 货物体积
+            "cargo_dims": self.main_window.cargo_dims.text(),  # 货物尺寸
+            "cfs_number": self.main_window.cfs_number.text(),  # 货物编号
+            "cfs_discount_price": self.main_window.cfs_discount_price.text(),  # 货物折扣价格
+            "where_cfs_discount": self.main_window.where_cfs_discount.currentText(),  # 货物折扣位置
+            "cfs_discount": self.main_window.cfs_discount.isChecked(),  # 是否有货物折扣
         }
+        # 定义一个字典cargo_stander，用于存储货物标准信息
         cargo_stander = {
-            "cfs_name": self.main_window.cfs_name.text(),
-            "cfs_bl_charge" : self.main_window.cfs_bl_charge.text(),
-            "cfs_yg_pkgs_charge" : self.main_window.cfs_yg_pkgs_charge.text(),
-            "cfs_yg_weight_charge" : self.main_window.cfs_yg_weight_charge.text(),
-            "cfs_yg_cmb_charge" : self.main_window.cfs_yg_cmb_charge.text(),
-            "cfs_yg_mini_charge" : self.main_window.cfs_yg_mini_charge.text(),
-            "cfs_ys_pkgs_charge" : self.main_window.cfs_ys_pkgs_charge.text(),
-            "cfs_ys_weight_charge" : self.main_window.cfs_ys_weight_charge.text(),
-            "cfs_ys_cbm_charge" : self.main_window.cfs_ys_cbm_charge.text(),
-            "cfs_ys_mini_charge": self.main_window.cfs_ys_mini_charge.text(),
-            "cfs_van_charge" : self.main_window.cfs_van_charge.text(),
-            "cfs_ows_charge" : self.main_window.cfs_ows_charge.text(),
-            "cfs_Insurance_charge" : self.main_window.cfs_Insurance_charge.text(),
+            "cfs_name": self.main_window.cfs_name.text(),  # 货物名称
+            "cfs_bl_charge" : self.main_window.cfs_bl_charge.text(),  # 货物BL费用
+            "cfs_yg_pkgs_charge" : self.main_window.cfs_yg_pkgs_charge.text(),  # 货物运费（件数）
+            "cfs_yg_weight_charge" : self.main_window.cfs_yg_weight_charge.text(),  # 货物运费（重量）
+            "cfs_yg_cmb_charge" : self.main_window.cfs_yg_cmb_charge.text(),  # 货物运费（体积）
+            "cfs_yg_mini_charge" : self.main_window.cfs_yg_mini_charge.text(),  # 货物运费（最小费用）
+            "cfs_ys_pkgs_charge" : self.main_window.cfs_ys_pkgs_charge.text(),  # 货物运输费用（件数）
+            "cfs_ys_weight_charge" : self.main_window.cfs_ys_weight_charge.text(),  # 货物运输费用（重量）
+            "cfs_ys_cbm_charge" : self.main_window.cfs_ys_cbm_charge.text(),  # 货物运输费用（体积）
+            "cfs_ys_mini_charge": self.main_window.cfs_ys_mini_charge.text(),  # 货物运输费用（最小费用）
+            "cfs_van_charge" : self.main_window.cfs_van_charge.text(),  # 货物货车费用
+            "cfs_ows_charge" : self.main_window.cfs_ows_charge.text(),  # 货物其他费用
+            "cfs_Insurance_charge" : self.main_window.cfs_Insurance_charge.text(),  # 货物保险费用
         }
-        #加载网页查询
-        import utils.warehouse.web as web 
-        import utils.warehouse.cfs_wg as cfs_wg
-        if cargo_data['warehouse_name'] == '外港仓库':
-            cargo_data_web = web.web_grasp(False,cargo_data["cfs_number"])
-            web_data =cargo_data_web.get_data()
-        else:
-            cargo_data_web = web.web_grasp(True,cargo_data["cfs_number"])
-            web_data =cargo_data_web.get_data()
-        #网页参数返回如下[{'time': 10, 'car_model': True, 'cargo_id': 'HWMAA2400934N-MF', 'goods': [{'pkgs_type': False, 'pkgs': '20', 'weight': '200.000', 'volume': '0.661', 'dims': '36.0×34.0×27.0'}]}, {'time': 16, 'car_model': True, 'cargo_id': 'HWMAA2400934N-MF', 'goods': [{'pkgs_type': False, 'pkgs': '24', 'weight': '175.000', 'volume': '0.800', 'dims': '35.0×34.0×28.0'}]}]
-        if cargo_data_web == None:
-            QMessageBox.information(self.main_window, "提示", "没有找到此单号，请检查单号是否正确")
-            return
-        if all(v is not None and v != '' for v in cargo_stander.values()) == False:
-            QMessageBox.information(self.main_window, "提示", "请先设置仓库标准")
-            return
-        #在web_data中添加一些数据
-        discount = {
-            'where_cfs_discount': cargo_data["where_cfs_discount"],
-            'cfs_discount': cargo_data["cfs_discount"],
-            'cfs_discount_price': cargo_data["cfs_discount_price"]
-        }
+        # 创建一个WebDataThread线程，用于处理货物信息
+        thread = WebDataThread(cargo_data, cargo_stander)
+        # 当线程完成时，调用update_ui_with_result函数
+        thread.finished.connect(self.update_ui_with_result)
+        # 启动线程
+        thread.start()
 
-        if cargo_data["warehouse_name"] == "外港仓库":
-            cargo_calculate = cfs_wg.calculate_cfs_wg(web_data,cargo_stander,discount)
-            cargo_data_calculate = cargo_calculate.main()
-        #将数据显示在cfs_price_output 的QTextEdit中
-        self.main_window.cfs_price_output.setText(str(cargo_data_calculate))
         return
+        # 定义一个函数update_ui_with_result，用于更新UI界面
+    def update_ui_with_result(self, result):
+        # 将计算结果输出到UI界面的cfs_price_output文本框中
+        self.main_window.cfs_price_output.setText(str(result))

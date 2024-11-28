@@ -142,14 +142,6 @@ class work_inquiry:
         self.main_window.auto_identification.clicked.connect(
             self.auto_identification_ai
         )
-
-    # 自动生成航线菜单栏中的内容
-    def get_line(self):
-        self.main_window.hangxian.clear()
-        # 读取航线
-        line = list(port_conf.get_line())
-        self.main_window.hangxian.addItems(line)
-
     # 自动生成航线菜单栏中的内容
     def get_line(self):
         self.main_window.hangxian.clear()

@@ -1591,7 +1591,7 @@
        <x>0</x>
        <y>0</y>
        <width>461</width>
-       <height>211</height>
+       <height>221</height>
       </rect>
      </property>
      <property name="title">
@@ -1946,9 +1946,9 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>210</y>
+       <y>220</y>
        <width>461</width>
-       <height>261</height>
+       <height>251</height>
       </rect>
      </property>
      <property name="title">
@@ -2336,7 +2336,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_2"/>
+          <widget class="QComboBox" name="nom_countries"/>
          </item>
         </layout>
        </item>
@@ -2360,11 +2360,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_3"/>
+        <widget class="QComboBox" name="nom_port"/>
        </item>
       </layout>
      </widget>
-     <widget class="QListView" name="listView">
+     <widget class="QListView" name="nom_port_list">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -2418,11 +2418,11 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_3"/>
+        <widget class="QLineEdit" name="nom_agent_name"/>
        </item>
       </layout>
      </widget>
-     <widget class="QPlainTextEdit" name="plainTextEdit">
+     <widget class="QPlainTextEdit" name="nom_agent_email_list">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -2444,7 +2444,7 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_49">
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="nom_agent_add">
         <property name="text">
          <string>添加</string>
         </property>
@@ -2464,7 +2464,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="nom_agent_delete">
         <property name="text">
          <string>删除</string>
         </property>
@@ -2484,7 +2484,7 @@
      <property name="title">
       <string>文件列表选择以及主题设置</string>
      </property>
-     <widget class="QListView" name="listView_2">
+     <widget class="QListView" name="nom_file_list">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -2494,7 +2494,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="nom_file_list_update">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -2525,7 +2525,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_4">
+        <widget class="QLineEdit" name="nom_email_subject">
          <property name="text">
           <string>The list of nomination goods//</string>
          </property>
@@ -2545,7 +2545,7 @@
       <property name="title">
        <string>邮件地址</string>
       </property>
-      <widget class="QListView" name="listView_3">
+      <widget class="QListView" name="nom_email_list">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -2556,7 +2556,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="pushButton_7">
+     <widget class="QPushButton" name="nom_email_send">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -2569,7 +2569,7 @@
        <string>发送</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_8">
+     <widget class="QPushButton" name="nom_clean_screen">
       <property name="geometry">
        <rect>
         <x>214</x>

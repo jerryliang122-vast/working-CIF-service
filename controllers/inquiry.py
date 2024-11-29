@@ -130,6 +130,7 @@ class work_inquiry:
         self.get_line()
         self.get_country()
         self.get_port()
+        self.get_proxy()
         self.main_window.hangxian.currentIndexChanged.connect(self.get_country)
         self.main_window.guojia.currentIndexChanged.connect(self.get_port)
         self.main_window.gangkou.currentIndexChanged.connect(self.get_proxy)

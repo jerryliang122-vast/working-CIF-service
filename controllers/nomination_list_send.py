@@ -13,7 +13,7 @@ from utils import nomination_list_email_sql
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
-from utils import inquiry_smtp
+from utils import nomination_list_smtp
 from utils import port
 from Ui.Ui_untitled import Ui_Form
 
@@ -104,12 +104,19 @@ def delete_agent_by_port_and_name(port, name):
         return False
 
 
-class work_inquiry:
+class nomination_list_send:
     def __init__(self, main_window):
         self.main_window = main_window
         self.get_line()
         self.get_country()
         self.get_port()
+        self.get_proxy()
+        self.main_window.nom_line.currentIndexChanged.connect(self.get_country)
+        self.main_window.nom_countries.currentIndexChanged.connect(self.get_port)
+        self.main_window.nom_port.currentIndexChanged.connect(self.get_proxy)
+        self.main_window.nom_agent_add.clicked.connect(self.write_proxy)
+        self.main_window.nom_agent_delete.clicked.connect(self.delete_agent)
+        
 
 
     # 自动生成航线菜单栏中的内容
@@ -137,3 +144,103 @@ class work_inquiry:
             self.main_window.nom_port.clear()
             self.main_window.nom_port.addItems(port)
             return port
+        
+    # 使用listview显示代理信息
+    def get_proxy(self):
+        # 读取此港口下的代理列表
+        proxy_infos = read_port_name(self.main_window.nom_port.currentText())
+
+        model = QStandardItemModel()
+        for info in proxy_infos:
+            item = QStandardItem(info)
+            item.setCheckable(True)
+            model.appendRow(item)
+        self.main_window.nom_port_list.setModel(model)
+        self.main_window.nom_port_list.selectionModel().currentRowChanged.connect(
+            self.update_addresslist
+        )
+
+        # 代理信息写入数据库
+    def write_proxy(self):
+        # 读取选择的航线信息
+        ship_route = self.main_window.nom_line.currentText()
+        # 读取选择的国家信息
+        country = self.main_window.nom_countries.currentText()
+        # 读取选择的港口信息
+        port = self.main_window.nom_port.currentText()
+        # 读取代理名字
+        proxy_name = self.main_window.agent_name.text()
+        # 读取代理邮箱
+        proxy_email = self.main_window.agent_email_list.toPlainText()
+        # 处理代理邮箱数据。将换行符替换成逗号
+        proxy_email = proxy_email.replace("\n", ",")
+        if data := write_port_name(port, proxy_name, proxy_email):
+            # 弹出界面提示
+            QMessageBox.about(self.main_window, "提示", "写入成功")
+        else:
+            QMessageBox.about(self.main_window, "提示", "写入失败")
+
+    # 显示代理邮箱
+    def update_addresslist(self, current, previous):
+        # 获取当前选中项的名称
+        selected_item = self.main_window.nom_email_list.model().itemFromIndex(current)
+        selected_name = selected_item.text()
+        # 获取港口
+        port = self.main_window.nom_port.currentText()
+        # 获取代理邮箱
+        email = read_email(selected_name, port)
+        # email做成列表
+        email_list = email.split(",")
+        # 创建表格模型并填充数据
+        model = QStandardItemModel()
+        header_labels = ["邮箱"]
+        model.setHorizontalHeaderLabels(header_labels)
+        for item in email_list:
+            item_email = QStandardItem(item.strip())  # 使用strip()方法去掉元素中的空格
+            model.appendRow([item_email])
+        self.main_window.nom_email_list.setModel(model)
+        header = self.main_window.nom_email_list.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
+    # 删除数据库中存储的代理信息
+    def delete_agent(self):
+        try:
+            # 从daili_list中获取选中代理信息
+            selected_indexes = self.main_window.nom_agent_email_list.selectedIndexes()
+            # 获取港口
+            port = self.main_window.nom_port.currentText()
+            # 将选中的代理信息返回到delete_agent_by_port_and_name
+            for index in selected_indexes:
+                delete_info = delete_agent_by_port_and_name(port, index.data())
+                if delete_info:
+                    # 弹出提示信息
+                    QMessageBox.about(self.main_window, "提示", "删除成功")
+                else:
+                    # 弹出提示信息
+                    QMessageBox.about(self.main_window, "提示", "删除失败")
+        except Exception as e:
+            # 弹出提示信息
+            QMessageBox.about(self.main_window, "提示", "出现崩溃")
+            logger.error(e)
+    
+    # 发送邮件
+    def send_email(self):
+        try:
+            # 获取询价编号
+            subject = self.main_window.nom_email_subject.text()
+            # 从listview中获取选中代理信息
+            selected_indexes = self.main_window.nom_agent_email_list.selectedIndexes()
+            # 获取港口
+            port = self.main_window.nom_port.currentText()
+            for index in selected_indexes:
+                proxy_infos = read_email(index.data(), port)
+                # 发送邮件
+                report = nomination_list_smtp.send_mail(proxy_infos, subject)
+            # 判断reports列表中是否含有false
+            if report == False:
+                QMessageBox.about(self.main_window, "提示", "发送失败")
+            else:
+                QMessageBox.about(self.main_window, "提示", "发送成功")
+        except Exception as e:
+            QMessageBox.about(self.main_window, "提示", "出现崩溃")
+            logger.error(e)

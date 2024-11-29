@@ -14,6 +14,7 @@ import sys
 from controllers import work_inquiry
 from controllers import warehouse_price
 from controllers import BillCalculate
+from controllers import nomination_list_send
 import logging
 
 logpath = os.path.join(os.getcwd(), "log.log")
@@ -52,9 +53,14 @@ class wm(QMainWindow, Ui_Form):
                 color: #333;
             }
         """)
+        # 创建一个处理询价的实例
         self.combo_box_handler = work_inquiry(self)
+        # 创建一个处理仓库费用计算的实例
         self.combo_box_handler1 = warehouse_price(self)
+        # 创建一个处理账单统计的实例
         self.combo_box_handler2 = BillCalculate(self)
+        # 创建一个处理nomination列表发送的实例
+        self.combo_box_handler3 = nomination_list_send(self)
 
 
 if __name__ == "__main__":

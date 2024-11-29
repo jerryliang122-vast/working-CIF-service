@@ -30,8 +30,9 @@ def mail_template():
 
 
 # 邮件发送
-def send_mail(name, subject, data):
+def send_mail(name, subject):
     try:
+        data = mail_template()
         # 使用split函数将邮件作为列表
         email = name.split(",")
         # 从配置文件中获取邮箱账号和密码

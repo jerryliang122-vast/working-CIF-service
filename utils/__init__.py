@@ -9,3 +9,6 @@ from .email_api import email_sql
 
 #获取发送指定货清单数据库
 from .nomination_list_email_send import email_sql as nomination_list_email_sql
+
+#nomination list 发送邮件
+from .nomination_list_email_send import smtp as nomination_list_smtp

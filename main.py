@@ -12,7 +12,9 @@ from PyQt6.QtWidgets import QApplication, QMainWindow
 from Ui.Ui_untitled import Ui_Form
 import sys
 from controllers import work_inquiry
+from controllers import warehouse_price
 from controllers import BillCalculate
+from controllers import nomination_list_send
 import logging
 
 logpath = os.path.join(os.getcwd(), "log.log")
@@ -33,8 +35,32 @@ class wm(QMainWindow, Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        # 在这里设置样式
+        self.setStyleSheet("""
+            QMainWindow {
+                background-color: #f0f0f0;
+            }
+            QPlainTextEdit {
+                border: 1px solid black; /* 设置QPlainTextEdit边框为黑色 */
+            }
+            QTextEdit {
+                border: 1px solid black;
+            }
+            QLineEdit{
+                border: 1px solid black;
+            }               
+            QLabel {
+                color: #333;
+            }
+        """)
+        # 创建一个处理询价的实例
         self.combo_box_handler = work_inquiry(self)
+        # 创建一个处理仓库费用计算的实例
+        #self.combo_box_handler1 = warehouse_price(self)
+        # 创建一个处理账单统计的实例
         self.combo_box_handler2 = BillCalculate(self)
+        # 创建一个处理nomination列表发送的实例
+        self.combo_box_handler3 = nomination_list_send(self)
 
 
 if __name__ == "__main__":

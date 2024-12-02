@@ -130,6 +130,7 @@ class work_inquiry:
         self.get_line()
         self.get_country()
         self.get_port()
+        self.get_proxy()
         self.main_window.hangxian.currentIndexChanged.connect(self.get_country)
         self.main_window.guojia.currentIndexChanged.connect(self.get_port)
         self.main_window.gangkou.currentIndexChanged.connect(self.get_proxy)
@@ -142,14 +143,6 @@ class work_inquiry:
         self.main_window.auto_identification.clicked.connect(
             self.auto_identification_ai
         )
-
-    # 自动生成航线菜单栏中的内容
-    def get_line(self):
-        self.main_window.hangxian.clear()
-        # 读取航线
-        line = list(port_conf.get_line())
-        self.main_window.hangxian.addItems(line)
-
     # 自动生成航线菜单栏中的内容
     def get_line(self):
         self.main_window.hangxian.clear()
@@ -184,7 +177,7 @@ class work_inquiry:
         model = QStandardItemModel()
         for info in proxy_infos:
             item = QStandardItem(info)
-            item.setCheckable(True)
+            item.setCheckable(False)
             model.appendRow(item)
         self.main_window.daili_list.setModel(model)
         self.main_window.daili_list.selectionModel().currentRowChanged.connect(

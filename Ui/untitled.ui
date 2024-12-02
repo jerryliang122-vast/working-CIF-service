@@ -1583,7 +1583,7 @@
    </widget>
    <widget class="QWidget" name="tab_4">
     <attribute name="title">
-     <string>指定货</string>
+     <string>仓库费用计算</string>
     </attribute>
     <widget class="QGroupBox" name="groupBox_9">
      <property name="geometry">
@@ -1591,7 +1591,7 @@
        <x>0</x>
        <y>0</y>
        <width>461</width>
-       <height>211</height>
+       <height>221</height>
       </rect>
      </property>
      <property name="title">
@@ -1946,9 +1946,9 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>210</y>
+       <y>220</y>
        <width>461</width>
-       <height>261</height>
+       <height>251</height>
       </rect>
      </property>
      <property name="title">
@@ -1983,7 +1983,7 @@
         <x>20</x>
         <y>10</y>
         <width>141</width>
-        <height>141</height>
+        <height>131</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -2207,9 +2207,9 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>150</y>
+        <y>140</y>
         <width>141</width>
-        <height>111</height>
+        <height>120</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -2270,6 +2270,317 @@
         </layout>
        </item>
       </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_6">
+    <attribute name="title">
+     <string>发送nomination list</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_20">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>271</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>选择代理</string>
+     </property>
+     <widget class="QWidget" name="horizontalLayoutWidget_21">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>241</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_47">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_44">
+         <item>
+          <widget class="QLabel" name="label_43">
+           <property name="text">
+            <string>航线</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="nom_line"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_18">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_45">
+         <item>
+          <widget class="QLabel" name="label_44">
+           <property name="text">
+            <string>国家</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="nom_countries"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_20">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>50</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_46">
+       <item>
+        <widget class="QLabel" name="label_45">
+         <property name="text">
+          <string>港口</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="nom_port"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QListView" name="nom_port_list">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>80</y>
+        <width>261</width>
+        <height>111</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_19">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>0</y>
+       <width>271</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>添加代理</string>
+     </property>
+     <widget class="QWidget" name="horizontalLayoutWidget_23">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>251</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_48">
+       <item>
+        <widget class="QLabel" name="label_46">
+         <property name="text">
+          <string>代理名称</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_19">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="nom_agent_name"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPlainTextEdit" name="nom_agent_email_list">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>231</width>
+        <height>101</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_24">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>160</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_49">
+      <item>
+       <widget class="QPushButton" name="nom_agent_add">
+        <property name="text">
+         <string>添加</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_20">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="nom_agent_delete">
+        <property name="text">
+         <string>删除</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_21">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>0</y>
+       <width>351</width>
+       <height>471</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>文件列表选择以及主题设置</string>
+     </property>
+     <widget class="QPushButton" name="nom_file_list_update">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>170</y>
+        <width>251</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>刷新</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_25">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>200</y>
+        <width>281</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_50">
+       <item>
+        <widget class="QLabel" name="label_47">
+         <property name="text">
+          <string>邮件主题</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="nom_email_subject">
+         <property name="text">
+          <string>The list of nomination goods//</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_22">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>230</y>
+        <width>301</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>邮件地址</string>
+      </property>
+      <widget class="QTableView" name="nom_email_list">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>281</width>
+         <height>111</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="nom_email_send">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>390</y>
+        <width>101</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>发送</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="nom_clean_screen">
+      <property name="geometry">
+       <rect>
+        <x>214</x>
+        <y>390</y>
+        <width>91</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>清屏</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="nom_file_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>331</width>
+        <height>151</height>
+       </rect>
+      </property>
      </widget>
     </widget>
    </widget>

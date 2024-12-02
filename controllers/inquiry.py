@@ -177,7 +177,7 @@ class work_inquiry:
         model = QStandardItemModel()
         for info in proxy_infos:
             item = QStandardItem(info)
-            item.setCheckable(True)
+            item.setCheckable(False)
             model.appendRow(item)
         self.main_window.daili_list.setModel(model)
         self.main_window.daili_list.selectionModel().currentRowChanged.connect(

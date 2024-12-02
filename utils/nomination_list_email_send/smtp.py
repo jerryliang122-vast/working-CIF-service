@@ -5,6 +5,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 from email.mime.base import MIMEBase
 from email import encoders
+from email.header import Header
+import mimetypes
 import os
 import json
 import logging
@@ -50,11 +52,18 @@ def send_mail(name, subject,file):
             img.add_header("Content-ID", "<image1>")
             msg.attach(img)
         # 添加附件
+        mime_type, _ = mimetypes.guess_type(file)
+        if mime_type is None:
+            logger.warning(f"无法识别文件 {file} 的MIME类型，将其作为通用二进制文件处理")
+            attachment = MIMEBase('application', 'octet-stream')
+        else:
+            main_type, sub_type = mime_type.split("/")
+            attachment = MIMEBase(main_type, sub_type)
         with open(file, "rb") as f:
-            attachment = MIMEBase("application", "octet-stream")
             attachment.set_payload(f.read())
             encoders.encode_base64(attachment)
-            attachment.add_header("Content-Disposition", f"attachment; filename={os.path.basename(file)}")
+            file_name = os.path.basename(file)
+            attachment.add_header("Content-Disposition", f"attachment; filename={Header(file_name, 'utf-8').encode()}")
             msg.attach(attachment)
         # 邮件发送
         msg["Subject"] = subject

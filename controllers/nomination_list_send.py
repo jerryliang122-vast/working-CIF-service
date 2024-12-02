@@ -117,6 +117,7 @@ class nomination_list_send:
         self.main_window.nom_agent_add.clicked.connect(self.write_proxy)
         self.main_window.nom_agent_delete.clicked.connect(self.delete_agent)
         self.main_window.nom_file_list_update.clicked.connect(self.nomination_list_file)
+        self.main_window.nom_email_send.clicked.connect(self.send_email)
         
 
 
@@ -240,13 +241,13 @@ class nomination_list_send:
             # 获取邮件主题
             subject = self.main_window.nom_email_subject.text()
             # 从listview中获取选中代理信息
-            selected_indexes = self.main_window.nom_agent_email_list.selectedIndexes()
+            selected_indexes = self.main_window.nom_port_list.selectedIndexes()
             # 获取港口
             port = self.main_window.nom_port.currentText()
             # 获取从nom_file_list 中的文件名称
             file_name = self.main_window.nom_file_list.selectedIndexes()
             #拼接文件路径
-            file_path = os.path.join(os.getcwd(), 'nomination_list', file_name[0].data())
+            file_path = os.path.join(os.getcwd(), 'conf','nomination_list', file_name[0].data())
             proxy_infos = read_email(selected_indexes[0].data(), port)
             # 发送邮件
             report = nomination_list_smtp.send_mail(proxy_infos, subject, file_path)

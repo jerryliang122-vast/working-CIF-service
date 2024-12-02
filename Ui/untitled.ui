@@ -62,7 +62,7 @@
     <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="usesScrollButtons">
     <bool>true</bool>
@@ -1225,7 +1225,7 @@
         <rect>
          <x>10</x>
          <y>80</y>
-         <width>239</width>
+         <width>211</width>
          <height>41</height>
         </rect>
        </property>
@@ -1628,7 +1628,7 @@
          <x>0</x>
          <y>20</y>
          <width>160</width>
-         <height>120</height>
+         <height>111</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -1709,7 +1709,7 @@
          <x>0</x>
          <y>20</y>
          <width>160</width>
-         <height>120</height>
+         <height>111</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1983,7 +1983,7 @@
         <x>20</x>
         <y>10</y>
         <width>141</width>
-        <height>139</height>
+        <height>131</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -2484,16 +2484,6 @@
      <property name="title">
       <string>文件列表选择以及主题设置</string>
      </property>
-     <widget class="QListView" name="nom_file_list">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>331</width>
-        <height>141</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QPushButton" name="nom_file_list_update">
       <property name="geometry">
        <rect>
@@ -2545,7 +2535,7 @@
       <property name="title">
        <string>邮件地址</string>
       </property>
-      <widget class="QListView" name="nom_email_list">
+      <widget class="QTableView" name="nom_email_list">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -2580,6 +2570,16 @@
       </property>
       <property name="text">
        <string>清屏</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="nom_file_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>331</width>
+        <height>151</height>
+       </rect>
       </property>
      </widget>
     </widget>

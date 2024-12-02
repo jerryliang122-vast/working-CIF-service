@@ -116,6 +116,7 @@ class nomination_list_send:
         self.main_window.nom_port.currentIndexChanged.connect(self.get_proxy)
         self.main_window.nom_agent_add.clicked.connect(self.write_proxy)
         self.main_window.nom_agent_delete.clicked.connect(self.delete_agent)
+        self.main_window.nom_file_list_update.clicked.connect(self.nomination_list_file)
         
 
 
@@ -145,6 +146,20 @@ class nomination_list_send:
             self.main_window.nom_port.addItems(port)
             return port
         
+    # 获取文件列表 并显示在nom_file_list
+    def nomination_list_file(self):
+        # 获取文件列表
+        file_list = os.listdir(os.path.join('conf','nomination_list'))
+        # 创建表格模型并填充数据
+        model = QStandardItemModel()
+        for file in file_list:
+            item = QStandardItem(file)
+            item.setCheckable(False)
+            model.appendRow(item)
+        self.main_window.nom_file_list.setModel(model)
+        header = self.main_window.nom_file_list.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
     # 使用listview显示代理信息
     def get_proxy(self):
         # 读取此港口下的代理列表
@@ -153,7 +168,7 @@ class nomination_list_send:
         model = QStandardItemModel()
         for info in proxy_infos:
             item = QStandardItem(info)
-            item.setCheckable(True)
+            item.setCheckable(False)
             model.appendRow(item)
         self.main_window.nom_port_list.setModel(model)
         self.main_window.nom_port_list.selectionModel().currentRowChanged.connect(
@@ -162,16 +177,12 @@ class nomination_list_send:
 
         # 代理信息写入数据库
     def write_proxy(self):
-        # 读取选择的航线信息
-        ship_route = self.main_window.nom_line.currentText()
-        # 读取选择的国家信息
-        country = self.main_window.nom_countries.currentText()
         # 读取选择的港口信息
         port = self.main_window.nom_port.currentText()
         # 读取代理名字
-        proxy_name = self.main_window.agent_name.text()
+        proxy_name = self.main_window.nom_agent_name.text()
         # 读取代理邮箱
-        proxy_email = self.main_window.agent_email_list.toPlainText()
+        proxy_email = self.main_window.nom_agent_email_list.toPlainText()
         # 处理代理邮箱数据。将换行符替换成逗号
         proxy_email = proxy_email.replace("\n", ",")
         if data := write_port_name(port, proxy_name, proxy_email):
@@ -183,7 +194,7 @@ class nomination_list_send:
     # 显示代理邮箱
     def update_addresslist(self, current, previous):
         # 获取当前选中项的名称
-        selected_item = self.main_window.nom_email_list.model().itemFromIndex(current)
+        selected_item = self.main_window.nom_port_list.model().itemFromIndex(current)
         selected_name = selected_item.text()
         # 获取港口
         port = self.main_window.nom_port.currentText()
@@ -206,7 +217,7 @@ class nomination_list_send:
     def delete_agent(self):
         try:
             # 从daili_list中获取选中代理信息
-            selected_indexes = self.main_window.nom_agent_email_list.selectedIndexes()
+            selected_indexes = self.main_window.nom_port_list.selectedIndexes()
             # 获取港口
             port = self.main_window.nom_port.currentText()
             # 将选中的代理信息返回到delete_agent_by_port_and_name
@@ -226,16 +237,19 @@ class nomination_list_send:
     # 发送邮件
     def send_email(self):
         try:
-            # 获取询价编号
+            # 获取邮件主题
             subject = self.main_window.nom_email_subject.text()
             # 从listview中获取选中代理信息
             selected_indexes = self.main_window.nom_agent_email_list.selectedIndexes()
             # 获取港口
             port = self.main_window.nom_port.currentText()
-            for index in selected_indexes:
-                proxy_infos = read_email(index.data(), port)
-                # 发送邮件
-                report = nomination_list_smtp.send_mail(proxy_infos, subject)
+            # 获取从nom_file_list 中的文件名称
+            file_name = self.main_window.nom_file_list.selectedIndexes()
+            #拼接文件路径
+            file_path = os.path.join(os.getcwd(), 'nomination_list', file_name[0].data())
+            proxy_infos = read_email(selected_indexes[0].data(), port)
+            # 发送邮件
+            report = nomination_list_smtp.send_mail(proxy_infos, subject, file_path)
             # 判断reports列表中是否含有false
             if report == False:
                 QMessageBox.about(self.main_window, "提示", "发送失败")

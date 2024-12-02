@@ -113,3 +113,6 @@ def main():
     # 检查conf文件夹中的ai.yaml是否存在如果不存在生成一个
     if not os.path.exists("conf/ai.yaml"):
         create_ai_yaml()
+    #检查运行目录下有没有nomination_list文件夹。如果不存在生成一个文件夹
+    if not os.path.exists("conf/nomination_list"):
+        os.makedirs("conf/nomination_list")

@@ -57,7 +57,7 @@ class wm(QMainWindow, Ui_Form):
         # 创建一个处理询价的实例
         self.combo_box_handler = work_inquiry(self)
         # 创建一个处理仓库费用计算的实例
-        #self.combo_box_handler1 = warehouse_price(self)
+        self.combo_box_handler1 = warehouse_price(self)
         # 创建一个处理账单统计的实例
         self.combo_box_handler2 = BillCalculate(self)
         # 创建一个处理nomination列表发送的实例

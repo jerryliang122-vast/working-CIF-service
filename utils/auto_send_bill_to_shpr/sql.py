@@ -7,8 +7,8 @@ Base = declarative_base()
 
 
 class email_list(Base):
-    _tablename_ = "email_list"
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    __tablename__ = "email_list"
+    id = Column(Integer, primary_key=True)
     subject = Column(TEXT)
     sender = Column(TEXT)
     receiver = Column(TEXT)

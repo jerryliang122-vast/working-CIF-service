@@ -8,8 +8,8 @@ if not os.path.exists("conf"):
     # 没有的话新建一个conf文件夹，并执行
     os.mkdir("conf")
 config.config.main()
-from PyQt6.QtWidgets import QApplication, QMainWindow
-from Ui.Ui_untitled import Ui_Form
+from PySide6.QtWidgets import QApplication, QMainWindow
+from Ui.untitled_ui import Ui_Form
 import sys
 from controllers import work_inquiry
 from controllers import warehouse_price
@@ -37,7 +37,8 @@ class wm(QMainWindow, Ui_Form):
         super().__init__()
         self.setupUi(self)
         # 在这里设置样式
-        self.setStyleSheet("""
+        self.setStyleSheet(
+            """
             QMainWindow {
                 background-color: #f0f0f0;
             }
@@ -53,7 +54,8 @@ class wm(QMainWindow, Ui_Form):
             QLabel {
                 color: #333;
             }
-        """)
+        """
+        )
         # 创建一个处理询价的实例
         self.combo_box_handler = work_inquiry(self)
         # 创建一个处理仓库费用计算的实例

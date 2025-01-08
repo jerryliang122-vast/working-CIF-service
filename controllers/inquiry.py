@@ -1,8 +1,8 @@
 import sys
 import os
-from PyQt6.QtGui import QStandardItemModel, QStandardItem
-from PyQt6.QtCore import QThread, pyqtSignal
-from PyQt6.QtWidgets import (
+from PySide6.QtGui import QStandardItemModel, QStandardItem
+from PySide6.QtCore import QThread, Slot
+from PySide6.QtWidgets import (
     QListView,
     QAbstractItemView,
     QMainWindow,
@@ -15,7 +15,6 @@ from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
 from utils import inquiry_smtp
 from utils import port
-from Ui.Ui_untitled import Ui_Form
 
 logger = logging.getLogger("my_logger")
 
@@ -104,8 +103,8 @@ def delete_agent_by_port_and_name(port, name):
 
 
 class AIRecognitionThread(QThread):
-    auto_identification_ai_finished_signal = pyqtSignal(str)  # 用于传递识别结果的信号
-    auto_identification_ai_error_signal = pyqtSignal(str)
+    auto_identification_ai_finished_signal = Slot(str)  # 用于传递识别结果的信号
+    auto_identification_ai_error_signal = Slot(str)
 
     def __init__(self, data):
         super().__init__()
@@ -143,6 +142,7 @@ class work_inquiry:
         self.main_window.auto_identification.clicked.connect(
             self.auto_identification_ai
         )
+
     # 自动生成航线菜单栏中的内容
     def get_line(self):
         self.main_window.hangxian.clear()

@@ -1,7 +1,5 @@
 greenlet==3.0.3
-PyQt6==6.7.0
-PyQt6-Qt6==6.7.0
-PyQt6-sip==13.6.0
+pyside6==6.8.1.1
 PyYAML==6.0.1
 SQLAlchemy==2.0.30
 typing_extensions==4.11.0

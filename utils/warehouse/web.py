@@ -35,7 +35,7 @@ headers = {
 
 # 构建凤威地址
 def fengwei_url(no):
-    url = f"http://h5qa.izuiyou.com/Public/InWhsRecord.aspx?no={no}"
+    url = f"http://101.132.78.239:8099/Public/InWhsRecord.aspx?no={no}"
     return url
 
 

@@ -19,28 +19,48 @@ def price_to_ten(price: str):
     new_price *= Decimal("10")
     return new_price
 
-#将货物数据分类为托盘，散货
-def classify_goods(goods):
-    #托盘
-    pallets =[]
-    #散货
-    loss_goods = []
-    for each in goods:
-        if each['pkgs_type'] == True:
-            #托盘
-            pallets.append(each)
-        else:
-            #散货
-            loss_goods.append(each)
-    return pallets, loss_goods
-
-def main(data, stander):
-    #将总数据中每辆车数据提取出来
-    for each_cargo in data:
-        #将货物数据分类为托盘，散货
-        pallets, loss_goods = classify_goods(each_cargo['goods'])
+#货物数据整合
+class cargo_merge():
+    def __init__(self,data):
+        """
+        data: 货物数据输入goods 这段数据即可
+        """
+        self.data = data
+    
+    def overlarge_cargo(self):
+        """
+        超大货物
+        """
+    
+    def calculate(self):
+        """
+        计算货物数据
+        """
     
 
+    def main(self):
+        """
+        主函数
+        """
+        goods = self.data['goods']
+        
+
+
+
+
+
+class cargo_handle():
+    def __init__(self):
+        pass
+    
+
+    #处理货物数据
+
+    #处理单票数据
+    def handle(self, data, stander):
+
+
+        
 
 if __name__ == '__main__':
     data = [

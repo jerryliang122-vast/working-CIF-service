@@ -1,8 +1,8 @@
 import sys
 import os
-from PyQt6.QtGui import QStandardItemModel, QStandardItem
-from PyQt6.QtCore import QThread, pyqtSignal
-from PyQt6.QtWidgets import (
+from PySide6.QtGui import QStandardItemModel, QStandardItem
+from PySide6.QtCore import QThread, Slot
+from PySide6.QtWidgets import (
     QListView,
     QAbstractItemView,
     QMainWindow,
@@ -15,7 +15,6 @@ from sqlalchemy import create_engine, Column, Integer, String, TEXT
 import logging
 from utils import nomination_list_smtp
 from utils import port
-from Ui.Ui_untitled import Ui_Form
 
 logger = logging.getLogger("my_logger")
 
@@ -118,8 +117,6 @@ class nomination_list_send:
         self.main_window.nom_agent_delete.clicked.connect(self.delete_agent)
         self.main_window.nom_file_list_update.clicked.connect(self.nomination_list_file)
         self.main_window.nom_email_send.clicked.connect(self.send_email)
-        
-
 
     # 自动生成航线菜单栏中的内容
     def get_line(self):
@@ -146,11 +143,11 @@ class nomination_list_send:
             self.main_window.nom_port.clear()
             self.main_window.nom_port.addItems(port)
             return port
-        
+
     # 获取文件列表 并显示在nom_file_list
     def nomination_list_file(self):
         # 获取文件列表
-        file_list = os.listdir(os.path.join('conf','nomination_list'))
+        file_list = os.listdir(os.path.join("conf", "nomination_list"))
         # 创建表格模型并填充数据
         model = QStandardItemModel()
         for file in file_list:
@@ -177,6 +174,7 @@ class nomination_list_send:
         )
 
         # 代理信息写入数据库
+
     def write_proxy(self):
         # 读取选择的港口信息
         port = self.main_window.nom_port.currentText()
@@ -234,7 +232,7 @@ class nomination_list_send:
             # 弹出提示信息
             QMessageBox.about(self.main_window, "提示", "出现崩溃")
             logger.error(e)
-    
+
     # 发送邮件
     def send_email(self):
         try:
@@ -246,8 +244,10 @@ class nomination_list_send:
             port = self.main_window.nom_port.currentText()
             # 获取从nom_file_list 中的文件名称
             file_name = self.main_window.nom_file_list.selectedIndexes()
-            #拼接文件路径
-            file_path = os.path.join(os.getcwd(), 'conf','nomination_list', file_name[0].data())
+            # 拼接文件路径
+            file_path = os.path.join(
+                os.getcwd(), "conf", "nomination_list", file_name[0].data()
+            )
             proxy_infos = read_email(selected_indexes[0].data(), port)
             # 发送邮件
             report = nomination_list_smtp.send_mail(proxy_infos, subject, file_path)

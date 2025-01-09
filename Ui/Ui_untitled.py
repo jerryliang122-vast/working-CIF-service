@@ -13,7 +13,9 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(900, 504)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
@@ -94,7 +96,12 @@ class Ui_Form(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout.addItem(spacerItem)
         self.PKGS = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget)
         font = QtGui.QFont()
@@ -129,7 +136,12 @@ class Ui_Form(object):
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_2.addItem(spacerItem1)
         self.KGS = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_2)
         self.KGS.setEnabled(True)
@@ -165,7 +177,12 @@ class Ui_Form(object):
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_3.addWidget(self.label_4)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_3.addItem(spacerItem2)
         self.CBM = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_3)
         font = QtGui.QFont()
@@ -201,7 +218,12 @@ class Ui_Form(object):
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.horizontalLayout_4.addWidget(self.label_5)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_4.addItem(spacerItem3)
         self.size = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_4)
         self.size.setEnabled(True)
@@ -237,7 +259,12 @@ class Ui_Form(object):
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.horizontalLayout_5.addWidget(self.label_6)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_5.addItem(spacerItem4)
         self.HS = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_5)
         font = QtGui.QFont()
@@ -272,7 +299,12 @@ class Ui_Form(object):
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.horizontalLayout_6.addWidget(self.label_7)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_6.addItem(spacerItem5)
         self.cargoname = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_6)
         font = QtGui.QFont()
@@ -349,8 +381,12 @@ class Ui_Form(object):
         font.setKerning(True)
         font.setStyleStrategy(QtGui.QFont.StyleStrategy.PreferAntialias)
         self.daili_list.setFont(font)
-        self.daili_list.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection)
-        self.daili_list.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
+        self.daili_list.setSelectionMode(
+            QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection
+        )
+        self.daili_list.setSelectionBehavior(
+            QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows
+        )
         self.daili_list.setObjectName("daili_list")
         self.horizontalLayoutWidget_7 = QtWidgets.QWidget(parent=self.groupBox_2)
         self.horizontalLayoutWidget_7.setGeometry(QtCore.QRect(50, 50, 131, 31))
@@ -375,7 +411,12 @@ class Ui_Form(object):
         self.label_9.setFont(font)
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_7.addWidget(self.label_9)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem6 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_7.addItem(spacerItem6)
         self.gangkou = QtWidgets.QComboBox(parent=self.horizontalLayoutWidget_7)
         font = QtGui.QFont()
@@ -410,7 +451,12 @@ class Ui_Form(object):
         self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout_8.addWidget(self.label_8)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem7 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_8.addItem(spacerItem7)
         self.hangxian = QtWidgets.QComboBox(parent=self.horizontalLayoutWidget_8)
         font = QtGui.QFont()
@@ -445,7 +491,12 @@ class Ui_Form(object):
         self.label_10.setFont(font)
         self.label_10.setObjectName("label_10")
         self.horizontalLayout_9.addWidget(self.label_10)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem8 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_9.addItem(spacerItem8)
         self.guojia = QtWidgets.QComboBox(parent=self.horizontalLayoutWidget_9)
         font = QtGui.QFont()
@@ -480,7 +531,9 @@ class Ui_Form(object):
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_10)
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
-        self.add_agent_email = QtWidgets.QPushButton(parent=self.horizontalLayoutWidget_10)
+        self.add_agent_email = QtWidgets.QPushButton(
+            parent=self.horizontalLayoutWidget_10
+        )
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setBold(False)
@@ -490,7 +543,12 @@ class Ui_Form(object):
         self.add_agent_email.setFont(font)
         self.add_agent_email.setObjectName("add_agent_email")
         self.horizontalLayout_10.addWidget(self.add_agent_email)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem9 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_10.addItem(spacerItem9)
         self.delete_agent = QtWidgets.QPushButton(parent=self.horizontalLayoutWidget_10)
         font = QtGui.QFont()
@@ -535,7 +593,12 @@ class Ui_Form(object):
         self.label_11.setFont(font)
         self.label_11.setObjectName("label_11")
         self.horizontalLayout_11.addWidget(self.label_11)
-        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem10 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_11.addItem(spacerItem10)
         self.agent_name = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_11)
         font = QtGui.QFont()
@@ -600,7 +663,9 @@ class Ui_Form(object):
         self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_15)
         self.horizontalLayout_18.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_18.setObjectName("horizontalLayout_18")
-        self.auto_identification = QtWidgets.QPushButton(parent=self.horizontalLayoutWidget_15)
+        self.auto_identification = QtWidgets.QPushButton(
+            parent=self.horizontalLayoutWidget_15
+        )
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setBold(False)
@@ -694,7 +759,12 @@ class Ui_Form(object):
         self.label_12.setFont(font)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_12.addWidget(self.label_12)
-        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem11 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_12.addItem(spacerItem11)
         self.inquiry_number = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_12)
         font = QtGui.QFont()
@@ -798,7 +868,9 @@ class Ui_Form(object):
         self.label_21 = QtWidgets.QLabel(parent=self.verticalLayoutWidget)
         self.label_21.setObjectName("label_21")
         self.horizontalLayout_21.addWidget(self.label_21)
-        self.cfs_yg_weight_charge = QtWidgets.QLineEdit(parent=self.verticalLayoutWidget)
+        self.cfs_yg_weight_charge = QtWidgets.QLineEdit(
+            parent=self.verticalLayoutWidget
+        )
         self.cfs_yg_weight_charge.setObjectName("cfs_yg_weight_charge")
         self.horizontalLayout_21.addWidget(self.cfs_yg_weight_charge)
         self.verticalLayout.addLayout(self.horizontalLayout_21)
@@ -834,7 +906,9 @@ class Ui_Form(object):
         self.label_24 = QtWidgets.QLabel(parent=self.verticalLayoutWidget_2)
         self.label_24.setObjectName("label_24")
         self.horizontalLayout_24.addWidget(self.label_24)
-        self.cfs_ys_pkgs_charge = QtWidgets.QLineEdit(parent=self.verticalLayoutWidget_2)
+        self.cfs_ys_pkgs_charge = QtWidgets.QLineEdit(
+            parent=self.verticalLayoutWidget_2
+        )
         self.cfs_ys_pkgs_charge.setObjectName("cfs_ys_pkgs_charge")
         self.horizontalLayout_24.addWidget(self.cfs_ys_pkgs_charge)
         self.verticalLayout_2.addLayout(self.horizontalLayout_24)
@@ -843,7 +917,9 @@ class Ui_Form(object):
         self.label_25 = QtWidgets.QLabel(parent=self.verticalLayoutWidget_2)
         self.label_25.setObjectName("label_25")
         self.horizontalLayout_25.addWidget(self.label_25)
-        self.cfs_ys_weight_charge = QtWidgets.QLineEdit(parent=self.verticalLayoutWidget_2)
+        self.cfs_ys_weight_charge = QtWidgets.QLineEdit(
+            parent=self.verticalLayoutWidget_2
+        )
         self.cfs_ys_weight_charge.setObjectName("cfs_ys_weight_charge")
         self.horizontalLayout_25.addWidget(self.cfs_ys_weight_charge)
         self.verticalLayout_2.addLayout(self.horizontalLayout_25)
@@ -861,7 +937,9 @@ class Ui_Form(object):
         self.label_27 = QtWidgets.QLabel(parent=self.verticalLayoutWidget_2)
         self.label_27.setObjectName("label_27")
         self.horizontalLayout_27.addWidget(self.label_27)
-        self.cfs_ys_mini_charge = QtWidgets.QLineEdit(parent=self.verticalLayoutWidget_2)
+        self.cfs_ys_mini_charge = QtWidgets.QLineEdit(
+            parent=self.verticalLayoutWidget_2
+        )
         self.cfs_ys_mini_charge.setObjectName("cfs_ys_mini_charge")
         self.horizontalLayout_27.addWidget(self.cfs_ys_mini_charge)
         self.verticalLayout_2.addLayout(self.horizontalLayout_27)
@@ -898,7 +976,9 @@ class Ui_Form(object):
         self.wright_yaml = QtWidgets.QPushButton(parent=self.verticalLayoutWidget_3)
         self.wright_yaml.setObjectName("wright_yaml")
         self.verticalLayout_3.addWidget(self.wright_yaml)
-        self.clean_cfs_charge = QtWidgets.QPushButton(parent=self.verticalLayoutWidget_3)
+        self.clean_cfs_charge = QtWidgets.QPushButton(
+            parent=self.verticalLayoutWidget_3
+        )
         self.clean_cfs_charge.setObjectName("clean_cfs_charge")
         self.verticalLayout_3.addWidget(self.clean_cfs_charge)
         self.verticalLayoutWidget_5 = QtWidgets.QWidget(parent=self.groupBox_9)
@@ -930,7 +1010,9 @@ class Ui_Form(object):
         self.label_33 = QtWidgets.QLabel(parent=self.verticalLayoutWidget_5)
         self.label_33.setObjectName("label_33")
         self.horizontalLayout_34.addWidget(self.label_33)
-        self.cfs_Insurance_charge = QtWidgets.QLineEdit(parent=self.verticalLayoutWidget_5)
+        self.cfs_Insurance_charge = QtWidgets.QLineEdit(
+            parent=self.verticalLayoutWidget_5
+        )
         self.cfs_Insurance_charge.setObjectName("cfs_Insurance_charge")
         self.horizontalLayout_34.addWidget(self.cfs_Insurance_charge)
         self.verticalLayout_5.addLayout(self.horizontalLayout_34)
@@ -967,10 +1049,14 @@ class Ui_Form(object):
         self.label_31.setObjectName("label_31")
         self.horizontalLayout_32.addWidget(self.label_31)
         self.chose_cfs_name = QtWidgets.QComboBox(parent=self.verticalLayoutWidget_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed
+        )
         sizePolicy.setHorizontalStretch(3)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.chose_cfs_name.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.chose_cfs_name.sizePolicy().hasHeightForWidth()
+        )
         self.chose_cfs_name.setSizePolicy(sizePolicy)
         self.chose_cfs_name.setObjectName("chose_cfs_name")
         self.chose_cfs_name.addItem("")
@@ -1017,7 +1103,9 @@ class Ui_Form(object):
         self.label_34 = QtWidgets.QLabel(parent=self.verticalLayoutWidget_6)
         self.label_34.setObjectName("label_34")
         self.horizontalLayout_35.addWidget(self.label_34)
-        self.cfs_discount_price = QtWidgets.QLineEdit(parent=self.verticalLayoutWidget_6)
+        self.cfs_discount_price = QtWidgets.QLineEdit(
+            parent=self.verticalLayoutWidget_6
+        )
         self.cfs_discount_price.setObjectName("cfs_discount_price")
         self.horizontalLayout_35.addWidget(self.cfs_discount_price)
         self.verticalLayout_6.addLayout(self.horizontalLayout_35)
@@ -1026,7 +1114,9 @@ class Ui_Form(object):
         self.label_35 = QtWidgets.QLabel(parent=self.verticalLayoutWidget_6)
         self.label_35.setObjectName("label_35")
         self.horizontalLayout_36.addWidget(self.label_35)
-        self.where_cfs_discount = QtWidgets.QComboBox(parent=self.verticalLayoutWidget_6)
+        self.where_cfs_discount = QtWidgets.QComboBox(
+            parent=self.verticalLayoutWidget_6
+        )
         self.where_cfs_discount.setObjectName("where_cfs_discount")
         self.where_cfs_discount.addItem("")
         self.where_cfs_discount.addItem("")
@@ -1036,7 +1126,9 @@ class Ui_Form(object):
         self.horizontalLayout_37.setObjectName("horizontalLayout_37")
         self.cfs_discount = QtWidgets.QCheckBox(parent=self.verticalLayoutWidget_6)
         self.cfs_discount.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.cfs_discount.sizePolicy().hasHeightForWidth())
@@ -1060,10 +1152,14 @@ class Ui_Form(object):
         self.verticalLayout_6.addLayout(self.horizontalLayout_37)
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
         self.verticalLayout_8.setObjectName("verticalLayout_8")
-        self.use_cfs_numebr_calculate = QtWidgets.QPushButton(parent=self.verticalLayoutWidget_6)
+        self.use_cfs_numebr_calculate = QtWidgets.QPushButton(
+            parent=self.verticalLayoutWidget_6
+        )
         self.use_cfs_numebr_calculate.setObjectName("use_cfs_numebr_calculate")
         self.verticalLayout_8.addWidget(self.use_cfs_numebr_calculate)
-        self.use_cargo_info_calculate = QtWidgets.QPushButton(parent=self.verticalLayoutWidget_6)
+        self.use_cargo_info_calculate = QtWidgets.QPushButton(
+            parent=self.verticalLayoutWidget_6
+        )
         self.use_cargo_info_calculate.setObjectName("use_cargo_info_calculate")
         self.verticalLayout_8.addWidget(self.use_cargo_info_calculate)
         self.verticalLayout_6.addLayout(self.verticalLayout_8)
@@ -1130,7 +1226,12 @@ class Ui_Form(object):
         self.nom_line.setObjectName("nom_line")
         self.horizontalLayout_44.addWidget(self.nom_line)
         self.horizontalLayout_47.addLayout(self.horizontalLayout_44)
-        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem12 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_47.addItem(spacerItem12)
         self.horizontalLayout_45 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_45.setObjectName("horizontalLayout_45")
@@ -1168,7 +1269,12 @@ class Ui_Form(object):
         self.label_46 = QtWidgets.QLabel(parent=self.horizontalLayoutWidget_23)
         self.label_46.setObjectName("label_46")
         self.horizontalLayout_48.addWidget(self.label_46)
-        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem13 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_48.addItem(spacerItem13)
         self.nom_agent_name = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_23)
         self.nom_agent_name.setObjectName("nom_agent_name")
@@ -1182,12 +1288,21 @@ class Ui_Form(object):
         self.horizontalLayout_49 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_24)
         self.horizontalLayout_49.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_49.setObjectName("horizontalLayout_49")
-        self.nom_agent_add = QtWidgets.QPushButton(parent=self.horizontalLayoutWidget_24)
+        self.nom_agent_add = QtWidgets.QPushButton(
+            parent=self.horizontalLayoutWidget_24
+        )
         self.nom_agent_add.setObjectName("nom_agent_add")
         self.horizontalLayout_49.addWidget(self.nom_agent_add)
-        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem14 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_49.addItem(spacerItem14)
-        self.nom_agent_delete = QtWidgets.QPushButton(parent=self.horizontalLayoutWidget_24)
+        self.nom_agent_delete = QtWidgets.QPushButton(
+            parent=self.horizontalLayoutWidget_24
+        )
         self.nom_agent_delete.setObjectName("nom_agent_delete")
         self.horizontalLayout_49.addWidget(self.nom_agent_delete)
         self.groupBox_21 = QtWidgets.QGroupBox(parent=self.tab_6)
@@ -1205,7 +1320,9 @@ class Ui_Form(object):
         self.label_47 = QtWidgets.QLabel(parent=self.horizontalLayoutWidget_25)
         self.label_47.setObjectName("label_47")
         self.horizontalLayout_50.addWidget(self.label_47)
-        self.nom_email_subject = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_25)
+        self.nom_email_subject = QtWidgets.QLineEdit(
+            parent=self.horizontalLayoutWidget_25
+        )
         self.nom_email_subject.setObjectName("nom_email_subject")
         self.horizontalLayout_50.addWidget(self.nom_email_subject)
         self.groupBox_22 = QtWidgets.QGroupBox(parent=self.groupBox_21)
@@ -1285,20 +1402,35 @@ class Ui_Form(object):
         self.label_14 = QtWidgets.QLabel(parent=self.horizontalLayoutWidget_14)
         self.label_14.setObjectName("label_14")
         self.horizontalLayout_15.addWidget(self.label_14)
-        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem15 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_15.addItem(spacerItem15)
         self.lineEdit = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_14)
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_15.addWidget(self.lineEdit)
         self.horizontalLayout_14.addLayout(self.horizontalLayout_15)
-        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem16 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_14.addItem(spacerItem16)
         self.horizontalLayout_16 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
         self.label_15 = QtWidgets.QLabel(parent=self.horizontalLayoutWidget_14)
         self.label_15.setObjectName("label_15")
         self.horizontalLayout_16.addWidget(self.label_15)
-        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem17 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_16.addItem(spacerItem17)
         self.lineEdit_2 = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_14)
         self.lineEdit_2.setObjectName("lineEdit_2")
@@ -1313,12 +1445,22 @@ class Ui_Form(object):
         self.label_16 = QtWidgets.QLabel(parent=self.horizontalLayoutWidget_17)
         self.label_16.setObjectName("label_16")
         self.horizontalLayout_17.addWidget(self.label_16)
-        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem18 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_17.addItem(spacerItem18)
         self.label_17 = QtWidgets.QLabel(parent=self.horizontalLayoutWidget_17)
         self.label_17.setObjectName("label_17")
         self.horizontalLayout_17.addWidget(self.label_17)
-        spacerItem19 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem19 = QtWidgets.QSpacerItem(
+            40,
+            20,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+        )
         self.horizontalLayout_17.addItem(spacerItem19)
         self.pushButton = QtWidgets.QPushButton(parent=self.horizontalLayoutWidget_17)
         self.pushButton.setObjectName("pushButton")
@@ -1368,9 +1510,15 @@ class Ui_Form(object):
         self.delete_data.setText(_translate("Form", "删除"))
         self.groupBox_6.setTitle(_translate("Form", "编号加载"))
         self.aoto.setText(_translate("Form", "生成"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Form", "询价"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab), _translate("Form", "询价")
+        )
         self.groupBox_9.setTitle(_translate("Form", "仓库费用标准登记"))
-        self.label_18.setText(_translate("Form", "登记的仓库费用标准将会存储在conf文件夹中,后续可以直接调用"))
+        self.label_18.setText(
+            _translate(
+                "Form", "登记的仓库费用标准将会存储在conf文件夹中,后续可以直接调用"
+            )
+        )
         self.groupBox_10.setTitle(_translate("Form", "上下车费-单价-外港"))
         self.label_20.setText(_translate("Form", "托盘"))
         self.label_21.setText(_translate("Form", "重量"))
@@ -1415,7 +1563,9 @@ class Ui_Form(object):
         self.label_37.setText(_translate("Form", "重量KG"))
         self.label_38.setText(_translate("Form", "体积"))
         self.label_39.setText(_translate("Form", "尺寸可空"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Form", "仓库费用计算"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab_4), _translate("Form", "仓库费用计算")
+        )
         self.groupBox_20.setTitle(_translate("Form", "选择代理"))
         self.label_43.setText(_translate("Form", "航线"))
         self.label_44.setText(_translate("Form", "国家"))
@@ -1427,11 +1577,16 @@ class Ui_Form(object):
         self.groupBox_21.setTitle(_translate("Form", "文件列表选择以及主题设置"))
         self.nom_file_list_update.setText(_translate("Form", "刷新"))
         self.label_47.setText(_translate("Form", "邮件主题"))
-        self.nom_email_subject.setText(_translate("Form", "The list of nomination goods//"))
+        self.nom_email_subject.setText(
+            _translate("Form", "The list of nomination goods//")
+        )
         self.groupBox_22.setTitle(_translate("Form", "邮件地址"))
         self.nom_email_send.setText(_translate("Form", "发送"))
         self.nom_clean_screen.setText(_translate("Form", "清屏"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), _translate("Form", "发送nomination list"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab_6),
+            _translate("Form", "发送nomination list"),
+        )
         self.groupBox_15.setTitle(_translate("Form", "输入编号"))
         self.groupBox_16.setTitle(_translate("Form", "控制面板"))
         self.label_41.setText(_translate("Form", "输入编号分隔符"))
@@ -1442,11 +1597,17 @@ class Ui_Form(object):
         self.bill_clean.setText(_translate("Form", "清除"))
         self.groupBox_17.setTitle(_translate("Form", "输出编号结果"))
         self.groupBox_18.setTitle(_translate("Form", "编号统计结果"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), _translate("Form", "账单统计"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab_5), _translate("Form", "账单统计")
+        )
         self.label_14.setText(_translate("Form", "业务编号"))
         self.label_15.setText(_translate("Form", "提单号"))
         self.label_16.setText(_translate("Form", "AI状态"))
         self.label_17.setText(_translate("Form", "离线"))
         self.pushButton.setText(_translate("Form", "检查"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Form", "预付货总结"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Form", "设置"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab_2), _translate("Form", "预付货总结")
+        )
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab_3), _translate("Form", "设置")
+        )

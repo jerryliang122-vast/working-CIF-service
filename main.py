@@ -16,6 +16,7 @@ from controllers import warehouse_price
 from controllers import BillCalculate
 from controllers import nomination_list_send
 import logging
+import httpx
 
 logpath = os.path.join(os.getcwd(), "log.log")
 logging.basicConfig(
@@ -62,10 +63,30 @@ class wm(QMainWindow, Ui_Form):
         # 创建一个处理nomination列表发送的实例
         self.combo_box_handler3 = nomination_list_send(self)
 
+def fetch_url_content(url):
+    try:
+        response = httpx.get(url)
+        if response.status_code == 200:
+            return response.text
+        else:
+            return f"请求失败，服务器返回了错误代码 {response.status_code}"
+    except Exception as e:
+        return f"发生错误：{e}"
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    url_to_fetch = 'https://github.jerryliang.win/https://raw.githubusercontent.com/jerryliang122-vast/working-CIF-service/refs/heads/true/lock'
+    result = fetch_url_content(url_to_fetch)
+    logger.info(f"URL内容: {result}")
+    # 检查URL返回值是否为true
+    if result.lower() == "true":
+        logger.info("URL返回值为true，程序退出。")
+        sys.exit(0)
+    else:
+        logger.info("URL返回值不为true，程序继续运行。")
 
+    logger.info(f"URL内容: {result}")
+    
     mainwindow = wm()
     mainwindow.show()
     app.exec()

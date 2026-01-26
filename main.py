@@ -9,7 +9,7 @@ if not os.path.exists("conf"):
     os.mkdir("conf")
 config.config.main()
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from Ui.Ui_untitled import Ui_Form
+from Ui.untitled_ui import Ui_Form
 import sys
 from controllers import work_inquiry
 from controllers import warehouse_price

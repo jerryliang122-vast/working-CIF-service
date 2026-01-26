@@ -18,7 +18,7 @@ logger = logging.getLogger("my_logger")
 
 
 # 邮件模板修改
-def mail_template(clasue,port, address, data):
+def mail_template(clasue, port, address, data, dear_name="team"):
     table_rows = "".join(
         f"<tr><td style='border: 1px solid black;'>{row[0]}</td><td style='border: 1px solid black;'>{row[1]}</td></tr>"
         for row in data
@@ -29,7 +29,7 @@ def mail_template(clasue,port, address, data):
     <title>DAP shipment</title>
     </head>
     <body>
-    <p>Dear team,<p>
+    <p>Dear {dear_name},<p>
     <p>This is a {clasue} shipment, Pls share price to us </p>
     <p>Destination Port:</p>
     <p>{port}</p>
@@ -45,7 +45,7 @@ def mail_template(clasue,port, address, data):
     </body>
     </html>
     """.format(
-        clasue=clasue, port=port, address=address, table_rows=table_rows
+        clasue=clasue, port=port, address=address, table_rows=table_rows, dear_name=dear_name
     )
 
 

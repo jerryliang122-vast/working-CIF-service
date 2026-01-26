@@ -12,6 +12,7 @@ class Agent(Base):
     port = Column(TEXT)
     name = Column(TEXT)
     email = Column(TEXT)
+    agent_dear_name = Column(TEXT)
 
 
 # 创建数据库

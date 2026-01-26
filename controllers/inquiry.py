@@ -51,6 +51,33 @@ def read_email(name, port):
     return data[0]
 
 
+# 读取代理的 dear_name
+def read_dear_name(name, port):
+    try:
+        logging.info(f"read_dear_name called with name='{name}', port='{port}'")
+        agent = (
+            session.query(Agent)
+            .filter(Agent.name == name, Agent.port == port)
+            .first()
+        )
+        logging.info(f"read_dear_name - query result agent: {agent}")
+        if agent:
+            logging.info(f"read_dear_name - agent.agent_dear_name: {agent.agent_dear_name}, type: {type(agent.agent_dear_name)}")
+            if agent.agent_dear_name and agent.agent_dear_name.strip():
+                result = agent.agent_dear_name.strip()
+                logging.info(f"read_dear_name - returning: '{result}'")
+                return result
+            else:
+                logging.info(f"read_dear_name - agent.agent_dear_name is empty or None, returning 'team'")
+                return "team"
+        else:
+            logging.info(f"read_dear_name - no agent found, returning 'team'")
+            return "team"
+    except Exception as e:
+        logging.error(f"read_dear_name - error: {e}")
+        return "team"  # 如果查询失败，默认返回 "team"
+
+
 # 按照港口读取代理名称列表
 def read_port_name(port):
     data = session.query(Agent.name).filter(Agent.port.like(f"%{port}%")).all()
@@ -59,19 +86,23 @@ def read_port_name(port):
 
 
 # 按照港口写入或更新代理email信息和名称
-def write_port_name(port, name, email):
+def write_port_name(port, name, email, agent_dear_name=None):
     try:
+        # 如果 agent_dear_name 为空，默认设置为 "team"
+        if not agent_dear_name or agent_dear_name.strip() == "":
+            agent_dear_name = "team"
+        
         # 先查询是否有此港口的代理
         data = session.query(Agent.name).filter(Agent.port.like(f"%{port}%")).all()
         data = [i[0] for i in data]
         if name in data:
             # 更新
             session.query(Agent).filter(Agent.name == name, Agent.port == port).update(
-                {Agent.email: email}
+                {Agent.email: email, Agent.agent_dear_name: agent_dear_name}
             )
         else:
             # 写入
-            agent = Agent(port=port, name=name, email=email)
+            agent = Agent(port=port, name=name, email=email, agent_dear_name=agent_dear_name)
             session.add(agent)
         # 提交
         session.commit()
@@ -180,6 +211,8 @@ class work_inquiry:
             item.setCheckable(False)
             model.appendRow(item)
         self.main_window.daili_list.setModel(model)
+        # 清空 agent_dear_name 控件
+        self.main_window.agent_dear_name.clear()
         self.main_window.daili_list.selectionModel().currentRowChanged.connect(
             self.update_addresslist
         )
@@ -198,14 +231,17 @@ class work_inquiry:
         proxy_email = self.main_window.agent_email_list.toPlainText()
         # 处理代理邮箱数据。将换行符替换成逗号
         proxy_email = proxy_email.replace("\n", ",")
-        if data := write_port_name(port, proxy_name, proxy_email):
+        # 读取 dear_name
+        proxy_dear_name = self.main_window.agent_dear_name.text()
+        # 调用写入函数
+        if data := write_port_name(port, proxy_name, proxy_email, proxy_dear_name):
             # 弹出界面提示
             QMessageBox.about(self.main_window, "提示", "写入成功")
         else:
             QMessageBox.about(self.main_window, "提示", "写入失败")
 
     # 预览
-    def preview_data(self):
+    def preview_data(self, dear_name="team"):
         # 获取地址
         address = self.main_window.address.toPlainText()
         # 获取件数
@@ -245,12 +281,25 @@ class work_inquiry:
             ["hs_code", f"{hs_code}"],
             ["cargo_description", f"{goods_description}"],
         ]
-        return inquiry_smtp.mail_template(clause, port, address, data)
+        return inquiry_smtp.mail_template(clause, port, address, data, dear_name)
 
     # 预览显示到界面
     def preview(self):
-        # 获取模板
-        template = self.preview_data()
+        # 尝试获取当前选中代理的 dear_name
+        selected_indexes = self.main_window.daili_list.selectedIndexes()
+        if selected_indexes:
+            # 有选中的代理，获取其 dear_name
+            proxy_name = selected_indexes[0].data()
+            port = self.main_window.gangkou.currentText()
+            dear_name = read_dear_name(proxy_name, port)
+            logging.info(f"preview - using dear_name: {dear_name} for agent: {proxy_name}")
+        else:
+            # 没有选中代理，使用默认值 "team"
+            dear_name = "team"
+            logging.info(f"preview - no agent selected, using default dear_name: {dear_name}")
+        
+        # 获取模板，传入 dear_name
+        template = self.preview_data(dear_name)
         # 显示到textedit界面
         self.main_window.emailtext.setHtml(template)
 
@@ -267,12 +316,18 @@ class work_inquiry:
             selected_indexes = self.main_window.daili_list.selectedIndexes()
             # 获取港口
             port = self.main_window.gangkou.currentText()
-            # 获取模板
-            template = self.preview_data()
+            
             for index in selected_indexes:
-                proxy_infos = read_email(index.data(), port)
+                proxy_name = index.data()
+                # 获取代理邮箱
+                proxy_infos = read_email(proxy_name, port)
+                # 获取代理的 dear_name
+                proxy_dear_name = read_dear_name(proxy_name, port)
+                # 使用 dear_name 生成个性化邮件模板
+                template = self.preview_data(proxy_dear_name)
                 # 发送邮件
                 report = inquiry_smtp.send_mail(proxy_infos, subject, template)
+            
             # 判断reports列表中是否含有false
             if report == False:
                 QMessageBox.about(self.main_window, "提示", "发送失败")
@@ -295,10 +350,22 @@ class work_inquiry:
         # 获取当前选中项的名称
         selected_item = self.main_window.daili_list.model().itemFromIndex(current)
         selected_name = selected_item.text()
+        logging.info(f"update_addresslist - selected_name: {selected_name}")
         # 获取港口
         port = self.main_window.gangkou.currentText()
+        logging.info(f"update_addresslist - port: {port}")
         # 获取代理邮箱
         email = read_email(selected_name, port)
+        logging.info(f"update_addresslist - email: {email}")
+        # 获取代理的 dear_name
+        dear_name = read_dear_name(selected_name, port)
+        logging.info(f"update_addresslist - dear_name: {dear_name}")
+        # 将 dear_name 回显到输入框
+        self.main_window.agent_dear_name.setText(dear_name)
+        logging.info(f"update_addresslist - agent_dear_name.setText() called with: {dear_name}")
+        # 验证设置是否成功
+        actual_value = self.main_window.agent_dear_name.text()
+        logging.info(f"update_addresslist - agent_dear_name.text() after setText: {actual_value}")
         # email做成列表
         email_list = email.split(",")
         # 创建表格模型并填充数据
@@ -325,6 +392,7 @@ class work_inquiry:
         self.main_window.emailtext.clear()
         self.main_window.agent_name.clear()
         self.main_window.agent_email_list.clear()
+        self.main_window.agent_dear_name.clear()
         self.main_window.random_number.clear()
         self.main_window.inquiry_number.clear()
         # 弹出提示

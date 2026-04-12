@@ -14,13 +14,16 @@ class ChatGPT:
         self.client = openai.OpenAI(api_key=api_key, base_url=base_url)
 
     def ai_import(self, input):
-        # 输入进openai
         messages = [
             {"role": "system", "content": self.system_prompt},
             {"role": "user", "content": input},
         ]
-        response = self.client.chat.completions.create(
-            model=self.model, messages=messages, stream=False
-        )
-        # 输出openai的回答
+        kwargs = {
+            "model": self.model,
+            "messages": messages,
+            "stream": False,
+        }
+        if "minimax" in self.model.lower():
+            kwargs["extra_body"] = {"reasoning_split": True}
+        response = self.client.chat.completions.create(**kwargs)
         return response.choices[0].message.content.strip()

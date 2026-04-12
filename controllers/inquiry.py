@@ -174,6 +174,8 @@ class work_inquiry:
         self.main_window.auto_identification.clicked.connect(
             self.auto_identification_ai
         )
+        self.main_window.auto_paste.clicked.connect(self.auto_paste_ai)
+        self.main_window.auto_clean.clicked.connect(self.auto_clean_ai)
     # 自动生成航线菜单栏中的内容
     def get_line(self):
         self.main_window.hangxian.clear()
@@ -441,3 +443,43 @@ class work_inquiry:
         self.main_window.aioutput.setPlainText("**Error:** " + error)
         # 并记录到日志
         logger.error(error)
+
+    def auto_paste_ai(self):
+        import json
+
+        text = self.main_window.aioutput.toPlainText().strip()
+        if not text:
+            QMessageBox.about(self.main_window, "提示", "没有可粘贴的识别结果")
+            return
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError:
+            QMessageBox.about(self.main_window, "提示", "识别结果不是有效的JSON格式，请重新识别")
+            return
+
+        field_map = {
+            "inquiry_number": ("inquiry_number", "line"),
+            "address": ("address", "plain"),
+            "PKGS": ("PKGS", "line"),
+            "KGS": ("KGS", "line"),
+            "CBM": ("CBM", "line"),
+            "size": ("size", "line"),
+            "HS": ("HS", "line"),
+            "cargoname": ("cargoname", "line"),
+            "port": ("port", "line"),
+        }
+
+        for json_key, (widget_name, widget_type) in field_map.items():
+            value = data.get(json_key, "")
+            if value:
+                widget = getattr(self.main_window, widget_name)
+                if widget_type == "plain":
+                    widget.setPlainText(str(value))
+                else:
+                    widget.setText(str(value))
+
+        QMessageBox.about(self.main_window, "提示", "粘贴成功")
+
+    def auto_clean_ai(self):
+        self.main_window.aiimport.clear()
+        self.main_window.aioutput.clear()

@@ -73,7 +73,12 @@ def create_ai_yaml():
             "api_key": "",
             "model": "gpt-3.5-turbo",
             "base_url": "https://api.openai.com/v1",
-            "system_prompt": "请你根据用户的文本，仅提取并显示以下信息：询价编号（如果有）， 地址，件数，重量，体积，HS编码，货物描述",
+            "system_prompt": (
+                "请你根据用户的文本，提取以下信息并严格以JSON格式返回（不要包含任何其他文字说明，只返回纯JSON）：\n"
+                '{"inquiry_number": "询价编号，没有则为空字符串", "address": "地址", "PKGS": "件数", "KGS": "重量", '
+                '"CBM": "体积", "size": "货物单件尺寸", "HS": "HS编码", "cargoname": "货物描述", "port": "目的港"}\n'
+                "如果某项信息无法从文本中提取，对应值设为空字符串。"
+            ),
         }
         yaml.dump(
             data,
